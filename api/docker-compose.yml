@@ -1,0 +1,53 @@
+version: '2'
+services:
+  nginx:
+    container_name: nginx
+    image: feeldburn-nginx
+    build: 
+      context: .
+      dockerfile: nginx.dockerfile
+    links:
+        - node-1:node-1
+        - web-1:web-1
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - nodeapp-network
+  node-1:
+    container_name: feeldburn-api
+    image: feeldburn-api
+    build:
+      context: .
+      dockerfile: node.dockerfile
+    links:
+      - feeldburnmongodb:feeldburnmongodb
+    ports:
+      - "3000:3000"
+      - "7000:7000"
+    networks:
+      - nodeapp-network
+  web-1:
+    container_name: feeldburn-web
+    image: feeldburn-web
+    build: 
+      context: ../web
+      dockerfile: dockerfile
+    ports: 
+      - "4200:4200"
+    networks:
+      - nodeapp-network
+    links:
+      - node-1:node-1  
+  feeldburnmongodb:
+    container_name: feeldburnmongodb
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - nodeapp-network
+    volumes:
+      - '/skraemer/dockerVolMongo:/data/db'  
+networks:
+  nodeapp-network:
+    driver: bridge

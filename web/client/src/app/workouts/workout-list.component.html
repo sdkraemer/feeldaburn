@@ -1,0 +1,7 @@
+<button type="button" class="btn btn-primary" [routerLink]="['/workouts', 'New']">Add</button>
+<ul>
+    <li *ngFor="let workout of workouts">
+        <button type="button" class="btn btn-outline-secondary" [routerLink]="['/workouts', workout._id]">View</button>
+        {{workout.name}}
+    </li>
+</ul>

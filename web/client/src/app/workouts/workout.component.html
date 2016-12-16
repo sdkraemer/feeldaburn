@@ -1,0 +1,12 @@
+<h2>View Workout</h2>
+<button type="button" class="btn btn-outline-secondary" [routerLink]="['/workouts']">Back</button>
+<div *ngIf="workout" >
+    <form novalidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" [ngModel]="workout.name"/>
+        </div>
+        <input type="hidden" name="_id" [ngModel]="workout._id" />
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
