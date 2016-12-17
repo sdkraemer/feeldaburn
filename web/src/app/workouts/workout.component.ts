@@ -41,6 +41,10 @@ export class WorkoutComponent implements OnInit {
         this.workout.name = form.value.name;
         if(form.value._id){
             console.log("Saving an existing workout");
+            this.workoutService.update(this.workout)
+                .subscribe((isSuccessful: boolean) => {
+                    this.goToWorkouts();
+                });
         }
         else{
             console.log("Saving a new workout");

@@ -40,12 +40,20 @@ export class WorkoutService {
                     .catch(this.handleError); 
     }
 
-    add(workout: Workout): Observable<boolean>{
-        return this.http.post(`${this.apiUrl}`, workout)
-                .map((response: Response) => {
-                    return this.isSuccessStatusCode(response.status);
-                })
-                .catch(this.handleError);
+    add(workout: Workout): Observable<boolean> {
+        return this.http.post(this.apiUrl, workout)
+                   .map((response: Response) => {
+                        return this.isSuccessStatusCode(response.status);
+                   })
+                   .catch(this.handleError);
+    }
+
+    update(workout: Workout): Observable<boolean> {
+        return this.http.put(`${this.apiUrl}/${workout._id}`, workout)
+                   .map((response: Response) => {
+                       return this.isSuccessStatusCode(response.status);
+                   })
+                   .catch(this.handleError);
     }
 
     private isSuccessStatusCode(statusCode) {

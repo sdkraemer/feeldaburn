@@ -47,12 +47,28 @@ app.get('/api/workouts/:id', function(req, res){
 });
 
 app.post('/api/workouts', function(req, res){
-    console.log("saving new workout on api side");
-    console.dir(req.body);
+    console.log("Saving new workout.");
     var workout = new Workout({name: req.body.name});
     workout.save(function(err, workout){
-        if(err) { console.log('error inserting new workout: '+err) }
+        if(err) { console.log('Error inserting new workout: '+err); }
         res.json(req.body);
+    });
+});
+
+app.put('/api/workouts/:id', function(req, res){
+    console.log('Updating workout.');
+    Workout.findOne({'_id': req.params.id}, {}, function(err, workout){
+        if (err) return console.error(err);
+
+        workout.name = req.body.name || workout.name;
+
+        workout.save(function(err, workout){
+            if(err) { 
+                console.log("Error updating workout. "+err);
+                res.json({ 'status': false });
+            }
+            res.json({ 'status': true });
+        });
     });
 });
 
