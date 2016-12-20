@@ -55,6 +55,14 @@ export class WorkoutService {
                    .catch(this.handleError);
     }
 
+    remove(_id: string){
+        return this.authHttp.delete(`${this.apiUrl}/${_id}`)
+                    .map((response: Response) => {
+                        return this.isSuccessStatusCode(response.status);
+                    })
+                    .catch(this.handleError);
+    }
+
     private isSuccessStatusCode(statusCode) {
         return (statusCode >= 200 && statusCode < 300);
     }

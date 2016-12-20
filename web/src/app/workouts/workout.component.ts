@@ -37,6 +37,15 @@ export class WorkoutComponent implements OnInit {
         }
     }
 
+    onDelete(form){
+        console.log("deleting workout");
+        console.dir(form);
+        this.workoutService.remove(form.value._id)
+            .subscribe((isSuccessful: boolean) => {
+                this.goToWorkouts();
+            });
+    }
+
     onSubmit(form){
         this.workout.name = form.value.name;
         this.workout.createdAt = form.value.createdAt;

@@ -29,7 +29,6 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/workouts', [authCheck, userId] , function(req, res){
-    console.log("/api/workouts userId: %s", req.userId);
     Workout.find({'createdBy': ObjectId(req.userId)},function(err, workouts){
         if (err) return console.error(err);
         res.json(workouts);
@@ -37,7 +36,6 @@ app.get('/api/workouts', [authCheck, userId] , function(req, res){
 });
 
 app.get('/api/workouts/:id', [authCheck, userId], function(req, res){
-    console.log("/api/workouts/:id, "+req.params.id);
     Workout.findOne({ '_id': req.params.id, 'createdBy': ObjectId(req.userId) }, {}, function (err, workout) {
         res.json(workout);
     });
@@ -45,7 +43,6 @@ app.get('/api/workouts/:id', [authCheck, userId], function(req, res){
 });
 
 app.post('/api/workouts', [authCheck, userId], function(req, res){
-    console.log("Saving new workout.");
     var workout = new Workout({
                         name: req.body.name, 
                         notes: req.body.notes,
@@ -58,7 +55,6 @@ app.post('/api/workouts', [authCheck, userId], function(req, res){
 });
 
 app.put('/api/workouts/:id', [authCheck, userId], function(req, res){
-    console.log('Updating workout.');
     Workout.findOne({'_id': req.params.id}, {}, function(err, workout){
         if (err) return console.error(err);
 
@@ -76,19 +72,35 @@ app.put('/api/workouts/:id', [authCheck, userId], function(req, res){
     });
 });
 
+app.delete('/api/workouts/:id', [authCheck, userId], function(req, res){
+    console.log('DELETE /api/workout/%s', req.params.id);
+    Workout.remove({_id: req.params.id}, function(err){
+        if(err){
+            console.log("Error occurred removing workout: %s", err);
+        }
+        res.sendStatus(200);
+    });
+});
+
 ////////////////////////////////////////////////////
 // Users
 
 app.post('/api/users', [authCheck], function(req, res){
-    console.log("user create endpoint hit on api side");
-    console.dir(req);
-    var user = new User({name: req.body.name, auth0UserId: req.body.user_id});
-    user.save(function(err, user){
-        if(err) {
-            console.log('user not created: '+err);
-            res.json(user);
+    var auth0UserId = req.body.user_id;
+    var user = User.findOne({'auth0UserId': auth0UserId}, {}, function(err, user){
+        if(err) {console.log("Error occurred trying to find user by logged in auth0 user.")}
+        console.log("POST /api/users ... Does user exist? %j", user);
+        if(!user){
+            var user = new User({name: req.body.name, auth0UserId: auth0UserId});
+            user.save(function(err, user){
+                if(err) {
+                    console.log('user not created: '+err);
+                    res.json(user);
+                }
+                res.json(user);
+            });
+
         }
-        res.json(user);
     });
 });
 
