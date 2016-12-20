@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Workout, IWorkout } from './workout';
 import { Http, Response } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 //rxjs
 import { Observable } from 'rxjs/Observable';
@@ -14,10 +15,13 @@ export class WorkoutService {
     apiUrl: string = 'http://localhost/api/workouts';
     workouts: IWorkout[];
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http,
+        private authHttp: AuthHttp
+    ) { }
 
     getWorkouts(): Observable<IWorkout[]> {
-        return this.http.get(this.apiUrl)
+        return this.authHttp.get(this.apiUrl)
             .map((res: Response) => {
                 this.workouts = res.json();
                 return this.workouts;
@@ -27,21 +31,16 @@ export class WorkoutService {
 
     getWorkout(_id: string): Observable<Workout> {
         const url = `${this.apiUrl}/${_id}`;
-        return this.http
+        return this.authHttp
                     .get(url)
                     .map((response: Response) => {
-                        console.dir(response);
-                        let json = response.json();
-                        let workout = new Workout();
-                        workout._id = json['_id'];
-                        workout.name = json['name'];
-                        return workout;
+                        return response.json();
                     })
                     .catch(this.handleError); 
     }
 
     add(workout: Workout): Observable<boolean> {
-        return this.http.post(this.apiUrl, workout)
+        return this.authHttp.post(this.apiUrl, workout)
                    .map((response: Response) => {
                         return this.isSuccessStatusCode(response.status);
                    })
@@ -49,7 +48,7 @@ export class WorkoutService {
     }
 
     update(workout: Workout): Observable<boolean> {
-        return this.http.put(`${this.apiUrl}/${workout._id}`, workout)
+        return this.authHttp.put(`${this.apiUrl}/${workout._id}`, workout)
                    .map((response: Response) => {
                        return this.isSuccessStatusCode(response.status);
                    })

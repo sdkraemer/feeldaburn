@@ -6,6 +6,15 @@
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" [ngModel]="workout.name"/>
         </div>
+        <div class="form-group">
+            <label for="name">Created At:</label>
+            <input type="text" class="form-control" readonly="true" value="{{workout.createdAt | date:'short'}}"/>
+            <input type="hidden" class="form-control" name="createdAt" [ngModel]="workout.createdAt"/>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea class="form-control" name="notes" rows="3" [ngModel]="workout.notes"></textarea>
+        </div>
         <input type="hidden" name="_id" [ngModel]="workout._id" />
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

@@ -8,7 +8,8 @@ import { WorkoutService } from './workout.service';
 })
 export class WorkoutListComponent implements OnInit {
     workouts: Workout[];
-    constructor(private workoutService: WorkoutService) { }
+    constructor(
+        private workoutService: WorkoutService) { }
 
     ngOnInit() {
         this.getWorkouts();

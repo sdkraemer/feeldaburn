@@ -39,6 +39,9 @@ export class WorkoutComponent implements OnInit {
 
     onSubmit(form){
         this.workout.name = form.value.name;
+        this.workout.createdAt = form.value.createdAt;
+        this.workout.notes = form.value.notes;
+
         if(form.value._id){
             console.log("Saving an existing workout");
             this.workoutService.update(this.workout)

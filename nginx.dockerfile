@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.10
 
 MAINTAINER Scott Kraemer
 
