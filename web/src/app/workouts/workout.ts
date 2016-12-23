@@ -5,6 +5,7 @@ export interface IWorkout {
     notes: string;
     createdAt: Date;
     completedAt: Date;
+    workoutType: IWorkoutType;
 }
 
 export class Workout {
@@ -14,4 +15,20 @@ export class Workout {
   notes: string;
   createdAt: Date;
   completedAt: Date;
+  workoutType: IWorkoutType;
+  //schedule: string; schedule this workout is associated with
+}
+
+export interface IWorkoutType {
+  
+}
+
+export class StrengthTrainingWorkoutType implements IWorkoutType{
+  guide: string;
+}
+
+export class RunningWorkoutType implements IWorkoutType{
+  distance: number;
+  distanceType: string;
+  calories: number;
 }

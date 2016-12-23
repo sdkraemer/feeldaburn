@@ -13,6 +13,8 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { WorkoutListComponent } from './workouts/workout-list.component';
 import { WorkoutComponent } from './workouts/workout.component';
 
+import { WorkoutTypeComponent } from './workouts/workout-type.component';
+
 import { GuidesComponent } from './guides/guides.component'
 import { GuideListComponent } from './guides/guide-list.component'
 import { GuideService } from './guides/guide.service';
@@ -29,6 +31,8 @@ import { routing, appRoutingProviders } from './app.routes';
     WorkoutsComponent,
     WorkoutListComponent,
     WorkoutComponent,
+
+    WorkoutTypeComponent,
 
     GuidesComponent,
     GuideListComponent,

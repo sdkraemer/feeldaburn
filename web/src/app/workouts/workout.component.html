@@ -21,6 +21,9 @@
             <input type="text" class="form-control" readonly="true" value="{{workout.createdAt | date:'short'}}"/>
             <input type="hidden" class="form-control" name="createdAt" [ngModel]="workout.createdAt"/>
         </div>
+
+        <workout-type></workout-type>
+
         <input type="hidden" name="_id" [ngModel]="workout._id" />
         <input type="hidden" name="completedAt" [ngModel]="workout.completedAt" />
         <button type="submit" class="btn btn-primary">Save</button>
