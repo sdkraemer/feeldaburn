@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Workout, IWorkout } from './workout';
+import { Guide, IGuide } from './guide';
 import { Http, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
@@ -11,46 +11,42 @@ import 'rxjs/add/operator/catch';
 
 
 @Injectable()
-export class WorkoutService {
-    apiUrl: string = 'http://localhost/api/workouts';
-    workouts: IWorkout[];
+export class GuideService {
+    apiUrl: string = 'http://localhost/api/guides';
 
     constructor(
         private http: Http,
         private authHttp: AuthHttp
     ) { }
 
-    getWorkouts(): Observable<IWorkout[]> {
+    getGuides(): Observable<IGuide[]> {
         return this.authHttp.get(this.apiUrl)
             .map((res: Response) => {
-                this.workouts = res.json();
-                return this.workouts;
+                return res.json();
             })
             .catch(this.handleError);
     }
 
-    getWorkout(_id: string): Observable<Workout> {
+    getGuide(_id: string): Observable<IGuide> {
         const url = `${this.apiUrl}/${_id}`;
         return this.authHttp
                     .get(url)
                     .map((response: Response) => {
-                        console.log("WorkoutService.getWorkout");
-                        console.dir(response.json());
                         return response.json();
                     })
                     .catch(this.handleError); 
     }
 
-    add(workout: Workout): Observable<boolean> {
-        return this.authHttp.post(this.apiUrl, workout)
+    add(guide: IGuide): Observable<boolean> {
+        return this.authHttp.post(this.apiUrl, guide)
                    .map((response: Response) => {
                         return this.isSuccessStatusCode(response.status);
                    })
                    .catch(this.handleError);
     }
 
-    update(workout: Workout): Observable<boolean> {
-        return this.authHttp.put(`${this.apiUrl}/${workout._id}`, workout)
+    update(guide: IGuide): Observable<boolean> {
+        return this.authHttp.put(`${this.apiUrl}/${guide._id}`, guide)
                    .map((response: Response) => {
                        return this.isSuccessStatusCode(response.status);
                    })

@@ -13,15 +13,26 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { WorkoutListComponent } from './workouts/workout-list.component';
 import { WorkoutComponent } from './workouts/workout.component';
 
+import { GuidesComponent } from './guides/guides.component'
+import { GuideListComponent } from './guides/guide-list.component'
+import { GuideService } from './guides/guide.service';
+import { GuideComponent } from './guides/guide.component'
+
+
 import { routing, appRoutingProviders } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    
     WorkoutsComponent,
     WorkoutListComponent,
-    WorkoutComponent
+    WorkoutComponent,
+
+    GuidesComponent,
+    GuideListComponent,
+    GuideComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +42,7 @@ import { routing, appRoutingProviders } from './app.routes';
   ],
   providers: [
     WorkoutService,
+    GuideService,
     AUTH_PROVIDERS,
     Auth,
     appRoutingProviders

@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Workout } from './workout';
 import { WorkoutService } from './workout.service';
 
+import { Guide } from '../guides/guide';
+import { GuideService } from '../guides/guide.service';
+
 //rxjs
 import 'rxjs/add/operator/do'; 
 
@@ -13,13 +16,17 @@ import 'rxjs/add/operator/do';
 })
 export class WorkoutComponent implements OnInit {
     public workout: Workout;
+    public guides: Guide[];
 
     constructor(
         private workoutService: WorkoutService,
+        private guideService: GuideService, 
         private route: ActivatedRoute,
         private router: Router) { }
 
-    ngOnInit() { 
+    ngOnInit() {
+        this.getGuides();
+
         this.route
             .params
             .map(params => params['id'])
@@ -37,6 +44,13 @@ export class WorkoutComponent implements OnInit {
         }
     }
 
+    private getGuides(){
+        this.guideService.getGuides()
+            .subscribe((guides) => {
+                this.guides = guides;
+            });
+    }
+
     onDelete(form){
         console.log("deleting workout");
         console.dir(form);
@@ -46,10 +60,22 @@ export class WorkoutComponent implements OnInit {
             });
     }
 
+    onComplete(form){
+        console.log("onSubmit");
+        form.value.completedAt = new Date();
+        this.onSubmit(form);
+    }
+
     onSubmit(form){
+        console.log("onSubmit");
         this.workout.name = form.value.name;
+        this.workout.guide = form.value.guide;
         this.workout.createdAt = form.value.createdAt;
         this.workout.notes = form.value.notes;
+        this.workout.completedAt = form.value.completedAt;
+        console.log(form.value.guide);
+        console.dir(form.value);
+        console.dir(this.workout);
 
         if(form.value._id){
             console.log("Saving an existing workout");

@@ -1,21 +1,10 @@
 <button type="button" class="btn btn-primary" [routerLink]="['/workouts', 'New']">Add</button>
-<!--<ul>
-    <li *ngFor="let workout of workouts">
-        <button type="button" class="btn btn-outline-secondary" [routerLink]="['/workouts', workout._id]">View</button>
-        {{workout.createdAt | date:'short'}} - {{workout.name}}
-    </li>
-</ul>
-
-<div *ngFor="let workout of workouts" class="card card-block" style="width: 18rem;">
-  <h3 class="card-title">{{workout.name}}</h3>
-  <p class="card-text">Description goes here.</p>
-  <a href="#" class="btn btn-primary" [routerLink]="['/workouts', workout._id]">View</a>
-</div>-->
-
+<hr>
 <div *ngFor="let workout of workouts" class="card" style="width: 18rem;">
   <div class="card-block">
     <h4 class="card-title">{{workout.name}}</h4>
-    <h6 class="card-subtitle text-muted">{{workout.createdAt | date:'short'}}</h6>
+    <h6 class="card-subtitle text-muted" *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</h6>
+    <h6 class="card-subtitle text-muted" *ngIf="!workout.completedAt">In Progress</h6>
   </div>
   <div class="card-block">
     <p class="card-text">Description goes here.</p>

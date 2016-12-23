@@ -7,6 +7,11 @@ var WorkoutSchema = new Schema(
     name: {
         type: String, required: true, trim: true
     },
+    guide: {
+        type: ObjectId,
+        ref: "Guide",
+        required: false
+    },
     notes: {
         type: String, required: false, trim: true 
     },
@@ -14,6 +19,9 @@ var WorkoutSchema = new Schema(
         type: ObjectId,
         ref: "User",
         required: true
+    },
+    completedAt: {
+        type: Date
     }
 }, 
 { 

@@ -1,0 +1,12 @@
+<button type="button" class="btn btn-primary" [routerLink]="['/guides', 'New']">Add</button>
+<hr>
+<div *ngFor="let guide of guides" class="card" style="width: 18rem;">
+  <div class="card-block">
+    <h4 class="card-title">{{guide.name}}</h4>
+    <h6 class="card-subtitle text-muted">{{guide.createdAt | date:'short'}}</h6>
+  </div>
+  <div class="card-block">
+    <p class="card-text">{{guide.description}}</p>
+    <a href="#" class="btn btn-primary" [routerLink]="['/guides', guide._id]">View</a>
+  </div>
+</div>
