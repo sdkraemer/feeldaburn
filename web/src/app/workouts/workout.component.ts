@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Workout } from './workout';
+import { Workout, WorkoutType, StrengthTrainingWorkoutType, RunningWorkoutType } from './workout';
 import { WorkoutService } from './workout.service';
 
 import { Guide } from '../guides/guide';
@@ -17,6 +17,8 @@ import 'rxjs/add/operator/do';
 export class WorkoutComponent implements OnInit {
     public workout: Workout;
     public guides: Guide[];
+    public workoutTypes =  WorkoutType;
+    public workoutType: WorkoutType;
 
     constructor(
         private workoutService: WorkoutService,
@@ -40,7 +42,12 @@ export class WorkoutComponent implements OnInit {
         }
         else{
             this.workoutService.getWorkout(_id)
-                .subscribe((workout) => this.workout = workout);
+                .subscribe((workout) => {
+                    this.workout = workout;
+                    //to test
+                    this.workout.workoutType = new RunningWorkoutType();
+                    this.setWorkoutType();
+                });
         }
     }
 
@@ -49,6 +56,15 @@ export class WorkoutComponent implements OnInit {
             .subscribe((guides) => {
                 this.guides = guides;
             });
+    }
+
+    private setWorkoutType(){
+        if(this.workout.workoutType instanceof StrengthTrainingWorkoutType){
+            this.workoutType = this.workoutTypes.STRENGTH_TRAINING;
+        }
+        else if(this.workout.workoutType instanceof RunningWorkoutType){
+            this.workoutType = this.workoutTypes.RUNNING;
+        }
     }
 
     onDelete(form){

@@ -37,13 +37,12 @@ module.exports = function(app) {
         Workout.findOne({'_id': req.params.id}, {}, function(err, workout){
             if (err) return console.error(err);
 
-            console.dir(req.body);
             workout.name = req.body.name || workout.name;
             workout.guide = workout.guide; //for now only allow assigning a guide on create
             workout.notes = req.body.notes || workout.notes;
             workout.createdBy = workout.createdBy;
             workout.completedAt = req.body.completedAt || workout.completedAt;
-            console.dir(workout);
+            
             workout.save(function(err, workout){
                 if(err) { 
                     console.log("Error updating workout. "+err);

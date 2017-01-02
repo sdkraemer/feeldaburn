@@ -1,6 +1,7 @@
 var Guide = require('../models/guide');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
+var _ = require('lodash');
 
 module.exports = function(app) {
     app.get('/api/guides', function(req, res){
@@ -11,10 +12,22 @@ module.exports = function(app) {
     });
 
     app.post('/api/guides', function(req, res){
+        var data = req.body;
         var guide = new Guide({
-                            name: req.body.name, 
-                            description: req.body.description
+                            name: data.name, 
+                            description: data.description,
+                            createdBy: ObjectId(req.userId),
+                            exercises: []
                         });
+        if(data.exercises){
+            data.exercises.forEach(function(exercise) {
+                guide.exercises.push({
+                    name: exercise.name,
+                    sided: exercise.sided,
+                    type: exercise.type
+                });
+            }, this);
+        }
         guide.save(function(err, guide){
             if(err) { console.log('Error inserting new guide: '+err); }
             res.json(req.body);
@@ -31,10 +44,28 @@ module.exports = function(app) {
     app.put('/api/guides/:id', function(req, res){
         Guide.findOne({'_id': req.params.id}, {}, function(err, guide){
             if (err) return console.error(err);
+            console.log("PUT existing guide data:", guide);
 
-            guide.name = req.body.name || guide.name;
-            guide.description = req.body.description || guide.description;
-            guide.createdBy = guide.createdBy;
+            var data = req.body;
+
+            guide.name = data.name || guide.name;
+            guide.description = data.description || guide.description;
+
+            data.exercises.forEach(function(exercise) {
+                if(exercise._id){
+                    var dbExercise = _.find(guide.exercises, function(e){
+                        return e._id == exercise._id;
+                    });
+
+                    dbExercise.name = exercise.name || dbExercise;
+                    dbExercise.sided = exercise.sided || dbExercise.sided;
+                    dbExercise.type = exercise.type || dbExercise.type;
+                }
+                else{
+                    exercise._id = new mongoose.Types.ObjectId;
+                    guide.exercises.push(exercise);
+                }
+            }, this);
 
             guide.save(function(err, guide){
                 if(err) { 

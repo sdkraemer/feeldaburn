@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 
@@ -9,11 +10,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 
 import { WorkoutsModule } from './workouts/workouts.module';
+import { GuidesModule } from './guides/guides.module';
 
-import { GuidesComponent } from './guides/guides.component'
-import { GuideListComponent } from './guides/guide-list.component'
-import { GuideService } from './guides/guide.service';
-import { GuideComponent } from './guides/guide.component'
 
 
 import { routing, appRoutingProviders } from './app.routes';
@@ -22,20 +20,17 @@ import { routing, appRoutingProviders } from './app.routes';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     routing,
     WorkoutsModule,
+    GuidesModule
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
-
-    GuidesComponent,
-    GuideListComponent,
-    GuideComponent
+    HomeComponent
   ],
   providers: [
-    GuideService,
     AUTH_PROVIDERS,
     Auth,
     appRoutingProviders

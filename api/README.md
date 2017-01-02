@@ -78,3 +78,6 @@ Activity: {
     ]
 }
 
+--12/26: Working on trying out workouttype enum to see if that will work with sub component rendering
+--1/1: Sided is acting up, shows as null and null type in robomongo. Post only working. Have to 
+  allow updating guide, then retrieve exercises on created ones.

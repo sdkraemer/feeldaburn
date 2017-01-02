@@ -19,6 +19,12 @@ export class Workout {
   //schedule: string; schedule this workout is associated with
 }
 
+export enum WorkoutType {
+  STRENGTH_TRAINING,
+  RUNNING,
+  CYCLING
+}
+
 export interface IWorkoutType {
   
 }

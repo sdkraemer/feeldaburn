@@ -8,6 +8,8 @@ import { WorkoutService } from './workout.service';
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutTypeComponent } from './workout-type.component';
 
+import { GuideService } from '../guides/guide.service';
+
 @NgModule({
     imports: [
         SharedModule,
@@ -20,7 +22,8 @@ import { WorkoutTypeComponent } from './workout-type.component';
         routedComponents
     ],
     providers: [
-        WorkoutService
+        WorkoutService,
+        GuideService
     ],
 })
 export class WorkoutsModule { }

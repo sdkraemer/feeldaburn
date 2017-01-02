@@ -13,10 +13,10 @@ import { AuthGuard }                from './auth/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'workouts', component: WorkoutsComponent, canActivate: [AuthGuard] },
-  { path: 'workouts/:id', component: WorkoutComponent, canActivate: [AuthGuard] },
-  { path: 'guides', component: GuidesComponent, canActivate: [AuthGuard] },
-  { path: 'guides/:id', component: GuideComponent, canActivate: [AuthGuard] },
+  // { path: 'workouts', component: WorkoutsComponent, canActivate: [AuthGuard] },
+  // { path: 'workouts/:id', component: WorkoutComponent, canActivate: [AuthGuard] },
+  // { path: 'guides', component: GuidesComponent, canActivate: [AuthGuard] },
+  // { path: 'guides/:id', component: GuideComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

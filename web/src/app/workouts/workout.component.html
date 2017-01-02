@@ -7,6 +7,15 @@
             <input type="text" class="form-control" id="name" name="name" [ngModel]="workout.name"/>
         </div>
         <div class="form-group">
+            <label for="type">Type:</label>
+            <select class="form-control" name="type" [(ngModel)]="workoutType">
+                <option value=""></option>
+                <option [value]="workoutTypes.STRENGTH_TRAINING">Strength Training</option>
+                <option [value]="workoutTypes.RUNNING">Running</option>
+                <option [value]="workoutTypes.CYCLING">Cycling</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="guide">Guide:</label>
             <select class="form-control" name="guide" [(ngModel)]="workout.guide">
                 <option *ngFor="let guide of guides" [value]="guide._id">{{guide.name}}</option>
@@ -21,6 +30,10 @@
             <input type="text" class="form-control" readonly="true" value="{{workout.createdAt | date:'short'}}"/>
             <input type="hidden" class="form-control" name="createdAt" [ngModel]="workout.createdAt"/>
         </div>
+        
+        <div *ngIf="workoutType == workoutTypes.STRENGTH_TRAINING">Strength Training</div>
+        <div *ngIf="workoutType == workoutTypes.RUNNING">Running</div>
+        <div *ngIf="workoutType == workoutTypes.CYCLING">Cycling</div>
 
         <workout-type></workout-type>
 
