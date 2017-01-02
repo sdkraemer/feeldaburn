@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Workout, WorkoutType, StrengthTrainingWorkoutType, RunningWorkoutType } from './workout';
 import { WorkoutService } from './workout.service';
 
-import { Guide } from '../guides/guide';
-import { GuideService } from '../guides/guide.service';
+
 
 //rxjs
 import 'rxjs/add/operator/do'; 
@@ -15,19 +15,34 @@ import 'rxjs/add/operator/do';
     templateUrl: 'workout.component.html'
 })
 export class WorkoutComponent implements OnInit {
+    public form: FormGroup;
     public workout: Workout;
-    public guides: Guide[];
-    public workoutTypes =  WorkoutType;
-    public workoutType: WorkoutType;
+    
+    //public workoutTypes =  WorkoutType;
+    //public workoutType: WorkoutType;
+
+    public workoutTypes = [
+        { value: 'STRENGTH_TRAINING', display: 'Strength Training'},
+        { value: 'RUNNING', display: 'Running'},
+        { value: 'CYCLING', display: 'Cycling'}
+    ];
 
     constructor(
+        private formBuilder: FormBuilder,
         private workoutService: WorkoutService,
-        private guideService: GuideService, 
         private route: ActivatedRoute,
         private router: Router) { }
 
     ngOnInit() {
-        this.getGuides();
+        this.form = this.formBuilder.group({
+            _id: [''],
+            name: ['', Validators.required],
+            guide: [''],
+            notes: [''],
+            type: [''],
+            createdAt: [''],
+            completedAt: ['']
+        });
 
         this.route
             .params
@@ -38,38 +53,48 @@ export class WorkoutComponent implements OnInit {
 
     private getWorkout(_id) {
         if(_id == 'New'){
-            this.workout = new Workout();
+            this.form.setValue({
+                 _id: null,
+                name: null,
+                guide: null,
+                notes: null,
+                type: [''],
+                createdAt: [''],
+                completedAt: ['']
+            });
         }
         else{
             this.workoutService.getWorkout(_id)
                 .subscribe((workout) => {
-                    this.workout = workout;
+                    this.form.setValue({
+                        _id: workout._id,
+                        name: workout.name,
+                        guide: workout.guide,
+                        notes: workout.notes,
+                        type: workout.type,
+                        createdAt: workout.createdAt,
+                        completedAt: workout.completedAt
+                    });
                     //to test
-                    this.workout.workoutType = new RunningWorkoutType();
-                    this.setWorkoutType();
+                    //this.workout.workoutType = new RunningWorkoutType();
+                    //this.setWorkoutType();
                 });
         }
     }
 
-    private getGuides(){
-        this.guideService.getGuides()
-            .subscribe((guides) => {
-                this.guides = guides;
-            });
-    }
+    
 
-    private setWorkoutType(){
-        if(this.workout.workoutType instanceof StrengthTrainingWorkoutType){
-            this.workoutType = this.workoutTypes.STRENGTH_TRAINING;
-        }
-        else if(this.workout.workoutType instanceof RunningWorkoutType){
-            this.workoutType = this.workoutTypes.RUNNING;
-        }
-    }
+    // private setWorkoutType(){
+    //     if(this.workout.workoutType instanceof StrengthTrainingWorkoutType){
+    //         this.workoutType = this.workoutTypes.STRENGTH_TRAINING;
+    //     }
+    //     else if(this.workout.workoutType instanceof RunningWorkoutType){
+    //         this.workoutType = this.workoutTypes.RUNNING;
+    //     }
+    // }
 
     onDelete(form){
         console.log("deleting workout");
-        console.dir(form);
         this.workoutService.remove(form.value._id)
             .subscribe((isSuccessful: boolean) => {
                 this.goToWorkouts();
@@ -79,21 +104,14 @@ export class WorkoutComponent implements OnInit {
     onComplete(form){
         console.log("onSubmit");
         form.value.completedAt = new Date();
-        this.onSubmit(form);
+        //this.onSubmit(form); TODO fix this
     }
 
-    onSubmit(form){
+    onSubmit(){
         console.log("onSubmit");
-        this.workout.name = form.value.name;
-        this.workout.guide = form.value.guide;
-        this.workout.createdAt = form.value.createdAt;
-        this.workout.notes = form.value.notes;
-        this.workout.completedAt = form.value.completedAt;
-        console.log(form.value.guide);
-        console.dir(form.value);
-        console.dir(this.workout);
+        let workout = new Workout(this.form.value);
 
-        if(form.value._id){
+        if(workout._id){
             console.log("Saving an existing workout");
             this.workoutService.update(this.workout)
                 .subscribe((isSuccessful: boolean) => {

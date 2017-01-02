@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { WorkoutsRoutingModule, routedComponents } from './workouts.routing';
 
@@ -7,19 +8,22 @@ import { WorkoutService } from './workout.service';
 
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutTypeComponent } from './workout-type.component';
+import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
 
 import { GuideService } from '../guides/guide.service';
 
 @NgModule({
     imports: [
         SharedModule,
-        WorkoutsRoutingModule
+        WorkoutsRoutingModule,
+        ReactiveFormsModule
     ],
     exports: [],
     declarations: [
         WorkoutListComponent,
         WorkoutTypeComponent,
-        routedComponents
+        routedComponents,
+        StrengthTrainingWorkoutComponent
     ],
     providers: [
         WorkoutService,

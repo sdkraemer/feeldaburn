@@ -1,46 +1,35 @@
 <h2>View Workout</h2>
 <button type="button" class="btn btn-outline-secondary" [routerLink]="['/workouts']">Back</button>
-<div *ngIf="workout" >
-    <form novalidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+<div *ngIf="form" >
+    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" [ngModel]="workout.name"/>
+            <input type="text" class="form-control" id="name" formControlName="name"/>
         </div>
         <div class="form-group">
             <label for="type">Type:</label>
-            <select class="form-control" name="type" [(ngModel)]="workoutType">
-                <option value=""></option>
-                <option [value]="workoutTypes.STRENGTH_TRAINING">Strength Training</option>
-                <option [value]="workoutTypes.RUNNING">Running</option>
-                <option [value]="workoutTypes.CYCLING">Cycling</option>
+            <select class="form-control" formControlName="type">
+                <option *ngFor="let workoutType of workoutTypes" [value]="workoutType.value">
+                    {{workoutType.display}}
+                </option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="guide">Guide:</label>
-            <select class="form-control" name="guide" [(ngModel)]="workout.guide">
-                <option *ngFor="let guide of guides" [value]="guide._id">{{guide.name}}</option>
-            </select>
+        <div *ngIf="form.value.type != ''">
+            <strength-training-workout *ngIf="form.value.type == 'STRENGTH_TRAINING'" [group]="form"></strength-training-workout>
         </div>
         <div class="form-group">
             <label for="notes">Notes:</label>
-            <textarea class="form-control" name="notes" rows="3" [ngModel]="workout.notes"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="createdAt">Created At:</label>
-            <input type="text" class="form-control" readonly="true" value="{{workout.createdAt | date:'short'}}"/>
-            <input type="hidden" class="form-control" name="createdAt" [ngModel]="workout.createdAt"/>
+            <textarea class="form-control" rows="3" formControlName="notes"></textarea>
         </div>
         
-        <div *ngIf="workoutType == workoutTypes.STRENGTH_TRAINING">Strength Training</div>
-        <div *ngIf="workoutType == workoutTypes.RUNNING">Running</div>
-        <div *ngIf="workoutType == workoutTypes.CYCLING">Cycling</div>
 
-        <workout-type></workout-type>
+        <!--<workout-type></workout-type>-->
 
-        <input type="hidden" name="_id" [ngModel]="workout._id" />
-        <input type="hidden" name="completedAt" [ngModel]="workout.completedAt" />
+        <input type="hidden" formControlName="_id" />
+        <input type="hidden" formControlName="createdAt" />
+        <input type="hidden" formControlName="completedAt" />
         <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-primary" (click)="onComplete(form)" [hidden]="workout.completedAt">Complete</button>
-        <button type="button" class="btn btn-primary" (click)="onDelete(form)" [hidden]="!workout._id">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="onComplete(form)" [hidden]="form.completedAt">Complete</button>
+        <button type="button" class="btn btn-primary" (click)="onDelete(form)" [hidden]="!form._id">Delete</button>
     </form>
 </div>

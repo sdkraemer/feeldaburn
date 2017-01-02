@@ -5,7 +5,7 @@ export interface IWorkout {
     notes: string;
     createdAt: Date;
     completedAt: Date;
-    workoutType: IWorkoutType;
+    type: string;
 }
 
 export class Workout {
@@ -15,8 +15,17 @@ export class Workout {
   notes: string;
   createdAt: Date;
   completedAt: Date;
-  workoutType: IWorkoutType;
+  type: string;
   //schedule: string; schedule this workout is associated with
+
+  constructor(options: IWorkout){
+    this._id = options._id;
+    this.name = options.name;
+    this.guide = options.guide;
+    this.notes = options.notes;
+    this.createdAt = options.createdAt;
+    this.type = options.type;
+  }
 }
 
 export enum WorkoutType {

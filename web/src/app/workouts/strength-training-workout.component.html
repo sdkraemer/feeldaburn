@@ -1,0 +1,8 @@
+<div [formGroup]="form">
+    <div class="form-group">
+        <label for="guide">Guide:</label>
+        <select class="form-control" formControlName="guide">
+            <option *ngFor="let guide of guides" [value]="guide._id">{{guide.name}}</option>
+        </select>
+    </div>
+</div>
