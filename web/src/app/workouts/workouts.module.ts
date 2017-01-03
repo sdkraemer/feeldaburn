@@ -9,6 +9,7 @@ import { WorkoutService } from './workout.service';
 import { WorkoutListComponent } from './workout-list.component';
 import { WorkoutTypeComponent } from './workout-type.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
+import { RunningWorkoutComponent } from './running-workout.component';
 
 import { GuideService } from '../guides/guide.service';
 
@@ -23,7 +24,8 @@ import { GuideService } from '../guides/guide.service';
         WorkoutListComponent,
         WorkoutTypeComponent,
         routedComponents,
-        StrengthTrainingWorkoutComponent
+        StrengthTrainingWorkoutComponent,
+        RunningWorkoutComponent
     ],
     providers: [
         WorkoutService,

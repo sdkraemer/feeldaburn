@@ -16,7 +16,6 @@ import 'rxjs/add/operator/do';
 })
 export class WorkoutComponent implements OnInit {
     public form: FormGroup;
-    public workout: Workout;
     
     //public workoutTypes =  WorkoutType;
     //public workoutType: WorkoutType;
@@ -37,7 +36,6 @@ export class WorkoutComponent implements OnInit {
         this.form = this.formBuilder.group({
             _id: [''],
             name: ['', Validators.required],
-            guide: [''],
             notes: [''],
             type: [''],
             createdAt: [''],
@@ -53,10 +51,9 @@ export class WorkoutComponent implements OnInit {
 
     private getWorkout(_id) {
         if(_id == 'New'){
-            this.form.setValue({
+            this.form.patchValue({
                  _id: null,
                 name: null,
-                guide: null,
                 notes: null,
                 type: [''],
                 createdAt: [''],
@@ -66,12 +63,10 @@ export class WorkoutComponent implements OnInit {
         else{
             this.workoutService.getWorkout(_id)
                 .subscribe((workout) => {
-                    this.form.setValue({
+                    this.form.patchValue({
                         _id: workout._id,
                         name: workout.name,
-                        guide: workout.guide,
                         notes: workout.notes,
-                        type: workout.type,
                         createdAt: workout.createdAt,
                         completedAt: workout.completedAt
                     });
@@ -109,18 +104,36 @@ export class WorkoutComponent implements OnInit {
 
     onSubmit(){
         console.log("onSubmit");
-        let workout = new Workout(this.form.value);
+        var formData = this.form.value;
+        let workout = new Workout({
+            _id: formData._id,
+            name: formData.name,
+            notes: formData.notes,
+            createdAt: formData.createdAt,
+            completedAt: formData.completedAt
+        });
+        
+        if(this.form.value.type == 'RUNNING'){
+            workout.workoutType = new RunningWorkoutType({
+                distance: formData.workoutType.distance
+            });
+        }
+        else if(this.form.value.type == 'STRENGTH_TRAINING'){
+            workout.workoutType = new StrengthTrainingWorkoutType({
+                guide: formData.workoutType.guide
+            });
+        }
 
         if(workout._id){
             console.log("Saving an existing workout");
-            this.workoutService.update(this.workout)
+            this.workoutService.update(workout)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToWorkouts();
                 });
         }
         else{
             console.log("Saving a new workout");
-            this.workoutService.add(this.workout)
+            this.workoutService.add(workout)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToWorkouts();
                 });

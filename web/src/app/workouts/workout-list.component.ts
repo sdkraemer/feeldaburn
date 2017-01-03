@@ -7,7 +7,7 @@ import { WorkoutService } from './workout.service';
     templateUrl: 'workout-list.component.html'
 })
 export class WorkoutListComponent implements OnInit {
-    workouts: Workout[];
+    workouts: IWorkout[];
     constructor(
         private workoutService: WorkoutService) { }
 

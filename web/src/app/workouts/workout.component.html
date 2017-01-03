@@ -1,7 +1,7 @@
 <h2>View Workout</h2>
 <button type="button" class="btn btn-outline-secondary" [routerLink]="['/workouts']">Back</button>
 <div *ngIf="form" >
-    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" formControlName="name"/>
@@ -15,7 +15,8 @@
             </select>
         </div>
         <div *ngIf="form.value.type != ''">
-            <strength-training-workout *ngIf="form.value.type == 'STRENGTH_TRAINING'" [group]="form"></strength-training-workout>
+            <strength-training-workout *ngIf="form.value.type == 'STRENGTH_TRAINING'" [form]="form"></strength-training-workout>
+            <running-workout *ngIf="form.value.type == 'RUNNING'" [form]="form"></running-workout>
         </div>
         <div class="form-group">
             <label for="notes">Notes:</label>

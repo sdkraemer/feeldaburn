@@ -1,49 +1,70 @@
 export interface IWorkout {
     _id: string;
     name: string;
-    guide: string;
     notes: string;
     createdAt: Date;
     completedAt: Date;
-    type: string;
+    workoutType?: IWorkout;
 }
 
 export class Workout {
   _id: string;
   name: string;
-  guide: string;
   notes: string;
   createdAt: Date;
   completedAt: Date;
-  type: string;
-  //schedule: string; schedule this workout is associated with
+  workoutType?: IWorkoutType;
 
   constructor(options: IWorkout){
     this._id = options._id;
     this.name = options.name;
-    this.guide = options.guide;
     this.notes = options.notes;
     this.createdAt = options.createdAt;
-    this.type = options.type;
+    //this.workout = options.workout;
   }
 }
 
-export enum WorkoutType {
-  STRENGTH_TRAINING,
-  RUNNING,
-  CYCLING
-}
+// export enum WorkoutType {
+//   STRENGTH_TRAINING,
+//   RUNNING,
+//   CYCLING
+// }
 
 export interface IWorkoutType {
-  
+  type: string
 }
 
-export class StrengthTrainingWorkoutType implements IWorkoutType{
+export class WorkoutType {
+  type: string;
+
+  constructor(){
+  }
+}
+
+export interface IStrengthTrainingWorkoutType {
+  type?: string;
   guide: string;
 }
 
-export class RunningWorkoutType implements IWorkoutType{
+export class StrengthTrainingWorkoutType extends WorkoutType{
+  guide: string;
+  constructor(options: IStrengthTrainingWorkoutType){
+    super();
+    this.type = "STRENGTH_TRAINING";
+    this.guide = options.guide;
+  }
+}
+
+export interface IRunningWorkoutType {
+  type?: string;
   distance: number;
-  distanceType: string;
-  calories: number;
+}
+
+export class RunningWorkoutType extends WorkoutType{
+  distance: number;
+  constructor(options: IRunningWorkoutType){
+    super();
+    this.type = "RUNNING";
+    this.distance = options.distance;
+  }
 }

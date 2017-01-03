@@ -1,6 +1,10 @@
-var Workout = require('../models/workout');
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Types.ObjectId;
+var Workout = require('../models/workout'),
+    WorkoutTypeModels = require('../models/workouttype'),
+    WorkoutType = WorkoutTypeModels.WorkoutType,
+    StrengthTrainingWorkoutType = WorkoutTypeModels.StrengthTrainingWorkoutType,
+    RunningWorkoutType = WorkoutTypeModels.RunningWorkoutType,
+    mongoose = require('mongoose'),
+    ObjectId = mongoose.Types.ObjectId;
 
 
 module.exports = function(app) {
@@ -20,17 +24,44 @@ module.exports = function(app) {
     });
 
     app.post('/api/workouts', function(req, res){
-        var workout = new Workout({
-                            name: req.body.name, 
-                            guide: ObjectId(req.body.guide),
-                            notes: req.body.notes,
-                            createdBy: ObjectId(req.userId),
-                            completedAt: req.body.completedAt
-                        });
-        workout.save(function(err, workout){
-            if(err) { console.log('Error inserting new workout: '+err); }
-            res.json(req.body);
+        
+        var json = req.body;
+        console.dir(json);
+
+        if(json.workoutType.type == "RUNNING"){
+            console.log("Running workout");
+            var workoutType = new RunningWorkoutType({
+                workoutType: "RUNNING",
+                //distance: json.workoutType.distance
+                distance: 10
+            });
+        }
+        else if(json.workoutType.type == "STRENGTH_TRAINING"){
+            console.log("Strength Training workout");
+            var workoutType = new StrengthTrainingWorkoutType({
+                workoutType: "STRENGTH_TRAINING",
+                guide: ObjectId(json.workoutType.guide)
+            });
+        }
+
+        workoutType.save(function(err){
+            if(err) { console.log('Error occurred saving a workout type.:' + err); }
+
+            var workout = new Workout({
+                name: json.name,
+                notes: json.notes,
+                createdBy: ObjectId(req.userId),
+                completedAt: json.completedAt,
+                workoutType: workoutType._id
+            });
+
+            
+            workout.save(function(err, workout){
+                if(err) { console.log('Error inserting new workout: '+err); }
+                res.json(req.body);
+            });
         });
+ 
     });
 
     app.put('/api/workouts/:id', function(req, res){
@@ -63,4 +94,16 @@ module.exports = function(app) {
             res.sendStatus(200);
         });
     });
+
+    function createRunningWorkout(workoutData){
+        return new RunningWorkout({
+            name: workoutData.name, 
+            guide: ObjectId(workoutData.guide),
+            notes: workoutData.notes,
+            createdBy: ObjectId(req.userId),
+            completedAt: workoutData.completedAt,
+            type: workoutData.type,
+            distance: workoutData.distance
+        });
+    }
 }
