@@ -17,10 +17,12 @@ module.exports = function(app) {
     });
 
     app.get('/api/workouts/:id', function(req, res){
-        Workout.findOne({ '_id': req.params.id, 'createdBy': ObjectId(req.userId) }, {}, function (err, workout) {
-            res.json(workout);
-        });
-
+        Workout
+            .findOne({ '_id': req.params.id, 'createdBy': ObjectId(req.userId) })
+            .populate('workoutType')
+            .exec(function (err, workout) {
+                res.json(workout);
+            });
     });
 
     app.post('/api/workouts', function(req, res){

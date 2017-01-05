@@ -4,7 +4,7 @@ export interface IWorkout {
     notes: string;
     createdAt: Date;
     completedAt: Date;
-    workoutType?: IWorkout;
+    workoutType?: IWorkoutType;
 }
 
 export class Workout {
@@ -20,7 +20,7 @@ export class Workout {
     this.name = options.name;
     this.notes = options.notes;
     this.createdAt = options.createdAt;
-    //this.workout = options.workout;
+    this.workoutType = options.workoutType;
   }
 }
 
@@ -31,40 +31,47 @@ export class Workout {
 // }
 
 export interface IWorkoutType {
-  type: string
+  workoutType?: string
 }
 
-export class WorkoutType {
-  type: string;
+export class WorkoutType implements IWorkoutType{
+  workoutType: string;
 
-  constructor(){
+  constructor(options: IWorkoutType){
+    this.workoutType = options.workoutType;
   }
 }
 
-export interface IStrengthTrainingWorkoutType {
-  type?: string;
+export interface IStrengthTrainingWorkoutType extends IWorkoutType{
   guide: string;
 }
 
-export class StrengthTrainingWorkoutType extends WorkoutType{
+export class StrengthTrainingWorkoutType extends WorkoutType implements IStrengthTrainingWorkoutType{
   guide: string;
   constructor(options: IStrengthTrainingWorkoutType){
-    super();
-    this.type = "STRENGTH_TRAINING";
+    super(options);
+    this.workoutType = "STRENGTH_TRAINING";
     this.guide = options.guide;
+  }
+
+  set workoutType(value: string){
+    this.workoutType = "STRENGTH_TRAINING";
   }
 }
 
-export interface IRunningWorkoutType {
-  type?: string;
+export interface IRunningWorkoutType extends IWorkoutType{
   distance: number;
 }
 
-export class RunningWorkoutType extends WorkoutType{
+export class RunningWorkoutType extends WorkoutType implements IRunningWorkoutType{
   distance: number;
   constructor(options: IRunningWorkoutType){
-    super();
-    this.type = "RUNNING";
+    super(options);
+    this.workoutType = "RUNNING";
     this.distance = options.distance;
+  }
+
+  set workoutType(value: string){
+    this.workoutType = "RUNNING";
   }
 }

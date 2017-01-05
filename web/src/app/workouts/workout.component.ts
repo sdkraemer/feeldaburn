@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Workout, WorkoutType, StrengthTrainingWorkoutType, RunningWorkoutType } from './workout';
+import { Workout, IWorkout, WorkoutType, StrengthTrainingWorkoutType, RunningWorkoutType } from './workout';
 import { WorkoutService } from './workout.service';
 
 
@@ -16,6 +16,8 @@ import 'rxjs/add/operator/do';
 })
 export class WorkoutComponent implements OnInit {
     public form: FormGroup;
+
+    public workout: IWorkout;
     
     //public workoutTypes =  WorkoutType;
     //public workoutType: WorkoutType;
@@ -63,12 +65,15 @@ export class WorkoutComponent implements OnInit {
         else{
             this.workoutService.getWorkout(_id)
                 .subscribe((workout) => {
+                    this.workout = workout;
+
                     this.form.patchValue({
                         _id: workout._id,
                         name: workout.name,
                         notes: workout.notes,
                         createdAt: workout.createdAt,
-                        completedAt: workout.completedAt
+                        completedAt: workout.completedAt,
+                        type: workout.workoutType.workoutType
                     });
                     //to test
                     //this.workout.workoutType = new RunningWorkoutType();
@@ -76,17 +81,6 @@ export class WorkoutComponent implements OnInit {
                 });
         }
     }
-
-    
-
-    // private setWorkoutType(){
-    //     if(this.workout.workoutType instanceof StrengthTrainingWorkoutType){
-    //         this.workoutType = this.workoutTypes.STRENGTH_TRAINING;
-    //     }
-    //     else if(this.workout.workoutType instanceof RunningWorkoutType){
-    //         this.workoutType = this.workoutTypes.RUNNING;
-    //     }
-    // }
 
     onDelete(form){
         console.log("deleting workout");

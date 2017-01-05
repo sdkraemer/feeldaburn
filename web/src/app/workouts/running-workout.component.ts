@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
+import { RunningWorkoutType } from './workout';
 
 @Component({
     selector: 'running-workout',
@@ -10,6 +11,9 @@ export class RunningWorkoutComponent implements OnInit {
     @Input('form')
     public form: FormGroup;
 
+    @Input('workoutType')
+    public workoutType: RunningWorkoutType;
+
     constructor(
         private formBuilder: FormBuilder
     ) { }
@@ -17,7 +21,7 @@ export class RunningWorkoutComponent implements OnInit {
     ngOnInit() {
         this.removeExistingControl();
         this.form.addControl('workoutType', this.formBuilder.group({
-            distance: ['']
+            distance: [this.workoutType.distance]
         }));
     }
 

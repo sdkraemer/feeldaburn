@@ -83,3 +83,4 @@ Activity: {
   allow updating guide, then retrieve exercises on created ones.
 --1/2: working on saving workout data. Was going to try and save running workout and see if I could get distance saved.
  -- Was going to populate Workout.workout  = new RunningWorkout on save in component.
+ --1/3: Just got strength training./running specific workouts to save. Need to make it so the view shows updated stuff, and get put to work.

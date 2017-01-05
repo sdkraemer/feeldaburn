@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Workout, IWorkout } from './workout';
+import { Workout, IWorkout, RunningWorkoutType, StrengthTrainingWorkoutType, IRunningWorkoutType, IStrengthTrainingWorkoutType } from './workout';
 import { Http, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
@@ -34,19 +34,31 @@ export class WorkoutService {
         return this.authHttp
                     .get(url)
                     .map((response: Response) => {
-                        console.log("WorkoutService.getWorkout");
-                        console.dir(response.json());
-                        return response.json();
+                        let json = response.json();
+                        let workoutData = <IWorkout>json;
+                        let workout = new Workout(workoutData);
+                        if(workout.workoutType.workoutType == 'RUNNING'){
+                            let workoutTypeData = <IRunningWorkoutType>json.workoutType;
+                            let workoutType = new RunningWorkoutType(workoutTypeData);
+                            workout.workoutType = workoutType;
+                        }
+                        else if(workout.workoutType.workoutType == 'STRENGTH_TRAINING'){
+                            let workoutTypeData = <IStrengthTrainingWorkoutType>json.workoutType;
+                            let workoutType = new StrengthTrainingWorkoutType(workoutTypeData);
+                            workout.workoutType = workoutType;
+                        }
+                        return workout;
                     })
                     .catch(this.handleError); 
     }
 
     add(workout: Workout): Observable<boolean> {
-        return this.authHttp.post(this.apiUrl, workout)
-                   .map((response: Response) => {
+        return this.authHttp
+                    .post(this.apiUrl, workout)
+                    .map((response: Response) => {
                         return this.isSuccessStatusCode(response.status);
-                   })
-                   .catch(this.handleError);
+                    })
+                    .catch(this.handleError);
     }
 
     update(workout: Workout): Observable<boolean> {
