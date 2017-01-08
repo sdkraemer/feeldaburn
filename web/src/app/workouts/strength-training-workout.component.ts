@@ -18,6 +18,7 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     public workoutType: StrengthTrainingWorkoutType;
 
     public guides: Guide[];
+    public selectedGuide: Guide;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -26,10 +27,21 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
 
     ngOnInit() {
         this.removeExistingControl();
+        if(!this.workoutType){
+            this.workoutType = new StrengthTrainingWorkoutType({
+                _id: null,
+                guide: null,
+                exercises: []
+            });
+        }
         this.form.addControl('workoutType', this.formBuilder.group({
+            _id: [this.workoutType._id],
             guide: [this.workoutType.guide]
         }));
         this.getGuides();
+        if(this.workoutType.guide){
+            this.getGuide(this.workoutType.guide);
+        }
     }
 
     private removeExistingControl(){
@@ -38,10 +50,34 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
         }
     }
 
+    public onGuideChange(_id){
+        this.getGuide(_id);
+    }
+
     private getGuides(){
-        this.guideService.getGuides()
+        this.guideService
+            .getGuides()
             .subscribe((guides) => {
                 this.guides = guides;
             });
+    }
+
+    private getGuide(_id: string){
+        this.guideService
+            .getGuide(_id)
+            .subscribe((guide) => {
+                this.selectedGuide = guide;
+                //build exercises from guide exercises
+            },
+            error => console.log('Could not load guide: '+_id),
+            () => this.populateExercisesOnWorkout());
+    }
+
+    private populateExercisesOnWorkout() {
+        if(this.workoutType.exercises.length == 0){
+            this.selectedGuide.exercises.forEach(function(exercise){
+                console.log(`building ${exercise.type} exercise ${exercise.name}`);
+            });
+        }
     }
 }

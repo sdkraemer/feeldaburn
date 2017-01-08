@@ -20,7 +20,14 @@ export class RunningWorkoutComponent implements OnInit {
 
     ngOnInit() {
         this.removeExistingControl();
+        if(!this.workoutType){
+            this.workoutType = new RunningWorkoutType({
+                _id: null,
+                distance: null
+            });
+        }
         this.form.addControl('workoutType', this.formBuilder.group({
+            _id: [this.workoutType._id],
             distance: [this.workoutType.distance]
         }));
     }

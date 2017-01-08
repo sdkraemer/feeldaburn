@@ -3,12 +3,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { WorkoutsRoutingModule, routedComponents } from './workouts.routing';
 
+import { WorkoutPickerModule } from './workout-picker/workout-picker.module';
+import { WorkoutTrackerModule } from './workout-tracker/workout-tracker.module';
 import { SharedModule } from '../shared/shared.module';
 import { WorkoutService } from './workout.service';
 
 import { WorkoutListComponent } from './workout-list.component';
-import { WorkoutTypeComponent } from './workout-type.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
+import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-workout-exercises.component';
 import { RunningWorkoutComponent } from './running-workout.component';
 
 import { GuideService } from '../guides/guide.service';
@@ -17,15 +19,17 @@ import { GuideService } from '../guides/guide.service';
     imports: [
         SharedModule,
         WorkoutsRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        WorkoutPickerModule,
+        WorkoutTrackerModule
     ],
     exports: [],
     declarations: [
         WorkoutListComponent,
-        WorkoutTypeComponent,
         routedComponents,
         StrengthTrainingWorkoutComponent,
-        RunningWorkoutComponent
+        RunningWorkoutComponent,
+        StrengthTrainingWorkoutExercisesComponent
     ],
     providers: [
         WorkoutService,

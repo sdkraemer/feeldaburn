@@ -2,9 +2,11 @@
     <div [formGroup]="form.controls.workoutType">
         <div class="form-group">
             <label for="guide">Guide:</label>
-            <select class="form-control" formControlName="guide">
+            <select class="form-control" formControlName="guide" (change)="onGuideChange($event.target.value)">
                 <option *ngFor="let guide of guides" [value]="guide._id">{{guide.name}}</option>
             </select>
         </div>
+        <strength-training-workout-exercises *ngIf="exercises" [form]="form" [exercises]="exercises"></strength-training-workout-exercises>
+        <input type="hidden" formControlName="_id"/>
     </div>
 </div>

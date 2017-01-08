@@ -31,32 +31,36 @@ export class Workout {
 // }
 
 export interface IWorkoutType {
+  _id: string;
   workoutType?: string
 }
 
 export class WorkoutType implements IWorkoutType{
+  _id: string;
   workoutType: string;
 
   constructor(options: IWorkoutType){
+    this._id = options._id;
     this.workoutType = options.workoutType;
   }
 }
 
 export interface IStrengthTrainingWorkoutType extends IWorkoutType{
   guide: string;
+  exercises?: IWorkoutExercise[];
 }
 
 export class StrengthTrainingWorkoutType extends WorkoutType implements IStrengthTrainingWorkoutType{
   guide: string;
+  exercises?: IWorkoutExercise[];
+
   constructor(options: IStrengthTrainingWorkoutType){
     super(options);
     this.workoutType = "STRENGTH_TRAINING";
     this.guide = options.guide;
+    this.exercises = options.exercises;
   }
 
-  set workoutType(value: string){
-    this.workoutType = "STRENGTH_TRAINING";
-  }
 }
 
 export interface IRunningWorkoutType extends IWorkoutType{
@@ -71,7 +75,40 @@ export class RunningWorkoutType extends WorkoutType implements IRunningWorkoutTy
     this.distance = options.distance;
   }
 
-  set workoutType(value: string){
-    this.workoutType = "RUNNING";
+}
+
+export interface ISet {
+  repetitions: number;
+  weight: number;
+  side: string;
+}
+
+export class Set implements ISet {
+  repetitions: number;
+  weight: number;
+  side: string;
+  
+  constructor(options: ISet) {
+    this.repetitions = options.repetitions;
+    this.weight = options.weight;
+    this.side = options.side;
+  }
+}
+
+export interface IWorkoutExercise {
+  name: string;
+  guide: string;
+  sets: ISet[];
+}
+
+export class WorkoutExercise implements IWorkoutExercise {
+  name: string;
+  guide: string;
+  sets: ISet[];
+
+  constructor(options: IWorkoutExercise){
+    this.name = options.name;
+    this.guide = options.guide;
+    this.sets = options.sets;
   }
 }

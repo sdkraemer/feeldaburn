@@ -1,0 +1,7 @@
+<label *ngFor="let workoutType of workoutTypes">
+    <input type="radio" name="workoutType" 
+        [attr.value]="workoutType.value"
+        (blur)="onBlur(workoutType.value)"
+        (change)="onChange(workoutType.value)"
+        (focus)="onFocus(workoutType.value)"
+        [checked]="value === workoutType.value">{{workoutType.display}}</label>

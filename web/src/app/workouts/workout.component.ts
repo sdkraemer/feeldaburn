@@ -61,6 +61,14 @@ export class WorkoutComponent implements OnInit {
                 createdAt: [''],
                 completedAt: ['']
             });
+            //is this the answer?
+            this.workout = new Workout({
+                _id: null,
+                name: null,
+                notes: null,
+                createdAt: null,
+                completedAt: null
+            });
         }
         else{
             this.workoutService.getWorkout(_id)
@@ -75,9 +83,6 @@ export class WorkoutComponent implements OnInit {
                         completedAt: workout.completedAt,
                         type: workout.workoutType.workoutType
                     });
-                    //to test
-                    //this.workout.workoutType = new RunningWorkoutType();
-                    //this.setWorkoutType();
                 });
         }
     }
@@ -90,14 +95,12 @@ export class WorkoutComponent implements OnInit {
             });
     }
 
-    onComplete(form){
-        console.log("onSubmit");
-        form.value.completedAt = new Date();
-        //this.onSubmit(form); TODO fix this
+    onComplete(){
+        this.form.value.completedAt = new Date();
+        this.onSubmit();
     }
 
     onSubmit(){
-        console.log("onSubmit");
         var formData = this.form.value;
         let workout = new Workout({
             _id: formData._id,
@@ -109,11 +112,13 @@ export class WorkoutComponent implements OnInit {
         
         if(this.form.value.type == 'RUNNING'){
             workout.workoutType = new RunningWorkoutType({
+                _id: formData.workoutType._id,
                 distance: formData.workoutType.distance
             });
         }
         else if(this.form.value.type == 'STRENGTH_TRAINING'){
             workout.workoutType = new StrengthTrainingWorkoutType({
+                _id: formData.workoutType._id,
                 guide: formData.workoutType.guide
             });
         }
