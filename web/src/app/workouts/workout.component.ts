@@ -73,16 +73,16 @@ export class WorkoutComponent implements OnInit {
         else{
             this.workoutService.getWorkout(_id)
                 .subscribe((workout) => {
-                    this.workout = workout;
+                    // this.workout = workout;
 
-                    this.form.patchValue({
-                        _id: workout._id,
-                        name: workout.name,
-                        notes: workout.notes,
-                        createdAt: workout.createdAt,
-                        completedAt: workout.completedAt,
-                        type: workout.workoutType.workoutType
-                    });
+                    // this.form.patchValue({
+                    //     _id: workout._id,
+                    //     name: workout.name,
+                    //     notes: workout.notes,
+                    //     createdAt: workout.createdAt,
+                    //     completedAt: workout.completedAt,
+                    //     type: workout.workoutType.workoutType
+                    // });
                 });
         }
     }

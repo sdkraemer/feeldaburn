@@ -78,10 +78,9 @@ export class GuideComponent implements OnInit {
         }
     }
 
-    onDelete(form) {
+    delete() {
         console.log("deleting guide");
-        console.dir(form);
-        this.guideService.remove(form.value._id)
+        this.guideService.remove(this.form.value._id)
             .subscribe((isSuccessful: boolean) => {
                 this.goToGuides();
             });

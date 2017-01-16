@@ -1,4 +1,21 @@
-Let's start tracking your workout!
-<div *ngIf="workout">
-    Workout stuff here
+<div *ngIf="workout" >
+    <form novalidate (ngSubmit)="save()" [formGroup]="form">
+
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea class="form-control" rows="3" formControlName="notes"></textarea>
+        </div>
+
+        <running-workout *ngIf="workout.type == 'RUNNING'" [form]="form" [workout]="workout"></running-workout>
+        <strength-training-workout *ngIf="workout.type == 'STRENGTH_TRAINING'" [form]="form" [workout]="workout"></strength-training-workout>
+        <completed-toggle formControlName="isCompleted"></completed-toggle>
+
+        <input type="hidden" formControlName="_id" />
+        <input type="hidden" formControlName="type" />
+        <input type="hidden" formControlName="name" />
+        <input type="hidden" formControlName="createdAt" />
+        <input type="hidden" formControlName="completedAt" />
+        <button class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary"(click)="delete()">Delete</button>
+    </form>
 </div>

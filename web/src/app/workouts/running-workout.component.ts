@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { RunningWorkoutType } from './workout';
 
 @Component({
-    selector: 'running-workout',
+    selector: 'running-workout-old',
     templateUrl: 'running-workout.component.html'
 })
 export class RunningWorkoutComponent implements OnInit {

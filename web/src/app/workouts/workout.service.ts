@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Workout, IWorkout, RunningWorkoutType, StrengthTrainingWorkoutType, IRunningWorkoutType, IStrengthTrainingWorkoutType } from './workout';
+import { Workout, IWorkout, RunningWorkout, StrengthTrainingWorkout, IRunningWorkout, IStrengthTrainingWorkout } from './workout-updated';
 import { Http, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
@@ -29,30 +29,25 @@ export class WorkoutService {
             .catch(this.handleError);
     }
 
-    getWorkout(_id: string): Observable<Workout> {
+    getWorkout(_id: string): Observable<IWorkout> {
         const url = `${this.apiUrl}/${_id}`;
         return this.authHttp
                     .get(url)
                     .map((response: Response) => {
                         let json = response.json();
-                        let workoutData = <IWorkout>json;
-                        let workout = new Workout(workoutData);
-                        if(workout.workoutType.workoutType == 'RUNNING'){
-                            let workoutTypeData = <IRunningWorkoutType>json.workoutType;
-                            let workoutType = new RunningWorkoutType(workoutTypeData);
-                            workout.workoutType = workoutType;
+                        let workout: IWorkout;
+                        if(json.type == 'RUNNING'){
+                            workout = new RunningWorkout(json);
                         }
-                        else if(workout.workoutType.workoutType == 'STRENGTH_TRAINING'){
-                            let workoutTypeData = <IStrengthTrainingWorkoutType>json.workoutType;
-                            let workoutType = new StrengthTrainingWorkoutType(workoutTypeData);
-                            workout.workoutType = workoutType;
+                        else if(json.type == 'STRENGTH_TRAINING'){
+                            workout = new StrengthTrainingWorkout(json);
                         }
                         return workout;
                     })
                     .catch(this.handleError); 
     }
 
-    add(workout: Workout): Observable<boolean> {
+    add(workout: IWorkout): Observable<boolean> {
         return this.authHttp
                     .post(this.apiUrl, workout)
                     .map((response: Response) => {
@@ -61,7 +56,7 @@ export class WorkoutService {
                     .catch(this.handleError);
     }
 
-    update(workout: Workout): Observable<boolean> {
+    update(workout: IWorkout): Observable<boolean> {
         return this.authHttp.put(`${this.apiUrl}/${workout._id}`, workout)
                    .map((response: Response) => {
                        return this.isSuccessStatusCode(response.status);
@@ -75,6 +70,22 @@ export class WorkoutService {
                         return this.isSuccessStatusCode(response.status);
                     })
                     .catch(this.handleError);
+    }
+
+    getPreviousStrengthTrainingWorkouts(guideId: string): Observable<IStrengthTrainingWorkout[]> {
+        let url = `${this.apiUrl}/previous/${guideId}`;
+        return this.authHttp
+                    .get(url)
+                    .map((response: Response) => {
+                        let json = response.json();
+                        let workouts: IWorkout[] = [];
+                        json.forEach(workoutJson => {
+                            workouts.push(new StrengthTrainingWorkout(workoutJson));
+                        });
+                        return workouts;
+                    })
+                    .catch(this.handleError);
+            
     }
 
     private isSuccessStatusCode(statusCode) {

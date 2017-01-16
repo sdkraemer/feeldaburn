@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { GuideService } from './guide.service';
 
 import { GuideListComponent } from './guide-list.component';
+import { GuideSidedSelectorComponent } from './guide-sided-selector.component';
+
 
 @NgModule({
     imports: [
@@ -17,6 +19,7 @@ import { GuideListComponent } from './guide-list.component';
     exports: [],
     declarations: [
         GuideListComponent,
+        GuideSidedSelectorComponent,
         routedComponents
     ],
     providers: [

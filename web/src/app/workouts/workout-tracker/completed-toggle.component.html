@@ -1,0 +1,5 @@
+<div class="form-group">
+    <label>Completed?</label>
+    <button type="button" class="btn btn-secondary" [class.active]="value == true" (click)="onClick(true);">Yes</button> 
+    <button type="button" class="btn btn-secondary" [class.active]="value != true" (click)="onClick(false);">No</button>
+</div>

@@ -6,7 +6,8 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { WorkoutTrackerComponent } from './workout-tracker.component';
 
 const routes: Routes = [
-  { path: 'workout-tracker', component: WorkoutTrackerComponent, canActivate: [AuthGuard] }
+  { path: 'workout-tracker', component: WorkoutTrackerComponent, canActivate: [AuthGuard] },
+  { path: 'workout-tracker/:id', component: WorkoutTrackerComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

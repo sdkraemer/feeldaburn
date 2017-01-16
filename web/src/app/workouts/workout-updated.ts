@@ -1,25 +1,29 @@
 export interface IWorkout {
     _id: string;
-    name: string;
-    notes: string;
-    createdAt: Date;
-    completedAt: Date;
+    type?: string;
+    name?: string;
+    notes?: string;
+    createdAt?: Date;
+    isCompleted?: boolean;
+    completedAt?: Date;
 }
 
 export interface IRunningWorkout extends IWorkout{
-    distance: number;
+    distance?: number;
 }
 
 export interface IStrengthTrainingWorkout extends IWorkout {
-    guide: string;
-    exercises: IWorkoutExercise[];
+    guide?: string;
+    exercises?: IWorkoutExercise[];
 }
 
 export class Workout implements IWorkout{
   _id: string;
+  type: string;
   name: string;
   notes: string;
   createdAt: Date;
+  isCompleted: boolean;
   completedAt: Date;
 
   constructor(options: IWorkout){
@@ -27,6 +31,8 @@ export class Workout implements IWorkout{
     this.name = options.name;
     this.notes = options.notes;
     this.createdAt = options.createdAt;
+    this.isCompleted = options.isCompleted;
+    this.completedAt = options.completedAt;
   }
 }
 
@@ -36,15 +42,17 @@ export class StrengthTrainingWorkout extends Workout implements IStrengthTrainin
 
     constructor(options: IStrengthTrainingWorkout){
         super(options);
+        this.type = "STRENGTH_TRAINING";
         this.guide = options.guide;
         this.exercises = options.exercises;
     }
 }
 
 export class RunningWorkout extends Workout implements IRunningWorkout {
-    distance: number;
+    distance?: number;
     constructor(options: IRunningWorkout) {
         super(options);
+        this.type = "RUNNING";
         this.distance = options.distance;
     }
 }
@@ -61,36 +69,59 @@ export class RunningWorkout extends Workout implements IRunningWorkout {
 
 export interface ISet {
   repetitions: number;
-  weight: number;
   side: string;
+  type?: string;
+}
+
+export interface IRepetitionSet extends ISet {
+
+}
+
+export interface IWeightsSet extends ISet {
+  weight: number;
 }
 
 export class Set implements ISet {
   repetitions: number;
-  weight: number;
   side: string;
+  type?: string;
   
   constructor(options: ISet) {
     this.repetitions = options.repetitions;
-    this.weight = options.weight;
     this.side = options.side;
+  }
+}
+
+export class RepetitionSet extends Set implements IRepetitionSet {
+  constructor(options: IRepetitionSet) {
+    super(options);
+    this.type = "REPS";
+  }
+}
+
+export class WeightsSet extends Set implements IWeightsSet {
+  weight: number;
+  constructor(options: IWeightsSet) {
+    super(options);
+    this.weight = options.weight;
+    this.type = "WEIGHTS";
   }
 }
 
 export interface IWorkoutExercise {
   name: string;
-  guide: string;
+  guideExercise: string;
   sets: ISet[];
 }
 
 export class WorkoutExercise implements IWorkoutExercise {
   name: string;
-  guide: string;
+  guideExercise: string;
   sets: ISet[];
 
   constructor(options: IWorkoutExercise){
     this.name = options.name;
-    this.guide = options.guide;
+    this.guideExercise = options.guideExercise;
     this.sets = options.sets;
   }
 }

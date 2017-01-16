@@ -53,13 +53,14 @@ module.exports = function(app) {
 
             data.exercises.forEach(function(exercise) {
                 if(exercise._id){
-                    var dbExercise = _.find(guide.exercises, function(e){
+                    var dbExerciseIndex = _.findIndex(guide.exercises, function(e){
                         return e._id == exercise._id;
                     });
 
-                    dbExercise.name = exercise.name || dbExercise;
-                    dbExercise.sided = exercise.sided || dbExercise.sided;
-                    dbExercise.type = exercise.type || dbExercise.type;
+                    guide.exercises[dbExerciseIndex].name = exercise.name;
+                    guide.exercises[dbExerciseIndex].sided = exercise.sided;
+                    guide.exercises[dbExerciseIndex].type = exercise.type;
+
                 }
                 else{
                     exercise._id = new mongoose.Types.ObjectId;

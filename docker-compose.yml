@@ -34,7 +34,7 @@ services:
     networks:
       - nodeapp-network
     volumes:
-      - '/skraemer/dockerVolMongo:/data/db'  
+      - '/data/db:/data/db'  
 networks:
   nodeapp-network:
     driver: bridge

@@ -1,0 +1,10 @@
+
+<div [formGroup]="form">
+    <input type="hidden" formControlName="guide"/>
+</div>
+
+<h4>Exercises:</h4>
+<hr>
+<div *ngIf="workout.exercises.length > 0">
+    <strength-training-workout-exercises [form]="form" [workout]="workout"></strength-training-workout-exercises>
+</div>

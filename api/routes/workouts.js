@@ -1,6 +1,7 @@
 var WorkoutModels = require('../models/workout'),
     Workout = WorkoutModels.Workout,
     StrengthTrainingWorkout = WorkoutModels.StrengthTrainingWorkout,
+    Guide = require('../models/guide'),
     RunningWorkout = WorkoutModels.RunningWorkout,
     mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
@@ -30,29 +31,38 @@ module.exports = function(app) {
             console.log("Running workout");
             var workout = new RunningWorkout({
                 type: "RUNNING",
-                name: json.name,
+                name: "Running Workout",
                 notes: json.notes,
                 createdBy: ObjectId(req.userId),
+                isCompleted: json.isCompleted,
                 completedAt: json.completedAt,
                 distance: json.distance
             });
         }
         else if(json.type == "STRENGTH_TRAINING"){
             console.log("Strength Training workout");
-            var workout = new StrengthTrainingWorkout({
-                type: "STRENGTH_TRAINING",
-                name: json.name,
-                notes: json.notes,
-                createdBy: ObjectId(req.userId),
-                completedAt: json.completedAt,
-                guide: ObjectId(json.guide)
-            });
-        };
+            Guide.findOne({_id: ObjectId(json.guide)}, function(err, guide){
+                var workout = new StrengthTrainingWorkout({
+                    type: "STRENGTH_TRAINING",
+                    name: guide.name,
+                    notes: json.notes,
+                    createdBy: ObjectId(req.userId),
+                    isCompleted: json.isCompleted,
+                    guide: ObjectId(json.guide),
+                    exercises: json.exercises
+                });
 
-        workout.save(function(err, workout){
-            if(err) { console.log('Error inserting new workout: '+err); }
-            res.json(req.body);
-        });
+                if(json.isCompleted){
+                    workout.completedAt = new Date();
+                }
+
+                workout.save(function(err, workout){
+                    if(err) { console.log('Error inserting new workout: '+err); }
+                    res.json(req.body);
+                });
+            });
+
+        }
     });
 
     app.put('/api/workouts/:id', function(req, res){
@@ -64,16 +74,21 @@ module.exports = function(app) {
             } 
             var json = req.body;
 
-            workout.name = json.name || workout.name;
-            workout.notes = json.notes || workout.notes;
+            workout.name = json.name;
+            workout.notes = json.notes;
             workout.createdBy = workout.createdBy;
-            workout.completedAt = json.completedAt || workout.completedAt;
+            if(json.isCompleted && !workout.isCompleted){
+                workout.completedAt = new Date();
+            }
+            workout.isCompleted = json.isCompleted;
+
 
             if(json.type == 'RUNNING'){
-                workout.distance = json.distance || workout.distance;
+                workout.distance = json.distance;
             }
             else if (json.type == 'STRENGTH_TRAINING'){
-                workout.guide = json.guide || workout.guide;
+                workout.guide = json.guide;
+                workout.exercises =  json.exercises; //just replace the whole thing.
             }
             
             workout.save(function(error, workout){
@@ -97,4 +112,26 @@ module.exports = function(app) {
             res.sendStatus(200);
         });
     });
+
+    app.get('/api/workouts/previous/:guideid', function(req, res){
+        var guideId = req.params.guideid;
+        console.log("Getting previous workouts from guide:" +guideId);
+        StrengthTrainingWorkout.
+            find({})
+            .where('guide').equals(ObjectId(guideId))
+            .limit(2)
+            .sort({completedAt: 'desc'})
+            .exec(function(err, workouts){
+                if(err){
+                    console.log("Could not find previous workouts: %s", err);
+                    res.sendStatus(404);
+                }
+                res.json(workouts);
+            });
+    });
+
+        
+
+
+
 }

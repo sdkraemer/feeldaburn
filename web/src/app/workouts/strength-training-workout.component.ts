@@ -7,7 +7,7 @@ import { GuideService } from '../guides/guide.service';
 import { StrengthTrainingWorkoutType } from './workout';
 
 @Component({
-    selector: 'strength-training-workout',
+    selector: 'strength-training-workout-old',
     templateUrl: 'strength-training-workout.component.html'
 })
 export class StrengthTrainingWorkoutComponent implements OnInit {

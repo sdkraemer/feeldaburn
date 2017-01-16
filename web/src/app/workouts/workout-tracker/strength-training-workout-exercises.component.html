@@ -1,0 +1,22 @@
+<div [formGroup]="form">
+    <div formArrayName="exercises">
+        <div class="card" *ngFor="let exercise of workout.exercises; let exercisesIndex = index;">
+            <div class="card-header">
+                {{ exercise.name }}
+            </div>
+            <div class="card-block">
+                <div [formGroupName]="exercisesIndex">
+                    <input type="hidden" formControlName="name"/>
+                    <input type="hidden" formControlName="guideExercise"/>
+                    <div formArrayName="sets">
+                        <ul style="list-style-type:none;">
+                            <li *ngFor="let set of exercise.sets; let setsIndex = index;">
+                                <strength-training-set [group]="form.controls.exercises.controls[exercisesIndex].controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set" [previousWorkouts]="previousWorkouts"></strength-training-set>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,8 +15,8 @@
             </select>
         </div>
         <div *ngIf="form.value.type != ''">
-            <strength-training-workout *ngIf="form.value.type == 'STRENGTH_TRAINING'" [form]="form" [workoutType]="workout.workoutType"></strength-training-workout>
-            <running-workout *ngIf="form.value.type == 'RUNNING'" [form]="form" [workoutType]="workout.workoutType"></running-workout>
+            <strength-training-workout-old *ngIf="form.value.type == 'STRENGTH_TRAINING'" [form]="form" [workoutType]="workout.workoutType"></strength-training-workout-old>
+            <running-workout-old *ngIf="form.value.type == 'RUNNING'" [form]="form" [workoutType]="workout.workoutType"></running-workout-old>
         </div>
         <div class="form-group">
             <label for="notes">Notes:</label>

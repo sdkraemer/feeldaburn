@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 var SetSchema = new Schema({
-    repetititons: {
+    repetitions: {
         type: Number,
     },
     weight: {
@@ -13,6 +13,11 @@ var SetSchema = new Schema({
         type: String,
         enum: ['LEFT', 'RIGHT', 'NONE'],
         default: 'NONE'
+    },
+    type: {
+        type: String,
+        enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
+        default: 'REPS'
     }
 });
 
@@ -48,7 +53,7 @@ var RunningWorkoutSchema = new Schema({
 var WorkoutSchema = new Schema(
 {
     name: {
-        type: String, required: true, trim: true
+        type: String, required: false, trim: true
     },
     type: {
         type: String,
@@ -61,6 +66,10 @@ var WorkoutSchema = new Schema(
         type: ObjectId,
         ref: "User",
         required: true
+    },
+    isCompleted: {
+        type: Boolean,
+        required: false
     },
     completedAt: {
         type: Date
