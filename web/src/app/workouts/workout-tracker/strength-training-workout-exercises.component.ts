@@ -3,7 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 
 import { Observable } from 'rxjs/Observable';
 
-import { IStrengthTrainingWorkout, IRepetitionSet, IWeightsSet, ISet } from '../workout-updated';
+import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../workout-updated';
 import { WorkoutService } from '../workout.service';
 
 @Component({
@@ -37,34 +37,39 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
         this.workout.exercises.forEach((exercise) => {
             let exerciseGroup = this.formBuilder.group({
                 name: exercise.name,
-                guideExercise: exercise.guideExercise
+                guideExercise: exercise.guideExercise,
+                type: exercise.type
             });
-            let setsControl = this.formBuilder.array([]);
 
-            exercise.sets.forEach((set, index) => {
-                setsControl.push(this.createControlSet(set));
-            }, this);
-            exerciseGroup.addControl("sets", setsControl);
-
+            this.createSetsControlOnExerciseGroup(exerciseGroup, exercise);
+            
             exerciseControl.push(exerciseGroup);
         }, this);
     }
 
-    createControlSet(set: ISet): FormGroup {
-        if(set.type == 'WEIGHTS'){
+    private createSetsControlOnExerciseGroup(exerciseGroup, exercise: IWorkoutExercise){
+        if(exercise.sets && exercise.sets.length > 0) {
+            let setsControl = this.formBuilder.array([]);
+            exercise.sets.forEach((set, index) => {
+                setsControl.push(this.createSetFormGroup(exercise.type, set));
+            }, this);
+            exerciseGroup.addControl("sets", setsControl);
+        }
+    }
+
+    private createSetFormGroup(exerciseType, set: ISet): FormGroup {
+        if(exerciseType == 'WEIGHTS'){
             return this.createWeightsSet(<IWeightsSet>set);
         }
         
         return this.formBuilder.group({
-            type: [set.type],
             side: [set.side],
             repetitions: [set.repetitions]
         });
     }
 
-    createWeightsSet(set: IWeightsSet){
+    private createWeightsSet(set: IWeightsSet){
         return this.formBuilder.group({
-            type: [set.type],
             side: [set.side],
             repetitions: [set.repetitions],
             weight: [set.weight]

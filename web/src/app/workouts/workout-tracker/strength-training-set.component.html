@@ -1,12 +1,11 @@
 <div [formGroup]="group">
     <h5 *ngIf="set.side != 'NONE'">{{set.side}}</h5>
-    <input type="hidden" formControlName="type"/>
     <input type="hidden" formControlName="side"/>
     <div class="form-group">
         <label>Repetitions:</label>
         <input type="text" class="form-control" formControlName="repetitions"/>
     </div>
-    <div *ngIf="set.type == 'WEIGHTS'">
+    <div *ngIf="exercise.type == 'WEIGHTS'">
         <div class="form-group">
             <label>Weight:</label>
             <input type="text" class="form-control" formControlName="weight"/>
@@ -18,14 +17,14 @@
                 <tr>
                     <th>Date</th>
                     <th>Repetitions</th>
-                    <th *ngIf="set.type == 'WEIGHTS'">Weight</th>
+                    <th *ngIf="exercise.type == 'WEIGHTS'">Weight</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let previousSet of previousSets; let i = index;">
                     <td>{{ previousWorkoutDates[i] | date }}</td>
                     <td>{{ previousSet.repetitions }}</td>
-                    <td *ngIf="set.type == 'WEIGHTS'">{{ previousSet.weight }}</td>
+                    <td *ngIf="exercise.type == 'WEIGHTS'">{{ previousSet.weight }}</td>
                 </tr>
             </tbody>
         </table>

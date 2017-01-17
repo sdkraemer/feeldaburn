@@ -70,7 +70,6 @@ export class RunningWorkout extends Workout implements IRunningWorkout {
 export interface ISet {
   repetitions: number;
   side: string;
-  type?: string;
 }
 
 export interface IRepetitionSet extends ISet {
@@ -84,7 +83,6 @@ export interface IWeightsSet extends ISet {
 export class Set implements ISet {
   repetitions: number;
   side: string;
-  type?: string;
   
   constructor(options: ISet) {
     this.repetitions = options.repetitions;
@@ -95,7 +93,6 @@ export class Set implements ISet {
 export class RepetitionSet extends Set implements IRepetitionSet {
   constructor(options: IRepetitionSet) {
     super(options);
-    this.type = "REPS";
   }
 }
 
@@ -104,7 +101,6 @@ export class WeightsSet extends Set implements IWeightsSet {
   constructor(options: IWeightsSet) {
     super(options);
     this.weight = options.weight;
-    this.type = "WEIGHTS";
   }
 }
 
@@ -112,16 +108,19 @@ export interface IWorkoutExercise {
   name: string;
   guideExercise: string;
   sets: ISet[];
+  type: string;
 }
 
 export class WorkoutExercise implements IWorkoutExercise {
   name: string;
   guideExercise: string;
   sets: ISet[];
+  type: string;
 
   constructor(options: IWorkoutExercise){
     this.name = options.name;
     this.guideExercise = options.guideExercise;
     this.sets = options.sets;
+    this.type = options.type;
   }
 }

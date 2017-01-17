@@ -13,11 +13,6 @@ var SetSchema = new Schema({
         type: String,
         enum: ['LEFT', 'RIGHT', 'NONE'],
         default: 'NONE'
-    },
-    type: {
-        type: String,
-        enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
-        default: 'REPS'
     }
 });
 
@@ -31,7 +26,12 @@ var ExerciseSchema = new Schema({
         ref: "Guide.exercises",
         required: true
     },
-    sets: [SetSchema]
+    sets: [SetSchema],
+    type: {
+        type: String,
+        enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
+        default: 'REPS'
+    }
 });
 
 var StrengthTrainingWorkoutSchema = new Schema({

@@ -53,7 +53,8 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
             let workoutExercise = new WorkoutExercise({
                 name: exercise.name,
                 guideExercise: exercise._id,
-                sets: []
+                sets: [],
+                type: exercise.type
             });
 
             //'REPS', 'WEIGHTS'
@@ -78,14 +79,15 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
         if(type == 'REPS') {
             set = new RepetitionSet({
                 repetitions: 0,
-                side: side});
+                side: side
+            });
         }
         else if (type = 'WEIGHTS') {
             set = new WeightsSet({
                 repetitions: 0,
                 weight: 0,
                 side: side
-            })
+            });
         }
 
         return set;

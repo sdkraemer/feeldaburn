@@ -8,6 +8,7 @@
                 <div [formGroupName]="exercisesIndex">
                     <input type="hidden" formControlName="name"/>
                     <input type="hidden" formControlName="guideExercise"/>
+                    <input type="hidden" formControlName="type"/>
                     <div formArrayName="sets">
                         <ul style="list-style-type:none;">
                             <li *ngFor="let set of exercise.sets; let setsIndex = index;">
