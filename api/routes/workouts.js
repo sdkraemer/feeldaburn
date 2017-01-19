@@ -10,6 +10,7 @@ var WorkoutModels = require('../models/workout'),
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
+        console.log("testing nodemon...omg...4?!!!");
         Workout.find({'createdBy': ObjectId(req.userId)},function(err, workouts){
             if (err) return console.error(err);
             res.json(workouts);

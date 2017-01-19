@@ -1,0 +1,16 @@
+# FROM node:6.9.1
+# ENV HOME=/home/app
+# WORKDIR  $HOME
+# RUN npm i angular-cli -g
+# EXPOSE 4200
+# EXPOSE 49153
+# ENTRYPOINT ["ng", "serve"]
+
+
+FROM node:6.9.1
+WORKDIR /project
+EXPOSE 4200 49152 80
+ENV HOME /project
+
+RUN npm i angular-cli -g
+ENTRYPOINT ["npm", "start", "--host", "0.0.0.0"]

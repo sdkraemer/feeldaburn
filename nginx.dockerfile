@@ -8,7 +8,7 @@ VOLUME /var/cache/nginx
 COPY api/docker/config/nginx.conf /etc/nginx/nginx.conf
 
 # Copy dist folder
-COPY ./web/dist/ /var/www/public/
+#COPY ./web/dist/ /var/www/public/
 
 EXPOSE 80 443
 

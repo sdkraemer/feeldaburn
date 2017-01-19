@@ -2,11 +2,14 @@ FROM node:latest
 
 MAINTAINER Scott Kraemer
 
-COPY . /var/www
+#COPY . /var/www
 WORKDIR /var/www
+
+RUN npm install -g nodemon
 
 RUN apt-get update
 
 EXPOSE 3000
 
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["nodemon", "index.js", "-L"]
+

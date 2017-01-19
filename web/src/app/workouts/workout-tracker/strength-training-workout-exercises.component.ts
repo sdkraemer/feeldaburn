@@ -59,7 +59,7 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
 
     private createSetFormGroup(exerciseType, set: ISet): FormGroup {
         if(exerciseType == 'WEIGHTS'){
-            return this.createWeightsSet(<IWeightsSet>set);
+            return this.createWeightsSetFormGroup(<IWeightsSet>set);
         }
         
         return this.formBuilder.group({
@@ -68,7 +68,7 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
         });
     }
 
-    private createWeightsSet(set: IWeightsSet){
+    private createWeightsSetFormGroup(set: IWeightsSet){
         return this.formBuilder.group({
             side: [set.side],
             repetitions: [set.repetitions],

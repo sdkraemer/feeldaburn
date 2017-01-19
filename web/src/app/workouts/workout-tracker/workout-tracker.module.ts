@@ -11,6 +11,7 @@ import { StrengthTrainingWorkoutComponent } from './strength-training-workout.co
 import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-workout-exercises.component';
 import { CompletedToggleComponent } from './completed-toggle.component';
 import { StrengthTrainingSetComponent } from './strength-training-set.component';
+import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-workout-exercise.component';
 
 
 
@@ -26,7 +27,8 @@ import { StrengthTrainingSetComponent } from './strength-training-set.component'
     StrengthTrainingWorkoutComponent,
     StrengthTrainingWorkoutExercisesComponent,
     CompletedToggleComponent,
-    StrengthTrainingSetComponent
+    StrengthTrainingSetComponent,
+    StrengthTrainingWorkoutExerciseComponent
   ],
   providers: [
     GuideService

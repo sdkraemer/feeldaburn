@@ -1,0 +1,5 @@
+To start:
+    From base folder 'docker-compose up'
+-Node server is using nodemon, so it should see changes
+-To rebuild angular:
+    From /web issue 'ng build'
