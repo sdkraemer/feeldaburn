@@ -109,6 +109,7 @@ export interface IWorkoutExercise {
   guideExercise: string;
   sets: ISet[];
   type: string;
+  isCompleted?: boolean;
 }
 
 export class WorkoutExercise implements IWorkoutExercise {
@@ -116,11 +117,13 @@ export class WorkoutExercise implements IWorkoutExercise {
   guideExercise: string;
   sets: ISet[];
   type: string;
+  isCompleted: boolean;
 
   constructor(options: IWorkoutExercise){
     this.name = options.name;
     this.guideExercise = options.guideExercise;
     this.sets = options.sets;
     this.type = options.type;
+    this.isCompleted = options.isCompleted;
   }
 }

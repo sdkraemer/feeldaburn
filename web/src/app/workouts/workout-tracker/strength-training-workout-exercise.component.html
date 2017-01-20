@@ -3,17 +3,16 @@
         {{ exercise.name }}
     </div>
     <div class="card-block">
-        <div>
-            <input type="hidden" formControlName="name"/>
-            <input type="hidden" formControlName="guideExercise"/>
-            <input type="hidden" formControlName="type"/>
-            <div formArrayName="sets">
-                <ul style="list-style-type:none;">
-                    <li *ngFor="let set of exercise.sets; let setsIndex = index;">
-                        <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set" [previousWorkouts]="previousWorkouts"></strength-training-set>
-                    </li>
-                </ul>
-            </div>
+        <input type="hidden" formControlName="name"/>
+        <input type="hidden" formControlName="guideExercise"/>
+        <input type="hidden" formControlName="type"/>
+        <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
+            <ul style="list-style-type:none;">
+                <li *ngFor="let set of exercise.sets; let setsIndex = index;">
+                    <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set" [previousWorkouts]="previousWorkouts"></strength-training-set>
+                </li>
+            </ul>
         </div>
+        <completed-toggle *ngIf="exercise.type == 'COMPLETED'" formControlName="isCompleted"></completed-toggle>
     </div>
 </div>

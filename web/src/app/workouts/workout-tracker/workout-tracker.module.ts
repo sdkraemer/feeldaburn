@@ -12,6 +12,7 @@ import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-w
 import { CompletedToggleComponent } from './completed-toggle.component';
 import { StrengthTrainingSetComponent } from './strength-training-set.component';
 import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-workout-exercise.component';
+import { IncrementDecrementButtonComponent } from './increment-decrement-button.component';
 
 
 
@@ -28,7 +29,8 @@ import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-wo
     StrengthTrainingWorkoutExercisesComponent,
     CompletedToggleComponent,
     StrengthTrainingSetComponent,
-    StrengthTrainingWorkoutExerciseComponent
+    StrengthTrainingWorkoutExerciseComponent,
+    IncrementDecrementButtonComponent
   ],
   providers: [
     GuideService

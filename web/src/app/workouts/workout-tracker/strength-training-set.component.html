@@ -3,12 +3,16 @@
     <input type="hidden" formControlName="side"/>
     <div class="form-group">
         <label>Repetitions:</label>
+        <increment-decrement-button [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
         <input type="text" class="form-control" formControlName="repetitions"/>
+        <increment-decrement-button [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
     </div>
     <div *ngIf="exercise.type == 'WEIGHTS'">
         <div class="form-group">
             <label>Weight:</label>
+            <increment-decrement-button [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
             <input type="text" class="form-control" formControlName="weight"/>
+            <increment-decrement-button [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
         </div>
     </div>
     <div *ngIf="!workout._id">

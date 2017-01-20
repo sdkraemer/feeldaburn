@@ -31,6 +31,10 @@ var ExerciseSchema = new Schema({
         type: String,
         enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
         default: 'REPS'
+    },
+    isCompleted: {
+        type: Boolean,
+        required: false
     }
 });
 
