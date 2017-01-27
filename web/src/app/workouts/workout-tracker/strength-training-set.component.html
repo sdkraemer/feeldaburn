@@ -2,35 +2,75 @@
     <h5 *ngIf="set.side != 'NONE'">{{set.side}}</h5>
     <input type="hidden" formControlName="side"/>
     <div class="form-group">
-        <label>Repetitions:</label>
-        <increment-decrement-button [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
-        <input type="text" class="form-control" formControlName="repetitions"/>
-        <increment-decrement-button [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
-    </div>
-    <div *ngIf="exercise.type == 'WEIGHTS'">
-        <div class="form-group">
-            <label>Weight:</label>
-            <increment-decrement-button [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
-            <input type="text" class="form-control" formControlName="weight"/>
-            <increment-decrement-button [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
+        <div class="row">
+            <label class="col-form-legend">Repetitions:</label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <increment-decrement-button style="float:right" [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="repetitions"/>
+            </div>
+            <div class="col">
+                <increment-decrement-button style="float:left" [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
+            </div>
         </div>
     </div>
-    <div *ngIf="!workout._id">
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Repetitions</th>
-                    <th *ngIf="exercise.type == 'WEIGHTS'">Weight</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let previousSet of previousSets; let i = index;">
-                    <td>{{ previousWorkoutDates[i] | date }}</td>
-                    <td>{{ previousSet.repetitions }}</td>
-                    <td *ngIf="exercise.type == 'WEIGHTS'">{{ previousSet.weight }}</td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="form-group" *ngIf="exercise.type == 'WEIGHTS'">
+        <div class="row">
+            <label class="col-form-legend">Weight:</label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <increment-decrement-button style="float:right" [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="weight"/>
+            </div>
+            <div class="col">
+                <increment-decrement-button style="float:left" [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-form-legend">Make Changes to Weight:</label>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <adjust-weight-picker formControlName="adjustWeight"></adjust-weight-picker>
+                <!--<div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-secondary">
+                        <input type="radio" formControlName="adjustWeight" autocomplete="off" value="DECREASE">
+                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                    </label>
+                    <label class="btn btn-secondary active">
+                        <input type="radio" formControlName="adjustWeight" autocomplete="off" value="NONE">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" formControlName="adjustWeight" autocomplete="off" value="INCREASE">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                    </label>
+                </div>-->
+            </div>
+        </div>
     </div>
+
+    <table class="table table-sm" *ngIf="!workout._id">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Repetitions</th>
+                <th *ngIf="exercise.type == 'WEIGHTS'">Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let previousSet of previousSets; let i = index;">
+                <td>{{ previousWorkoutDates[i] | date }}</td>
+                <td>{{ previousSet.repetitions }}</td>
+                <td *ngIf="exercise.type == 'WEIGHTS'">{{ previousSet.weight }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

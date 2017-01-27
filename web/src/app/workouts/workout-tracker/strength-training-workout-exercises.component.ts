@@ -8,7 +8,12 @@ import { WorkoutService } from '../workout.service';
 
 @Component({
     selector: 'strength-training-workout-exercises',
-    templateUrl: 'strength-training-workout-exercises.component.html'
+    templateUrl: 'strength-training-workout-exercises.component.html',
+    styles: [`
+        .card {
+            margin-bottom: 1em;
+        }
+    `]
 })
 export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     @Input("form")
@@ -76,7 +81,8 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
         return this.formBuilder.group({
             side: [set.side],
             repetitions: [set.repetitions],
-            weight: [set.weight]
+            weight: [set.weight],
+            adjustWeight: [set.adjustWeight]
         });
     }
 

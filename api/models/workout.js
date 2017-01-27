@@ -13,6 +13,11 @@ var SetSchema = new Schema({
         type: String,
         enum: ['LEFT', 'RIGHT', 'NONE'],
         default: 'NONE'
+    },
+    adjustWeight: {
+        type: String,
+        enum: ['NONE', 'INCREASE', 'DECREASE'],
+        default: 'NONE'
     }
 });
 

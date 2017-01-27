@@ -86,7 +86,8 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
             set = new WeightsSet({
                 repetitions: 0,
                 weight: 0,
-                side: side
+                side: side,
+                adjustWeight: 'NONE'
             });
         }
 

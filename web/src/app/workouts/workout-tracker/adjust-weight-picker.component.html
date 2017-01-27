@@ -1,0 +1,13 @@
+<div class="btn-group">
+    <label *ngFor="let adjustWeightOption of adjustWeightOptions" class="btn btn-secondary" [class.active]="value == adjustWeightOption">
+        <input type="radio" name="adjustWeight" 
+            [attr.value]="adjustWeightOption"
+            (blur)="onBlur(adjustWeightOption)"
+            (change)="onChange(adjustWeightOption)"
+            (focus)="onFocus(adjustWeightOption)"
+            [checked]="value === adjustWeightOption">
+        <i *ngIf="adjustWeightOption == 'DECREASE'" class="fa fa-arrow-down" aria-hidden="true"></i>
+        <i *ngIf="adjustWeightOption == 'NONE'" class="fa fa-minus" aria-hidden="true"></i>
+        <i *ngIf="adjustWeightOption == 'INCREASE'" class="fa fa-arrow-up" aria-hidden="true"></i>
+    </label>
+</div>
