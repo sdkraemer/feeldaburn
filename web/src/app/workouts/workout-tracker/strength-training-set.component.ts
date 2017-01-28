@@ -55,4 +55,12 @@ export class StrengthTrainingSetComponent implements OnInit {
             }
         }, this);
     }
+
+    copyRepititions(pastRepititions) {
+        this.group.controls['repetitions'].setValue(pastRepititions);
+    }
+
+    copyWeight(pastWeight) {
+        this.group.controls['weight'].setValue(pastWeight);
+    }
 }
