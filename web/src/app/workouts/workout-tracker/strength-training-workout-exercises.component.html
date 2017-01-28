@@ -1,12 +1,24 @@
 <div [formGroup]="form">
     <div formArrayName="exercises">
-        <div class="card" *ngFor="let exercise of workout.exercises; let exercisesIndex = index;">
-            <strength-training-workout-exercise 
-                [group]="form.controls.exercises.controls[exercisesIndex]"
-                [exercise]="exercise" 
-                [exercisesIndex]="exercisesIndex" 
-                [workout]="workout"
-                [previousWorkouts]="previousWorkouts"></strength-training-workout-exercise>
+        <div>
+            <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == 0" (click)="changeWorkout(-1)" style="float:left;">Previous</button>
+            <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == (workout.exercises.length-1)" (click)="changeWorkout(1)"  style="float:right;">Next</button>
+            <div style="clear:both"></div>
+        </div>
+        <br>
+        <strength-training-workout-exercise
+            *ngFor="let exercise of workout.exercises; let exercisesIndex = index;"
+            [group]="form.controls.exercises.controls[exercisesIndex]"
+            [exercise]="exercise" 
+            [exercisesIndex]="exercisesIndex" 
+            [workout]="workout"
+            [previousWorkouts]="previousWorkouts"
+            [activeExerciseIndex]="activeExerciseIndex"></strength-training-workout-exercise>
+        <br>
+        <div>
+            <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == 0" (click)="changeWorkout(-1)" style="float:left;">Previous</button>
+            <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == (workout.exercises.length-1)" (click)="changeWorkout(1)"  style="float:right;">Next</button>
+            <div style="clear:both"></div>
         </div>
     </div>
 </div>

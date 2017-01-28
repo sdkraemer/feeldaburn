@@ -17,7 +17,7 @@ export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
     private exercise: IWorkoutExercise;
 
     @Input("exercisesIndex")
-    private exercisesIndex;
+    private exercisesIndex: number;
 
     @Input("workout")
     private workout: IWorkout;
@@ -25,7 +25,11 @@ export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
     @Input("previousWorkouts")
     private previousWorkouts: Observable<IStrengthTrainingWorkout[]>;
 
+    @Input("activeExerciseIndex")
+    private activeExerciseIndex: number;
+
     constructor() { }
 
     ngOnInit() { }
+
 }

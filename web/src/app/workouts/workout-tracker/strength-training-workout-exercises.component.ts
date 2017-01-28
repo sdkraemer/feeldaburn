@@ -24,6 +24,8 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
 
     private previousWorkouts: Observable<IStrengthTrainingWorkout[]>;
 
+    private activeExerciseIndex: number;
+
     constructor(
         private formBuilder: FormBuilder,
         private workoutService: WorkoutService
@@ -35,6 +37,8 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
         }
         this.form.addControl("exercises", new FormArray([]));
         this.addExerciseControlsFromWorkout();
+
+        this.activeExerciseIndex = 0;
     }
 
     addExerciseControlsFromWorkout(){
@@ -89,5 +93,9 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     private getPreviousWorkouts(guideId: string): Observable<IStrengthTrainingWorkout[]>{
         return this.workoutService
                     .getPreviousStrengthTrainingWorkouts(guideId);
+    }
+
+    public changeWorkout(modifier){
+        this.activeExerciseIndex += modifier;
     }
 }

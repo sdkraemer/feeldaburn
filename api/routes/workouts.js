@@ -10,7 +10,6 @@ var WorkoutModels = require('../models/workout'),
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
-        console.log("testing nodemon...omg...4?!!!");
         Workout.find({'createdBy': ObjectId(req.userId)},function(err, workouts){
             if (err) return console.error(err);
             res.json(workouts);
@@ -67,7 +66,7 @@ module.exports = function(app) {
     });
 
     app.put('/api/workouts/:id', function(req, res){
-        Workout.findOne({'_id': req.params.id}, {}, function(err, workout){
+        Workout.findOne({'_id': req.params.id, 'createdBy': ObjectId(req.userId)}, {}, function(err, workout){
             if (err){
                 console.error('Error finding workout'+ err);
                 res.json({ 'status': false });
@@ -105,7 +104,7 @@ module.exports = function(app) {
 
     app.delete('/api/workouts/:id', function(req, res){
         console.log('DELETE /api/workout/%s', req.params.id);
-        Workout.remove({_id: req.params.id}, function(err){
+        Workout.remove({_id: req.params.id, 'createdBy': ObjectId(req.userId)}, function(err){
             if(err){
                 console.log("Error occurred removing workout: %s", err);
                 res.sendStatus(404);
@@ -118,7 +117,7 @@ module.exports = function(app) {
         var guideId = req.params.guideid;
         console.log("Getting previous workouts from guide:" +guideId);
         StrengthTrainingWorkout.
-            find({})
+            find({'createdBy': ObjectId(req.userId), isCompleted: true})
             .where('guide').equals(ObjectId(guideId))
             .limit(2)
             .sort({completedAt: 'desc'})
