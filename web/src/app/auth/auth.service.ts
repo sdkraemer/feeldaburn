@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired, AuthHttp } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 
 // Avoid name not found warnings
@@ -11,6 +12,7 @@ export class Auth {
   // Configure Auth0
   lock = new Auth0Lock('TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX', 'feeldaburn.auth0.com', {});
   userProfile: any;
+  apiUrl: string = `${environment.apiUrl}/users`;
 
   constructor(
     private router: Router,
@@ -43,8 +45,7 @@ export class Auth {
 
   //probably belongs in some sort of user service, but just try this
   private createUser(profileJson) {
-    // {"email":"tfcmaster9@gmail.com","email_verified":true,"name":"scott kraemer","given_name":"scott","family_name":"kraemer","picture":"https://lh4.googleusercontent.com/-pjLkWt9qyyc/AAAAAAAAAAI/AAAAAAAAAE8/wYNnQ_df_S4/photo.jpg","gender":"male","locale":"en","clientID":"TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX","updated_at":"2016-12-19T23:39:39.924Z","user_id":"google-oauth2|116672649890144897523","nickname":"tfcmaster9","identities":[{"provider":"google-oauth2","user_id":"116672649890144897523","connection":"google-oauth2","isSocial":true}],"created_at":"2016-12-19T22:29:42.726Z","global_client_id":"WAQzAcSpFBzIYGj5l1rY6CYTmmEOiw9y"}
-    this.authHttp.post('http://localhost/api/users', profileJson)
+    this.authHttp.post(this.apiUrl, profileJson)
       .map(res => res.json())
       .subscribe(user => {
         console.log("did it create a user?");

@@ -20,7 +20,8 @@ var authCheck = jwt({
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://feeldburnmongodb/test');
+//mongoose.connect('mongodb://feeldburnmongodb/test');
+mongoose.connect('mongodb://feeldaburn:qdra6A6CvtVdVsyta2FiHnHp3uMxK620d2gMzEzlYbaAYjqRti9aJtH8H9rQEyxkbIjuLeDt83H7HF2ZE8Zjog==@feeldaburn.documents.azure.com:10250/feeldaburn/?ssl=true');
 
 app.use('/api/workouts', [authCheck, userId]);
 app.use('/api/guides', [authCheck, userId]);
@@ -35,7 +36,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-
-var server = app.listen(3000, function(){
-    console.log('Server running at http://127.0.0.1/');
+var port = process.env.port || '3000';
+var server = app.listen(port, function(){
+    console.log('Server listening on port:'+port);
 });

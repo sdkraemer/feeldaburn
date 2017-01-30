@@ -1,7 +1,8 @@
 <div [formGroup]="form">
     <div formArrayName="exercises">
-        <div>
+        <div style="text-align: center">
             <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == 0" (click)="changeWorkout(-1)" style="float:left;">Previous</button>
+            <h5 style="display:inline;">({{ (activeExerciseIndex+1) }}/{{ workout.exercises.length }})</h5>
             <button type="button" class="btn btn-secondary" [disabled]="activeExerciseIndex == (workout.exercises.length-1)" (click)="changeWorkout(1)"  style="float:right;">Next</button>
             <div style="clear:both"></div>
         </div>
