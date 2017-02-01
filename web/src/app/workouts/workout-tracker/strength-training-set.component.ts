@@ -10,7 +10,16 @@ import * as _ from 'lodash';
 
 @Component({
     selector: 'strength-training-set',
-    templateUrl: 'strength-training-set.component.html'
+    templateUrl: 'strength-training-set.component.html',
+    styles: [`
+        .previous-set-adjust-weight > .fa-arrow-down {
+            color: #a83232;
+        }
+
+        .previous-set-adjust-weight > .fa-arrow-up {
+            color: #1d831d;
+        }
+    `]
 })
 export class StrengthTrainingSetComponent implements OnInit {
     @Input("set")

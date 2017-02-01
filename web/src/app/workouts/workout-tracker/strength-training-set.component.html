@@ -49,6 +49,7 @@
                 <th>Date</th>
                 <th>Repetitions</th>
                 <th *ngIf="exercise.type == 'WEIGHTS'">Weight</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +60,12 @@
                 </td>
                 <td *ngIf="exercise.type == 'WEIGHTS'">
                     <button type="button" class="btn btn-secondary" (click)="copyWeight(previousSet.weight)">{{ previousSet.weight }}</button>
+                </td>
+                <td>
+                    <span class="previous-set-adjust-weight">
+                        <i *ngIf="previousSet.adjustWeight == 'DECREASE'" class="fa fa-arrow-down" aria-hidden="true"></i>
+                        <i *ngIf="previousSet.adjustWeight == 'INCREASE'" class="fa fa-arrow-up" aria-hidden="true"></i>
+                    </span>
                 </td>
             </tr>
         </tbody>
