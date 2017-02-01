@@ -11,5 +11,5 @@ RUN apt-get update
 
 EXPOSE 3000
 
-ENTRYPOINT ["nodemon", "index.js", "-L"]
+ENTRYPOINT ["nodemon", "server.js", "-L"]
 
