@@ -1,4 +1,5 @@
 var express = require('express'),
+    config = require('config'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     User = require('./models/user'),
@@ -20,8 +21,8 @@ var authCheck = jwt({
 
 
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://feeldburnmongodb/test');
-mongoose.connect('mongodb://feeldaburn:qdra6A6CvtVdVsyta2FiHnHp3uMxK620d2gMzEzlYbaAYjqRti9aJtH8H9rQEyxkbIjuLeDt83H7HF2ZE8Zjog==@feeldaburn.documents.azure.com:10250/feeldaburn/?ssl=true');
+mongoose.connect(config.get("dbConnectionString"));
+//mongoose.connect('mongodb://feeldaburn:qdra6A6CvtVdVsyta2FiHnHp3uMxK620d2gMzEzlYbaAYjqRti9aJtH8H9rQEyxkbIjuLeDt83H7HF2ZE8Zjog==@feeldaburn.documents.azure.com:10250/feeldaburn/?ssl=true');
 
 app.use('/api/workouts', [authCheck, userId]);
 app.use('/api/guides', [authCheck, userId]);
