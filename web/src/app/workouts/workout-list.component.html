@@ -1,14 +1,13 @@
 <button type="button" class="btn btn-primary" [routerLink]="['/workouts', 'New']">Add</button>
 <button type="button" class="btn btn-primary" [routerLink]="['/workout-picker']">Pick a Workout!</button>
 <hr>
-<div *ngFor="let workout of workouts" class="card" style="width: 18rem;">
+<div *ngFor="let workout of workouts" class="card">
   <div class="card-block">
     <h4 class="card-title">{{workout.name}}</h4>
     <h6 class="card-subtitle text-muted" *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</h6>
     <h6 class="card-subtitle text-muted" *ngIf="!workout.completedAt">In Progress</h6>
   </div>
   <div class="card-block">
-    <p class="card-text">Description goes here.</p>
     <a href="#" class="btn btn-primary" [routerLink]="['/workout-tracker', workout._id]">View</a>
   </div>
 </div>

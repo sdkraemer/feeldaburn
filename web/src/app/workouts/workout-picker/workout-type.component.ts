@@ -5,10 +5,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'workout-type',
     templateUrl: 'workout-type.component.html',
     providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => WorkoutTypeComponent),
-    multi: true
-  }]
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => WorkoutTypeComponent),
+        multi: true
+    }],
+    styles: [`
+        input {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+    `]
 })
 export class WorkoutTypeComponent implements ControlValueAccessor {
     private onModelChange: Function;

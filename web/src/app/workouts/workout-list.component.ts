@@ -4,7 +4,13 @@ import { WorkoutService } from './workout.service';
 
 @Component({
     selector: 'workout-list',
-    templateUrl: 'workout-list.component.html'
+    templateUrl: 'workout-list.component.html',
+    styles: [`
+        .card {
+            margin-bottom: 1em;
+            width: 18rem;
+        }
+    `]
 })
 export class WorkoutListComponent implements OnInit {
     workouts: Workout[];

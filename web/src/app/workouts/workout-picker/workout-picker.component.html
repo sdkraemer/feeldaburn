@@ -1,10 +1,7 @@
 <h2>Select a Workout!</h2>
 <form novalidate [formGroup]="form">
     <workout-type formControlName="workoutType"></workout-type>
-    <div *ngIf="form.value.workoutType == 'STRENGTH_TRAINING'">
-        <h4>Select a Guide To Follow</h4>
-        <strength-training-picker [form]="form"></strength-training-picker>
-    </div>
+    <strength-training-picker *ngIf="form.value.workoutType == 'STRENGTH_TRAINING'" [form]="form"></strength-training-picker>
     <br>
     <button type="button" class="btn btn-primary" (click)="startWorkout()">Let's Go!</button>
 </form>
