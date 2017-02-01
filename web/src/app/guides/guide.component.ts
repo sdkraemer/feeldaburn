@@ -10,7 +10,12 @@ import 'rxjs/add/operator/do';
 
 @Component({
     selector: 'guide',
-    templateUrl: 'guide.component.html'
+    templateUrl: 'guide.component.html',
+    styles: [`
+        .card {
+            margin-bottom: 1em;
+        }
+    `]
 })
 export class GuideComponent implements OnInit {
     private _id: any;
@@ -79,7 +84,6 @@ export class GuideComponent implements OnInit {
     }
 
     delete() {
-        console.log("deleting guide");
         this.guideService.remove(this.form.value._id)
             .subscribe((isSuccessful: boolean) => {
                 this.goToGuides();
@@ -87,21 +91,20 @@ export class GuideComponent implements OnInit {
     }
 
     removeExercise(exerciseIndex){
-        console.log("TODO: remove exercise");
+        const control = <FormArray>this.form.controls['exercises'];
+        control.removeAt(exerciseIndex);
     }
 
     save() {
         let guide = new Guide(this.form.value);
 
         if(guide._id){
-            console.log("Saving an existing guide");
             this.guideService.update(guide)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToGuides();
                 });
         }
         else{
-            console.log("Saving a new guide");
             this.guideService.add(guide)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToGuides();
@@ -115,7 +118,7 @@ export class GuideComponent implements OnInit {
             _id: [null],
             name: ['', Validators.required],
             sided: [null],
-            type: ['', Validators.required]
+            type: ['REPS', Validators.required]
         });
     }
 
