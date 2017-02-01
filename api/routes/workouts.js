@@ -10,10 +10,17 @@ var WorkoutModels = require('../models/workout'),
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
-        Workout.find({'createdBy': ObjectId(req.userId)},function(err, workouts){
-            if (err) return console.error(err);
-            res.json(workouts);
-        });
+        Workout.
+            find({'createdBy': ObjectId(req.userId)})
+            .limit(10)//limit to past 10 for now.
+            .sort({completedAt: 'desc'})
+            .exec(function(err, workouts){
+                if(err){
+                    console.log("Could not find workouts: %s", err);
+                    res.sendStatus(404);
+                }
+                res.json(workouts);
+            });
     });
 
     app.get('/api/workouts/:id', function(req, res){
