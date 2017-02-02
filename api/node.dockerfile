@@ -6,6 +6,7 @@ MAINTAINER Scott Kraemer
 WORKDIR /var/www
 
 RUN npm install -g nodemon
+RUN npm install
 
 RUN apt-get update
 
