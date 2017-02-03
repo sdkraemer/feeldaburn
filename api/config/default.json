@@ -1,3 +1,8 @@
 {
-    "dbConnectionString": "mongodb://feeldburnmongodb/test"
+    "mongo": {
+        "host": "feeldburnmongodb",
+        "database": "db",
+        "username": "myAdmin",
+        "password": "uq0ZM3VPrYxI1Xk6"
+    }
 }

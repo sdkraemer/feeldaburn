@@ -20,9 +20,11 @@ var authCheck = jwt({
 });
 
 
-var mongoose = require('mongoose');
-mongoose.connect(config.get("dbConnectionString"));
-//mongoose.connect('mongodb://feeldaburn:qdra6A6CvtVdVsyta2FiHnHp3uMxK620d2gMzEzlYbaAYjqRti9aJtH8H9rQEyxkbIjuLeDt83H7HF2ZE8Zjog==@feeldaburn.documents.azure.com:10250/feeldaburn/?ssl=true');
+var mongooseConfig = config.get("mongo");
+console.dir(mongooseConfig);
+var connectionString = "mongodb://"+mongooseConfig.username+":"+mongooseConfig.password+"@"+mongooseConfig.host+":27017/admin";
+console.log(connectionString);
+mongoose.connect(connectionString);
 
 app.use('/api/workouts', [authCheck, userId]);
 app.use('/api/guides', [authCheck, userId]);
