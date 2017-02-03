@@ -22,7 +22,8 @@ var authCheck = jwt({
 
 var mongooseConfig = config.get("mongo");
 console.dir(mongooseConfig);
-var connectionString = "mongodb://"+mongooseConfig.username+":"+mongooseConfig.password+"@"+mongooseConfig.host+":27017/admin";
+//var connectionString = "mongodb://"+mongooseConfig.username+":"+mongooseConfig.password+"@"+mongooseConfig.host+":27017/db?authSource=admin";
+var connectionString = "mongodb://"+mongooseConfig.host+":27017/db";
 console.log(connectionString);
 mongoose.connect(connectionString);
 

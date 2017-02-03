@@ -33,7 +33,8 @@ services:
   feeldburnmongodb:
     container_name: feeldburnmongodb
     image: mongo:latest
-    command: mongod --auth
+    #command: mongod --auth
+    command: mongod
     ports:
       - "27017:27017"
     networks:
