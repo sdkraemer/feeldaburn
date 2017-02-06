@@ -7,7 +7,7 @@ import { Auth } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Feel Da Burn';
+  title = 'Xrcise';
   selectedWorkout : any;
 
   constructor(

@@ -9,3 +9,8 @@
 md-card{
     width: 50%;
 }
+
+@font-face {
+  font-family: 'Aeromatics';
+  src: url(/assets/fonts/AeroMaticsBold.ttf);
+}
