@@ -35,8 +35,8 @@ services:
     image: mongo:latest
     #command: mongod --auth
     command: mongod
-    ports:
-      - "27017:27017"
+    #ports:
+    #  - "27017:27017"
     networks:
       - nodeapp-network
     volumes:
