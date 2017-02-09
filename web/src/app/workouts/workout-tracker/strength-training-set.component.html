@@ -6,14 +6,14 @@
             <label class="col-form-legend">Repetitions:</label>
         </div>
         <div class="row">
-            <div class="col">
-                <increment-decrement-button style="float:right" [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
-            </div>
-            <div class="col">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <increment-decrement-button [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
+                </span>
                 <input type="number" class="form-control" formControlName="repetitions"/>
-            </div>
-            <div class="col">
-                <increment-decrement-button style="float:left" [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
+                <span class="input-group-btn">
+                    <increment-decrement-button [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
+                </span>
             </div>
         </div>
     </div>
@@ -23,14 +23,14 @@
             <label class="col-form-legend">Weight:</label>
         </div>
         <div class="row">
-            <div class="col">
-                <increment-decrement-button style="float:right" [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
-            </div>
-            <div class="col">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <increment-decrement-button [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
+                </span>
                 <input type="number" class="form-control" formControlName="weight"/>
-            </div>
-            <div class="col">
-                <increment-decrement-button style="float:left" [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
+                <span class="input-group-btn">
+                    <increment-decrement-button [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
+                </span>
             </div>
         </div>
         <div class="row">
