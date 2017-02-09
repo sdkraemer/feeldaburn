@@ -123,13 +123,18 @@ export class WorkoutTrackerComponent implements OnInit {
     }
 
     delete() {
-        this.workoutService
-            .remove(this.workout._id)
-            .subscribe((isSuccessful: boolean) => {
-                if(isSuccessful){
-                    this.goToWorkouts();
-                } 
-            });
+        if(!this.workout._id){
+            this.goToWorkouts();
+        }
+        else{
+            this.workoutService
+                .remove(this.workout._id)
+                .subscribe((isSuccessful: boolean) => {
+                    if(isSuccessful){
+                        this.goToWorkouts();
+                    } 
+                });
+        }
     }
 
     goToWorkouts() {
