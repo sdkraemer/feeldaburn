@@ -5,10 +5,17 @@ var _ = require('lodash');
 
 module.exports = function(app) {
     app.get('/api/guides', function(req, res){
-        Guide.find({},function(err, guides){
-            if (err) return console.error(err);
-            res.json(guides);
-        });
+
+        Guide.
+            find({})
+            .sort({name: 'asc'})
+            .exec(function(err, guides){
+                if(err){
+                    console.log("Could not find guides: %s", err);
+                    res.sendStatus(404);
+                }
+                res.json(guides);
+            });
     });
 
     app.post('/api/guides', function(req, res){
