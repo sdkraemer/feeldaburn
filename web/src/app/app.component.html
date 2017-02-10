@@ -1,18 +1,31 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"><i>X</i>rcise</a>
-      <button class="btn btn-primary btn-margin" [routerLink]="['']">Home</button>
-      <button class="btn btn-primary btn-margin" [routerLink]="['/workouts']" *ngIf="auth.authenticated()">Workouts</button>
-      <button class="btn btn-primary btn-margin" [routerLink]="['/guides']" *ngIf="auth.authenticated()">Guides</button>
-      <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-    <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
-    </div>
+<nav class="navbar navbar-light navbar-toggleable-md fixed-top bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" [routerLink]="['']"><i>X</i>rcise</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item" [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.authenticated()" [routerLink]="['/workouts']" routerLinkActive="active">
+        <a class="nav-link">Workouts</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.authenticated()" [routerLink]="['/guides']" routerLinkActive="active">
+        <a class="nav-link">Guides</a>
+      </li>
+      <li class="nav-item" *ngIf="!auth.authenticated()">
+        <a class="nav-link" (click)="auth.login()">Log In</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.authenticated()">
+        <a class="nav-link" (click)="auth.logout()">Log Out</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
-<main class="container">
+<div class="container">
   <router-outlet></router-outlet>
-</main>
+</div>
 
 
