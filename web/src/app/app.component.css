@@ -1,7 +1,11 @@
 .navbar-brand {
     font-family: 'Aeromatics';
-    font-size: 20pt;
+    font-size: 18pt;
     color: #0275d8;
+}
+
+.xstyle {
+    font-size: 32pt;
 }
 
 .nav-link{
