@@ -10,8 +10,16 @@ var WorkoutModels = require('../models/workout'),
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
+        var conditions = {
+            'createdBy': ObjectId(req.userId)
+        };
+        //Simple date searching to start
+        if(req.params.start && req.params.end){
+            conditions['completedAt'] = {$gte: new Date(req.params.start), $lte: new Date(req.params.end)}
+        }
+
         Workout.
-            find({'createdBy': ObjectId(req.userId)})
+            find(conditions)
             .limit(10)//limit to past 10 for now.
             .sort({completedAt: 'desc'})
             .exec(function(err, workouts){

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 
@@ -20,8 +20,8 @@ export class CalendarService {
         private authHttp: AuthHttp
     ) { }
 
-    getWorkoutEvents(): Observable<WorkoutEvent[]> {
-        return this.authHttp.get(this.apiUrl)
+    getWorkoutEvents(search: URLSearchParams): Observable<WorkoutEvent[]> {
+        return this.authHttp.get(this.apiUrl, {search})
             .map((res: Response) => {
                 let workouts: IWorkout[] = res.json();
                 return workouts.map((workout: IWorkout) => {

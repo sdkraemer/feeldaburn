@@ -26,6 +26,7 @@
     "auth0-lock": "^10.7.2",
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
+    "date-fns": "^1.27.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
