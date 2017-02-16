@@ -12,7 +12,7 @@ import { GuideComponent }          from './guides/guide.component';
 import { AuthGuard }                from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  //{ path: '', component: HomeComponent },
   { path: '**', redirectTo: '' }
 ];
 

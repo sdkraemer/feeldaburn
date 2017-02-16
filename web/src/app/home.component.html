@@ -1,1 +1,6 @@
-<h3>Welcome, get started and <span class="logo"><i>X</i>rcise</span>!!</h3>
+<h3 *ngIf="!auth.authenticated()">Welcome, get started and <span class="logo"><i>X</i>rcise</span>!!</h3>
+
+<mwl-calendar-month-view *ngIf="auth.authenticated()"
+  [viewDate]="viewDate"
+  [events]="events">
+</mwl-calendar-month-view>

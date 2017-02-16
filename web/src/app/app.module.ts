@@ -4,14 +4,13 @@ import { Http, RequestOptions } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
 
 import { WorkoutsModule } from './workouts/workouts.module';
 import { GuidesModule } from './guides/guides.module';
-
-
+import { HomeModule } from './home/home.module';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -28,13 +27,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    CalendarModule.forRoot(),
     routing,
     WorkoutsModule,
-    GuidesModule
+    GuidesModule,
+    HomeModule
   ],
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   providers: [
     {
