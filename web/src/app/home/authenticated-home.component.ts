@@ -52,4 +52,8 @@ export class AuthenticatedHomeComponent implements OnInit {
         search.set('end', format(getEnd(this.viewDate), 'YYYY-MM-DD'));
         this.events = this.calendarService.getWorkoutEvents(search);
     }
+
+    public dateChanged(){
+        this.getWorkouts();
+    }
 }
