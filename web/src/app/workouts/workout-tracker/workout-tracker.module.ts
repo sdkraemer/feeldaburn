@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkoutTrackerRoutingModule, routedComponents } from './workout-tracker.routing';
 
 import { GuideService } from '../../guides/guide.service';
+import { WorkoutFactoryService } from './workout-factory.service';
 
 import { RunningWorkoutComponent } from './running-workout.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
@@ -35,7 +36,8 @@ import { AdjustWeightPickerComponent } from './adjust-weight-picker.component';
     AdjustWeightPickerComponent
   ],
   providers: [
-    GuideService
+    GuideService,
+    WorkoutFactoryService
   ],
   exports: [
     

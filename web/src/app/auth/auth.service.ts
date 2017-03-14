@@ -45,6 +45,7 @@ export class Auth {
 
   //probably belongs in some sort of user service, but just try this
   private createUser(profileJson) {
+    console.log("creating user");
     this.authHttp.post(this.apiUrl, profileJson)
       .map(res => res.json())
       .subscribe(user => {

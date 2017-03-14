@@ -10,6 +10,7 @@ var WorkoutModels = require('../models/workout'),
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
+        console.log("req.userId: %s", req.userId);
         var conditions = {
             'createdBy': ObjectId(req.userId)
         };

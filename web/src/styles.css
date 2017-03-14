@@ -126,10 +126,11 @@ md-card{
           flex-wrap: wrap; }
 
 .cal-month-view .cal-event {
-  width: 10px;
-  height: 10px;
+  width: 1em;
+  height: 1em;
   border-radius: 50%;
   display: inline-block;
+  background-color: #0275d8;
   margin: 2px; }
 
 .cal-month-view .cal-day-cell.cal-in-month.cal-has-events {

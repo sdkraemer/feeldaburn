@@ -27,9 +27,9 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
 
     ngOnInit() { 
         this.addControlsToForm();
-        this.getGuide(this.workout.guide, () => {
-            this.setupWorkout();
-        });
+        // this.getGuide(this.workout.guide, () => {
+        //     this.setupWorkout();
+        // });
     }
 
     setupWorkout() {

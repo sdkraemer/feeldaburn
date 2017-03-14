@@ -1,0 +1,16 @@
+feeldburn-api       | { iss: 'https://feeldaburn.auth0.com/',
+feeldburn-api       |   sub: 'google-oauth2|116672649890144897523',
+feeldburn-api       |   aud: 'TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX',
+feeldburn-api       |   exp: 1486786309,
+feeldburn-api       |   iat: 1486750309 }
+feeldburn-api       | events.js:160
+feeldburn-api       |       throw er; // Unhandled 'error' event
+feeldburn-api       |       ^
+feeldburn-api       |
+feeldburn-api       | TypeError: Cannot read property '_id' of null
+feeldburn-api       |     at /var/www/userId.js:11:34
+feeldburn-api       |     at model.Query.<anonymous> (/var/www/node_modules/mongoose/lib/model.js:3407:16)
+feeldburn-api       |     at /var/www/node_modules/kareem/index.js:259:21
+feeldburn-api       |     at /var/www/node_modules/kareem/index.js:127:16
+feeldburn-api       |     at _combinedTickCallback (internal/process/next_tick.js:67:7)
+feeldburn-api       |     at process._tickCallback (internal/process/next_tick.js:98:9)

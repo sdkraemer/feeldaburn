@@ -6,6 +6,7 @@ import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWo
 
 import { WorkoutService } from '../workout.service';
 import { GuideService } from '../../guides/guide.service';
+import { WorkoutFactoryService } from './workout-factory.service';
 
 @Component({
     selector: 'workout-tracker',
@@ -20,7 +21,8 @@ export class WorkoutTrackerComponent implements OnInit {
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private workoutService: WorkoutService,
-        private guideService: GuideService
+        private guideService: GuideService,
+        private workoutFactoryService: WorkoutFactoryService
     ) { }
 
     ngOnInit() {
@@ -46,10 +48,16 @@ export class WorkoutTrackerComponent implements OnInit {
             
             let guide_id = this.route.snapshot.params['guide'];
 
-            this.workout = this.createWorkout({
-                type: workoutType,
-                guide: guide_id
-            });
+            // this.workout = this.createWorkout({
+            //     type: workoutType,
+            //     guide: guide_id
+            // });
+
+            this.workoutFactoryService
+                .createWorkout(workoutType, guide_id)
+                .subscribe(workout => {
+                    this.workout = workout;
+                });
         }
     }
 
@@ -74,22 +82,22 @@ export class WorkoutTrackerComponent implements OnInit {
             completed);
     }
 
-    createWorkout(options) {
-        let workout: IWorkout;
-        if(options.type == 'RUNNING'){
-            workout = new RunningWorkout({
-                _id: null
-            });
-        }
-        else if(options.type == 'STRENGTH_TRAINING'){
-            workout = new StrengthTrainingWorkout({
-                _id: null,
-                guide: options.guide,
-                exercises: []
-            });
-        }
-        return workout;
-    }
+    // createWorkout(options) {
+    //     let workout: IWorkout;
+    //     if(options.type == 'RUNNING'){
+    //         workout = new RunningWorkout({
+    //             _id: null
+    //         });
+    //     }
+    //     else if(options.type == 'STRENGTH_TRAINING'){
+    //         workout = new StrengthTrainingWorkout({
+    //             _id: null,
+    //             guide: options.guide,
+    //             exercises: []
+    //         });
+    //     }
+    //     return workout;
+    // }
 
     save() {
         var formData = this.form.value;
