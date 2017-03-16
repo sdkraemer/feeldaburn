@@ -47,5 +47,8 @@ var server = app.listen(port, function(){
 
 process.on('SIGINT', function() {
     console.log('SIGINT: Closing MongoDB connection');
-    mongoose.disconnect();
+    mongoose.connection.close(function () {
+        console.log('Mongoose default connection disconnected through app termination');
+        process.exit(0);
+    });
 });
