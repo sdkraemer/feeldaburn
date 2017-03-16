@@ -44,3 +44,8 @@ var port = process.env.port || '3000';
 var server = app.listen(port, function(){
     console.log('Server listening on port:'+port);
 });
+
+process.on('SIGINT', function() {
+    console.log('SIGINT: Closing MongoDB connection');
+    mongoose.disconnect();
+});
