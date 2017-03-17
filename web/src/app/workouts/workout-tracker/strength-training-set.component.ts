@@ -56,7 +56,7 @@ export class StrengthTrainingSetComponent implements OnInit {
             this.previousWorkoutDates.push(workout.completedAt);
             var exercise: IWorkoutExercise = _.find(workout.exercises, {guideExercise: this.exercise.guideExercise });
             
-            if(this.set.sided){
+            if(this.set.side == "RIGHT" || this.set.side == "LEFT"){
                 this.previousSets.push(_.find(exercise.sets, {side: this.set.side}));
             }
             else{
