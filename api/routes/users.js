@@ -18,8 +18,8 @@ module.exports = function(app) {
                     }
                     res.json(user);
                 });
-
             }
+            res.json(user);
         });
     });
 
