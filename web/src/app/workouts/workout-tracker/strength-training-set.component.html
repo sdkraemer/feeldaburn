@@ -56,10 +56,12 @@
             <tr *ngFor="let previousSet of previousSets; let i = index;">
                 <td>{{ previousWorkoutDates[i] | date }}</td>
                 <td>
-                    <button type="button" class="btn btn-secondary" (click)="copyRepititions(previousSet.repetitions)">{{ previousSet.repetitions }}</button>
+                    <button type="button" class="btn btn-secondary" (click)="copyRepititions(previousSet.repetitions)" *ngIf="previousSet.repetitions">{{ previousSet.repetitions }}</button>
+                    <span *ngIf="!previousSet.repetitions">-</span>
                 </td>
                 <td *ngIf="exercise.type == 'WEIGHTS'">
-                    <button type="button" class="btn btn-secondary" (click)="copyWeight(previousSet.weight)">{{ previousSet.weight }}</button>
+                    <button type="button" class="btn btn-secondary" (click)="copyWeight(previousSet.weight)" *ngIf="previousSet.weight">{{ previousSet.weight }}</button>
+                    <span *ngIf="!previousSet.weight">-</span>
                 </td>
                 <td>
                     <span class="previous-set-adjust-weight">
