@@ -3,3 +3,8 @@ To start:
 -Node server is using nodemon, so it should see changes
 -To rebuild angular:
     From /web issue 'ng build'
+
+
+6/12: 
+    -Was working on getting running component working, so I can track stats from my gps watch.
+    -Upgraded to angular 4.0, now it looks like auth0 problem: No JWT present or has expired

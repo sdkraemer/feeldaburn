@@ -1,6 +1,6 @@
 {
     "mongo": {
-        "host": "feeldburnmongodb",
+        "host": "xrcise-mongodb",
         "database": "db",
         "username": "myAdmin",
         "password": "uq0ZM3VPrYxI1Xk6"

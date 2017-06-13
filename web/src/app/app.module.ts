@@ -4,6 +4,7 @@ import { Http, RequestOptions } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    BrowserAnimationsModule,
     CalendarModule.forRoot(),
     routing,
     WorkoutsModule,

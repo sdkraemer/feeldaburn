@@ -36,6 +36,9 @@ module.exports = function(app) {
         Workout
             .findOne({ '_id': req.params.id, 'createdBy': ObjectId(req.userId) })
             .exec(function (err, workout) {
+                if(err){
+                    console.log("Error finding workout: "+req.params.id);
+                }
                 res.json(workout);
             });
     });

@@ -38,15 +38,17 @@ export class WorkoutFactoryService {
                exercises: this.createExercisesFromGuide(guide)
            });
        });
-        
     }
 
     public createRunningWorkout(): Observable<IRunningWorkout> {
+        
         return Observable.create(observer => {
-            observer.onNext(new RunningWorkout({
+            //observer.onNext(new RunningWorkout({
+            observer.next(new RunningWorkout({
                 _id: null
             }));
         });
+
     }
 
     private createExercisesFromGuide(guide: IGuide){

@@ -1,8 +1,8 @@
 version: '2'
 services:
   nginx:
-    container_name: nginx
-    image: feeldburn-nginx
+    container_name: xrcise-nginx
+    image: xrcise-nginx
     build: 
       context: .
       dockerfile: nginx.dockerfile
@@ -16,22 +16,22 @@ services:
     networks:
       - nodeapp-network
   node-1:
-    container_name: feeldburn-api
-    image: feeldburn-api
+    container_name: xrcise-api
+    image: xrcise-api
     build:
       context: ./api
       dockerfile: node.dockerfile
     volumes:
       - ./api/:/var/www/
     links:
-      - feeldburnmongodb:feeldburnmongodb
+      - xrcise-mongodb:xrcise-mongodb
     ports:
       - "3000:3000"
       - "7000:7000"
     networks:
       - nodeapp-network
-  feeldburnmongodb:
-    container_name: feeldburnmongodb
+  xrcise-mongodb:
+    container_name: xrcise-mongodb
     image: mongo:latest
     #command: mongod --auth
     command: mongod
