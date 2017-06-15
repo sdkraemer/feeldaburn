@@ -41,6 +41,7 @@ services:
       - nodeapp-network
     volumes:
       - '/data/db:/data/db'  
+      - '/mongodbbackup:/mongodbbackup'
 networks:
   nodeapp-network:
     driver: bridge
