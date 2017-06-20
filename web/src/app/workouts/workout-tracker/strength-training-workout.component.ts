@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IWorkout, Workout, IStrengthTrainingWorkout, StrengthTrainingWorkout, IWorkoutExercise, WorkoutExercise, ISet, Set, IRepetitionSet, RepetitionSet, IWeightsSet, WeightsSet } from '../workout-updated';
+import { IWorkout, Workout, IStrengthTrainingWorkout, StrengthTrainingWorkout, IWorkoutExercise, WorkoutExercise, ISet, Set, IRepetitionSet, RepetitionSet, IWeightsSet, WeightsSet } from '../../core';
 
 import { IGuide, IGuideExercise } from '../../guides/guide';
 

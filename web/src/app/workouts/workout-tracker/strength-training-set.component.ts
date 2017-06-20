@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 //rxjs
 import { Observable } from 'rxjs/Observable';
 
-import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../workout-updated';
+import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../../core';
 
 import * as _ from 'lodash';
 

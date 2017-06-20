@@ -1,5 +1,5 @@
 import { CalendarEvent } from 'angular-calendar';
-import { IWorkout } from '../workouts/workout-updated';
+import { IWorkout } from '../core';
 
 export interface WorkoutEvent extends CalendarEvent {
     workout: IWorkout;

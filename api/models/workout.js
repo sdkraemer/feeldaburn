@@ -56,7 +56,24 @@ var RunningWorkoutSchema = new Schema({
     distance: {
         type: Number,
         required: true
-    }
+    },
+    elapsed_time: {
+        type: Number,
+        required: false
+    },
+    pace: {
+        type: Number,
+        required: false
+    },
+    heartrate: {
+        type: Number,
+        required: false
+    },
+    calories: {
+        type: Number,
+        required: false
+    },
+
 });
 
 var WorkoutSchema = new Schema(

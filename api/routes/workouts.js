@@ -55,7 +55,22 @@ module.exports = function(app) {
                 createdBy: ObjectId(req.userId),
                 isCompleted: json.isCompleted,
                 completedAt: json.completedAt,
-                distance: json.distance
+                distance: json.distance,
+                elapsed_time: json.elapsed_time,
+                pace: json.pace,
+                heartrate: json.heartrate,
+                calories: json.calories
+            });
+
+            if(json.isCompleted){
+                workout.completedAt = new Date();
+            }
+
+            console.dir(workout);
+            console.log("testing");
+            workout.save(function(err, workout){
+                if(err) { console.log('Error inserting new workout: '+err); }
+                res.json(req.body);
             });
         }
         else if(json.type == "STRENGTH_TRAINING"){

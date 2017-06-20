@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout, IWorkoutExercise, WorkoutExercise, ISet, Set, IRepetitionSet, RepetitionSet, IWeightsSet, WeightsSet } from '../workout-updated';
+import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout, IWorkoutExercise, WorkoutExercise, ISet, Set, IRepetitionSet, RepetitionSet, IWeightsSet, WeightsSet } from '../../core';
 import { IGuide, IGuideExercise } from '../../guides/guide';
 
 import { GuideService } from '../../guides/guide.service';
@@ -18,37 +18,54 @@ export class WorkoutFactoryService {
         private guideService: GuideService
     ) { }
 
-    public createWorkout(workoutType, guideId: IGuide): Observable<IWorkout> {
+    public createWorkout(workoutType, guide: IGuide): IWorkout {
         if(workoutType == "STRENGTH_TRAINING"){
-            return this.createStrengthTrainingWorkout(guideId);
+            return this.createStrengthTrainingWorkout(guide);
         }
         else if(workoutType == "RUNNING"){
             return this.createRunningWorkout();
         }
     }
 
-    public createStrengthTrainingWorkout(guideId): Observable<IStrengthTrainingWorkout> {
+    public createStrengthTrainingWorkout(guide: IGuide): IStrengthTrainingWorkout {
         let workout: IStrengthTrainingWorkout;
 
-       return this.guideService.getGuide(guideId).map((guide) => {
-           return new StrengthTrainingWorkout({
-               _id: null,
-               guide: guide._id,
-               name: guide.name,
-               exercises: this.createExercisesFromGuide(guide)
-           });
-       });
+    //    return this.guideService.getGuide(guideId).map((guide) => {
+    //        return new StrengthTrainingWorkout({
+    //            _id: null,
+    //            guide: guide._id,
+    //            name: guide.name,
+    //            exercises: this.createExercisesFromGuide(guide)
+    //        });
+    //    });
+        return new StrengthTrainingWorkout({
+            _id: null,
+            guide: guide._id,
+            name: guide.name,
+            exercises: this.createExercisesFromGuide(guide)
+        });
     }
 
-    public createRunningWorkout(): Observable<IRunningWorkout> {
+    public createRunningWorkout(): IRunningWorkout {
         
-        return Observable.create(observer => {
-            //observer.onNext(new RunningWorkout({
-            observer.next(new RunningWorkout({
-                _id: null
-            }));
-        });
-
+        // return Observable.create(observer => {
+        //     observer.next(new RunningWorkout({
+        //         _id: null,
+        //         distance: null,
+        //         elapsed_time: null,
+        //         pace: null,
+        //         heartrate: null,
+        //         calories: null
+        //     }));
+        // });
+        return new RunningWorkout({
+                 _id: null,
+                 distance: null,
+                 elapsed_time: null,
+                 pace: null,
+                 heartrate: null,
+                 calories: null
+             })
     }
 
     private createExercisesFromGuide(guide: IGuide){

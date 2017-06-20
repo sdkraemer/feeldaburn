@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 
-import { IWorkout, IWorkoutExercise, IStrengthTrainingWorkout } from '../workout-updated';
+import { IWorkout, IWorkoutExercise, IStrengthTrainingWorkout } from '../../core';
 
 @Component({
     selector: 'strength-training-workout-exercise',

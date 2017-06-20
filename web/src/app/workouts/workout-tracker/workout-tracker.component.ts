@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout } from '../workout-updated';
+import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout } from '../../core';
 
 import { WorkoutService } from '../workout.service';
 import { GuideService } from '../../guides/guide.service';
@@ -46,18 +46,22 @@ export class WorkoutTrackerComponent implements OnInit {
         }
         else{
             
-            let guide_id = this.route.snapshot.params['guide'];
-
-            // this.workout = this.createWorkout({
-            //     type: workoutType,
-            //     guide: guide_id
-            // });
-
-            this.workoutFactoryService
-                .createWorkout(workoutType, guide_id)
-                .subscribe(workout => {
-                    this.workout = workout;
+            let guideId = this.route.snapshot.params['guide'];
+            let guide = null;
+            if(guideId) {
+                this.guideService.getGuide(guideId).subscribe((guide) => {
+                    this.workout = this.workoutFactoryService.createWorkout(workoutType, guide);
                 });
+            }
+            else{
+                this.workout = this.workoutFactoryService.createWorkout(workoutType, guide);
+            }
+
+            // this.workoutFactoryService
+            //     .createWorkout(workoutType, guide_id)
+            //     .subscribe(workout => {
+            //         this.workout = workout;
+            //     });
         }
     }
 

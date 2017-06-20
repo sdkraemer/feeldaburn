@@ -4,7 +4,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 
 import { WorkoutEvent } from './calendar-events';
-import { IWorkout } from '../workouts/workout-updated';
+import { IWorkout } from '../core/';
 
 //rxjs
 import { Observable } from 'rxjs/Observable';

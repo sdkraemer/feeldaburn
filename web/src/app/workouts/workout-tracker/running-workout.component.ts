@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IWorkout, Workout, IRunningWorkout, RunningWorkout } from '../workout-updated';
+import { IWorkout, Workout, IRunningWorkout, RunningWorkout } from '../../core/';
 
 @Component({
     selector: 'running-workout',
@@ -20,6 +20,10 @@ export class RunningWorkoutComponent implements OnInit {
 
     ngOnInit() { 
         this.form.addControl("distance", new FormControl());
+        this.form.addControl("elapsed_time", new FormControl());
+        this.form.addControl("pace", new FormControl());
+        this.form.addControl("heartrate", new FormControl());
+        this.form.addControl("calories", new FormControl());
     }
 
 }
