@@ -23,12 +23,12 @@ export interface IStrengthTrainingWorkout extends IWorkout {
 
 export class Workout implements IWorkout{
   _id: string;
-  type: string;
-  name: string;
-  notes: string;
-  createdAt: Date;
-  isCompleted: boolean;
-  completedAt: Date;
+  type?: string;
+  name?: string;
+  notes?: string;
+  createdAt?: Date;
+  isCompleted?: boolean;
+  completedAt?: Date;
 
   constructor(options: IWorkout){
     this._id = options._id;

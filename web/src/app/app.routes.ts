@@ -3,7 +3,6 @@ import { Routes, RouterModule }     from '@angular/router';
 
 
 import { WorkoutsComponent }        from './workouts/workouts.component';
-import { WorkoutComponent }         from './workouts/workout.component';
 
 import { GuidesComponent }          from './guides/guides.component';
 import { GuideComponent }          from './guides/guide.component';

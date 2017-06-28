@@ -9,9 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { WorkoutService } from './workout.service';
 
 import { WorkoutListComponent } from './workout-list.component';
-import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
-import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-workout-exercises.component';
-import { RunningWorkoutComponent } from './running-workout.component';
 
 import { GuideService } from '../guides/guide.service';
 
@@ -27,9 +24,6 @@ import { GuideService } from '../guides/guide.service';
     declarations: [
         WorkoutListComponent,
         routedComponents,
-        StrengthTrainingWorkoutComponent,
-        RunningWorkoutComponent,
-        StrengthTrainingWorkoutExercisesComponent
     ],
     providers: [
         WorkoutService,

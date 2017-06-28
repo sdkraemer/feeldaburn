@@ -3,11 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 
 import { WorkoutsComponent } from './workouts.component';
-import { WorkoutComponent } from './workout.component';
 
 const workoutRoutes: Routes = [  
-  { path: 'workouts', component: WorkoutsComponent, canActivate: [AuthGuard] },
-  { path: 'workouts/:id', component: WorkoutComponent, canActivate: [AuthGuard] }
+  { path: 'workouts', component: WorkoutsComponent, canActivate: [AuthGuard] }
 ];
 
 // const workoutRoutes: Routes = [
@@ -28,4 +26,4 @@ const workoutRoutes: Routes = [
 })
 export class WorkoutsRoutingModule { }
 
-export const routedComponents = [WorkoutsComponent, WorkoutComponent];  
+export const routedComponents = [WorkoutsComponent];  
