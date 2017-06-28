@@ -25,7 +25,6 @@
                             <label>Name:</label>
                             <input type="text" class="form-control"  formControlName="name"/>
                         </div>
-                        <guide-sided-selector formControlName="sided"></guide-sided-selector>
                         <div class="form-group">
                             <label>Type:</label>
                             <select formControlName="type">
@@ -34,6 +33,7 @@
                                 </option>
                             </select>
                         </div>
+                        <guide-sided-selector *ngIf="showSidedSelector(exercise)" formControlName="sided"></guide-sided-selector>
                         <input type="hidden" formControlName="_id"/>
                     </div>
                     <button type="button" class="btn btn-primary" (click)="removeExercise(i);">Remove</button>

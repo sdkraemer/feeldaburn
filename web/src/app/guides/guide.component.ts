@@ -127,6 +127,11 @@ export class GuideComponent implements OnInit {
         control.push(this.initExercise());
     }
 
+    showSidedSelector(exercise) {
+        let type = exercise.controls['type'].value;
+        return type == "REPS" || type == "WEIGHTS";
+    }
+
     goToGuides() {
         this.router.navigate(['/guides']);
     }
