@@ -12,7 +12,7 @@ var ExerciseSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
+        enum: ['REPS', 'WEIGHTS', 'COMPLETED', 'SECONDS'],
         default: 'COMPLETED'
     }
 });

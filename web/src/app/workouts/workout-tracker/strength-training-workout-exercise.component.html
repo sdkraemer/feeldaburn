@@ -14,5 +14,9 @@
             </ul>
         </div>
         <completed-toggle *ngIf="exercise.type == 'COMPLETED'" formControlName="isCompleted"></completed-toggle>
+        <div class="form-group" *ngIf="exercise.type == 'SECONDS'">
+            <label>Seconds: </label>
+            <input  type="number" class="form-control" formControlName="seconds"/>
+        </div>
     </div>
 </div>

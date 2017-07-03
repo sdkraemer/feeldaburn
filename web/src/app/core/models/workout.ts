@@ -126,6 +126,7 @@ export interface IWorkoutExercise {
   sets: ISet[];
   type: string;
   isCompleted?: boolean;
+  seconds?: number;
 }
 
 export class WorkoutExercise implements IWorkoutExercise {
@@ -134,6 +135,7 @@ export class WorkoutExercise implements IWorkoutExercise {
   sets: ISet[];
   type: string;
   isCompleted: boolean;
+  seconds: number;
 
   constructor(options: IWorkoutExercise){
     this.name = options.name;
@@ -141,5 +143,6 @@ export class WorkoutExercise implements IWorkoutExercise {
     this.sets = options.sets;
     this.type = options.type;
     this.isCompleted = options.isCompleted;
+    this.seconds = options.seconds;
   }
 }

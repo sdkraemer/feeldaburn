@@ -34,11 +34,15 @@ var ExerciseSchema = new Schema({
     sets: [SetSchema],
     type: {
         type: String,
-        enum: ['REPS', 'WEIGHTS', 'COMPLETED'],
+        enum: ['REPS', 'WEIGHTS', 'COMPLETED', 'SECONDS'],
         default: 'REPS'
     },
     isCompleted: {
         type: Boolean,
+        required: false
+    },
+    seconds: {
+        type: Number,
         required: false
     }
 });

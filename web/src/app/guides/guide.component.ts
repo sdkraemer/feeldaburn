@@ -6,7 +6,7 @@ import { IGuide, Guide, workoutType } from './guide';
 import { GuideService } from './guide.service';
 
 //rxjs
-import 'rxjs/add/operator/do'; 
+import 'rxjs/add/operator/do';
 
 @Component({
     selector: 'guide',
@@ -21,9 +21,10 @@ export class GuideComponent implements OnInit {
     private _id: any;
     public form: FormGroup;
     public exerciseTypes = [
-        { value: 'REPS', display: 'Repititions'},
-        { value: 'WEIGHTS', display: 'Repititions With Weights'},
-        { value: 'COMPLETED', display: 'Completed'}
+        { value: 'REPS', display: 'Repititions' },
+        { value: 'WEIGHTS', display: 'Repititions With Weights' },
+        { value: 'COMPLETED', display: 'Completed' },
+        { value: 'SECONDS', display: 'Seconds' }
     ];
 
     constructor(
@@ -49,16 +50,16 @@ export class GuideComponent implements OnInit {
     }
 
     private getGuide() {
-        if(this._id == 'New'){
+        if (this._id == 'New') {
             this.form.setValue({
                 _id: null,
                 name: null,
                 description: null,
-                createdAt: null, 
+                createdAt: null,
                 exercises: []
             });
         }
-        else{
+        else {
             this.guideService.getGuide(this._id)
                 .subscribe((guide) => {
                     this.form.setValue({
@@ -90,7 +91,7 @@ export class GuideComponent implements OnInit {
             });
     }
 
-    removeExercise(exerciseIndex){
+    removeExercise(exerciseIndex) {
         const control = <FormArray>this.form.controls['exercises'];
         control.removeAt(exerciseIndex);
     }
@@ -98,13 +99,13 @@ export class GuideComponent implements OnInit {
     save() {
         let guide = new Guide(this.form.value);
 
-        if(guide._id){
+        if (guide._id) {
             this.guideService.update(guide)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToGuides();
                 });
         }
-        else{
+        else {
             this.guideService.add(guide)
                 .subscribe((isSuccessful: boolean) => {
                     this.goToGuides();

@@ -53,6 +53,9 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
             if(exercise.type == 'COMPLETED'){
                 exerciseGroup.addControl("isCompleted", this.formBuilder.control(exercise.isCompleted));
             }
+            else if(exercise.type == 'SECONDS') {
+                exerciseGroup.addControl("seconds", this.formBuilder.control(exercise.seconds));
+            }
 
             this.createSetsControlOnExerciseGroup(exerciseGroup, exercise);
             
