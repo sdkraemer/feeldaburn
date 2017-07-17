@@ -31,26 +31,9 @@ export class WorkoutFactoryService {
         }
     }
 
-    public createWorkout(workoutType, guide: IGuide): IWorkout {
-        if(workoutType == "STRENGTH_TRAINING"){
-            return this.createStrengthTrainingWorkout(guide);
-        }
-        else if(workoutType == "RUNNING"){
-            return this.createRunningWorkout();
-        }
-    }
 
     public createStrengthTrainingWorkout(guide: IGuide): IStrengthTrainingWorkout {
         let workout: IStrengthTrainingWorkout;
-
-    //    return this.guideService.getGuide(guideId).map((guide) => {
-    //        return new StrengthTrainingWorkout({
-    //            _id: null,
-    //            guide: guide._id,
-    //            name: guide.name,
-    //            exercises: this.createExercisesFromGuide(guide)
-    //        });
-    //    });
         return new StrengthTrainingWorkout({
             _id: null,
             guide: guide._id,
@@ -60,17 +43,6 @@ export class WorkoutFactoryService {
     }
 
     public createRunningWorkout(): IRunningWorkout {
-        
-        // return Observable.create(observer => {
-        //     observer.next(new RunningWorkout({
-        //         _id: null,
-        //         distance: null,
-        //         elapsed_time: null,
-        //         pace: null,
-        //         heartrate: null,
-        //         calories: null
-        //     }));
-        // });
         return new RunningWorkout({
                  _id: null,
                  distance: null,
