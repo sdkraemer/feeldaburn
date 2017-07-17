@@ -18,6 +18,19 @@ export class WorkoutFactoryService {
         private guideService: GuideService
     ) { }
 
+    public createWorkoutByGuide(guide): IWorkout {
+        return this.createStrengthTrainingWorkout(guide);
+    }
+
+    public createWorkoutByWorkoutType(workoutType): IWorkout {
+        if(workoutType == "RUNNING") {
+            return this.createRunningWorkout();
+        }
+        else{
+            console.error("Unknown workout type");
+        }
+    }
+
     public createWorkout(workoutType, guide: IGuide): IWorkout {
         if(workoutType == "STRENGTH_TRAINING"){
             return this.createStrengthTrainingWorkout(guide);

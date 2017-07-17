@@ -32,7 +32,16 @@ export class WorkoutTrackerComponent implements OnInit {
         this.createForm(workoutType);
         
         if(id){
-            this.getWorkout(id, () => {
+            this.fillFormWithExistingWorkout(id);
+        }
+        else{
+            let guideId = this.route.snapshot.params['guide'];
+            this.workout = this.createWorkout(workoutType, guideId);
+        }
+    }
+
+    private fillFormWithExistingWorkout(workoutId) {
+        this.getWorkout(workoutId, () => {
                 this.form.patchValue({
                     _id: this.workout._id,
                     name: this.workout.name,
@@ -43,25 +52,16 @@ export class WorkoutTrackerComponent implements OnInit {
                     completedAt: this.workout.completedAt
                 });
             });
+    }
+
+    private createWorkout(workoutType, guideId): IWorkout{
+        if(guideId) {
+            this.guideService.getGuide(guideId).subscribe((guide) => {
+                return this.workoutFactoryService.createWorkoutByGuide(guide);
+            });
         }
         else{
-            
-            let guideId = this.route.snapshot.params['guide'];
-            let guide = null;
-            if(guideId) {
-                this.guideService.getGuide(guideId).subscribe((guide) => {
-                    this.workout = this.workoutFactoryService.createWorkout(workoutType, guide);
-                });
-            }
-            else{
-                this.workout = this.workoutFactoryService.createWorkout(workoutType, guide);
-            }
-
-            // this.workoutFactoryService
-            //     .createWorkout(workoutType, guide_id)
-            //     .subscribe(workout => {
-            //         this.workout = workout;
-            //     });
+            return this.workoutFactoryService.createWorkoutByWorkoutType(workoutType);
         }
     }
 
@@ -86,26 +86,10 @@ export class WorkoutTrackerComponent implements OnInit {
             completed);
     }
 
-    // createWorkout(options) {
-    //     let workout: IWorkout;
-    //     if(options.type == 'RUNNING'){
-    //         workout = new RunningWorkout({
-    //             _id: null
-    //         });
-    //     }
-    //     else if(options.type == 'STRENGTH_TRAINING'){
-    //         workout = new StrengthTrainingWorkout({
-    //             _id: null,
-    //             guide: options.guide,
-    //             exercises: []
-    //         });
-    //     }
-    //     return workout;
-    // }
-
     save() {
         var formData = this.form.value;
-        let workout :IWorkout = null;
+        let workout :IWorkout;
+        //TODO: refactor this w/ abstract factory pattern
         if(formData.type == 'RUNNING'){
             workout = new RunningWorkout(formData);
         }
@@ -113,19 +97,23 @@ export class WorkoutTrackerComponent implements OnInit {
             workout = new StrengthTrainingWorkout(formData);
         }
 
-        if(workout._id){
+        this.persistWorkout(workout);
+    }
+
+    private persistWorkout(workout: IWorkout) {
+        let isWorkoutNew = !workout._id;
+        if(isWorkoutNew){
             this.workoutService
-                .update(workout)
+                .add(workout)
                 .subscribe((isSuccessful: boolean) => {
                     if(isSuccessful){
                         this.goToWorkouts();
                     }
                 });
-
         }
         else{
             this.workoutService
-                .add(workout)
+                .update(workout)
                 .subscribe((isSuccessful: boolean) => {
                     if(isSuccessful){
                         this.goToWorkouts();
@@ -135,7 +123,8 @@ export class WorkoutTrackerComponent implements OnInit {
     }
 
     delete() {
-        if(!this.workout._id){
+        let isWorkoutSaved = !this.workout._id;
+        if(isWorkoutSaved){
             this.goToWorkouts();
         }
         else{
