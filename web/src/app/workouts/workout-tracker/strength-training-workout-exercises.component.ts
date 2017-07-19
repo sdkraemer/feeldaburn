@@ -3,8 +3,9 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 
 import { Observable } from 'rxjs/Observable';
 
-import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../../core';
 import { WorkoutService } from '../workout.service';
+import { StrengthTrainingFormFactoryService } from "app/workouts/workout-tracker/strength-training-form-factory.service";
+import { IStrengthTrainingWorkout } from "app/core";
 
 @Component({
     selector: 'strength-training-workout-exercises',
@@ -24,78 +25,38 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
 
     private previousWorkouts: Observable<IStrengthTrainingWorkout[]>;
 
-    private activeExerciseIndex: number;
+    private activeExerciseIndex: number = 0;
 
     constructor(
         private formBuilder: FormBuilder,
-        private workoutService: WorkoutService
+        private workoutService: WorkoutService,
+        private strengthTrainingFormFactoryService: StrengthTrainingFormFactoryService
     ) { }
 
     ngOnInit() { 
-        if(!this.workout._id){
+        let isNewWorkout = this.workout._id;
+        if(!isNewWorkout){
             this.previousWorkouts = this.getPreviousWorkouts(this.workout.guide);
         }
-        this.form.addControl("exercises", new FormArray([]));
-        this.addExerciseControlsFromWorkout();
-
-        this.activeExerciseIndex = 0;
-    }
-
-    addExerciseControlsFromWorkout(){
-        const exerciseControl = <FormArray>this.form.controls['exercises'];
-        this.workout.exercises.forEach((exercise) => {
-            let exerciseGroup = this.formBuilder.group({
-                name: exercise.name,
-                guideExercise: exercise.guideExercise,
-                type: exercise.type
-            });
-
-            if(exercise.type == 'COMPLETED'){
-                exerciseGroup.addControl("isCompleted", this.formBuilder.control(exercise.isCompleted));
-            }
-            else if(exercise.type == 'SECONDS') {
-                exerciseGroup.addControl("seconds", this.formBuilder.control(exercise.seconds));
-            }
-
-            this.createSetsControlOnExerciseGroup(exerciseGroup, exercise);
-            
-            exerciseControl.push(exerciseGroup);
-        }, this);
-    }
-
-    private createSetsControlOnExerciseGroup(exerciseGroup, exercise: IWorkoutExercise){
-        if(exercise.sets && exercise.sets.length > 0) {
-            let setsControl = this.formBuilder.array([]);
-            exercise.sets.forEach((set, index) => {
-                setsControl.push(this.createSetFormGroup(exercise.type, set));
-            }, this);
-            exerciseGroup.addControl("sets", setsControl);
-        }
-    }
-
-    private createSetFormGroup(exerciseType, set: ISet): FormGroup {
-        if(exerciseType == 'WEIGHTS'){
-            return this.createWeightsSetFormGroup(<IWeightsSet>set);
-        }
-        
-        return this.formBuilder.group({
-            side: [set.side],
-            repetitions: [set.repetitions]
-        });
-    }
-
-    private createWeightsSetFormGroup(set: IWeightsSet){
-        return this.formBuilder.group({
-            side: [set.side],
-            repetitions: [set.repetitions],
-            weight: [set.weight],
-            adjustWeight: [set.adjustWeight]
-        });
+        this.setupForm();
     }
 
     private getPreviousWorkouts(guideId: string): Observable<IStrengthTrainingWorkout[]>{
         return this.workoutService
                     .getPreviousStrengthTrainingWorkouts(guideId);
+    }
+
+    private setupForm() {
+        this.form.addControl("exercises", new FormArray([]));
+        this.addExerciseControlsFromWorkout();
+    }
+
+    addExerciseControlsFromWorkout(){
+        const exerciseControl = <FormArray>this.form.controls['exercises'];
+        this.workout.exercises.forEach((exercise) => {
+            let exerciseGroup = this.strengthTrainingFormFactoryService.createExerciseFormGroup(exercise);
+            exerciseControl.push(exerciseGroup);
+        }, this);
     }
 
     public changeWorkout(modifier){

@@ -4,9 +4,11 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 
 import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout } from '../../core';
 
+
 import { WorkoutService } from '../workout.service';
 import { GuideService } from '../../guides/guide.service';
 import { WorkoutFactoryService } from './workout-factory.service';
+import { WorkoutFactory } from "app/core/factories/workoutfactory";
 
 @Component({
     selector: 'workout-tracker',
@@ -36,7 +38,7 @@ export class WorkoutTrackerComponent implements OnInit {
         }
         else{
             let guideId = this.route.snapshot.params['guide'];
-            this.workout = this.createWorkout(workoutType, guideId);
+            this.createWorkout(workoutType, guideId);
         }
     }
 
@@ -54,14 +56,14 @@ export class WorkoutTrackerComponent implements OnInit {
             });
     }
 
-    private createWorkout(workoutType, guideId): IWorkout{
+    private createWorkout(workoutType, guideId){
         if(guideId) {
             this.guideService.getGuide(guideId).subscribe((guide) => {
-                return this.workoutFactoryService.createWorkoutByGuide(guide);
+                this.workout = this.workoutFactoryService.createWorkoutByGuide(guide);
             });
         }
         else{
-            return this.workoutFactoryService.createWorkoutByWorkoutType(workoutType);
+            this.workout = this.workoutFactoryService.createWorkoutByWorkoutType(workoutType);
         }
     }
 
@@ -88,15 +90,7 @@ export class WorkoutTrackerComponent implements OnInit {
 
     save() {
         var formData = this.form.value;
-        let workout :IWorkout;
-        //TODO: refactor this w/ abstract factory pattern
-        if(formData.type == 'RUNNING'){
-            workout = new RunningWorkout(formData);
-        }
-        else if(formData.type = 'STRENGTH_TRAINING'){
-            workout = new StrengthTrainingWorkout(formData);
-        }
-
+        let workout = WorkoutFactory.create(formData);
         this.persistWorkout(workout);
     }
 

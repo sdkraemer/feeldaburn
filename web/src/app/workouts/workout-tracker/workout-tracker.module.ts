@@ -6,6 +6,7 @@ import { WorkoutTrackerRoutingModule, routedComponents } from './workout-tracker
 
 import { GuideService } from '../../guides/guide.service';
 import { WorkoutFactoryService } from './workout-factory.service';
+import { StrengthTrainingFormFactoryService } from './strength-training-form-factory.service';
 
 import { RunningWorkoutComponent } from './running-workout.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout.component';
@@ -37,7 +38,8 @@ import { AdjustWeightPickerComponent } from './adjust-weight-picker.component';
   ],
   providers: [
     GuideService,
-    WorkoutFactoryService
+    WorkoutFactoryService,
+    StrengthTrainingFormFactoryService
   ],
   exports: [
     
