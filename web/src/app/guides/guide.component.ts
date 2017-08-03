@@ -20,12 +20,6 @@ import 'rxjs/add/operator/do';
 export class GuideComponent implements OnInit {
     private _id: any;
     public form: FormGroup;
-    public exerciseTypes = [
-        { value: 'REPS', display: 'Repititions' },
-        { value: 'WEIGHTS', display: 'Repititions With Weights' },
-        { value: 'COMPLETED', display: 'Completed' },
-        { value: 'SECONDS', display: 'Seconds' }
-    ];
 
     constructor(
         private formBuilder: FormBuilder,

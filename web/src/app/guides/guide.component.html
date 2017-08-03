@@ -25,14 +25,7 @@
                             <label>Name:</label>
                             <input type="text" class="form-control"  formControlName="name"/>
                         </div>
-                        <div class="form-group">
-                            <label>Type:</label>
-                            <select formControlName="type">
-                                <option *ngFor="let exerciseType of exerciseTypes" [value]="exerciseType.value">
-                                    {{exerciseType.display}}
-                                </option>
-                            </select>
-                        </div>
+                        <exercise-type-control formControlName="type"></exercise-type-control>
                         <guide-sided-selector *ngIf="showSidedSelector(exercise)" formControlName="sided"></guide-sided-selector>
                         <input type="hidden" formControlName="_id"/>
                     </div>

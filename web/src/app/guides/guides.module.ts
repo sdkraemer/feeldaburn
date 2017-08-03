@@ -8,6 +8,7 @@ import { GuideService } from './guide.service';
 
 import { GuideListComponent } from './guide-list.component';
 import { GuideSidedSelectorComponent } from './guide-sided-selector.component';
+import { ExerciseTypeControlComponent } from "app/guides/exercise-type-control.component";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { GuideSidedSelectorComponent } from './guide-sided-selector.component';
     declarations: [
         GuideListComponent,
         GuideSidedSelectorComponent,
+        ExerciseTypeControlComponent,
         routedComponents
     ],
     providers: [

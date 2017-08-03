@@ -23,7 +23,8 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     @Input("workout")
     public workout: IStrengthTrainingWorkout;
 
-    private previousWorkouts: Observable<IStrengthTrainingWorkout[]>;
+    @Input("previousWorkouts")
+    private previousWorkouts: IStrengthTrainingWorkout[];
 
     private activeExerciseIndex: number = 0;
 
@@ -33,17 +34,8 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
         private strengthTrainingFormFactoryService: StrengthTrainingFormFactoryService
     ) { }
 
-    ngOnInit() { 
-        let isNewWorkout = this.workout._id;
-        if(!isNewWorkout){
-            this.previousWorkouts = this.getPreviousWorkouts(this.workout.guide);
-        }
+    ngOnInit() {
         this.setupForm();
-    }
-
-    private getPreviousWorkouts(guideId: string): Observable<IStrengthTrainingWorkout[]>{
-        return this.workoutService
-                    .getPreviousStrengthTrainingWorkouts(guideId);
     }
 
     private setupForm() {

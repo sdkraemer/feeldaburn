@@ -32,7 +32,7 @@ export class StrengthTrainingSetComponent implements OnInit {
     public exercise: IWorkoutExercise;
 
     @Input("previousWorkouts")
-    public previousWorkoutsObservable: Observable<IStrengthTrainingWorkout[]>;
+    public previousWorkouts: IStrengthTrainingWorkout[];
 
     @Input("workout")
     public workout: IStrengthTrainingWorkout;
@@ -43,26 +43,35 @@ export class StrengthTrainingSetComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        if(this.previousWorkoutsObservable){
-            this.previousWorkoutsObservable
-                .subscribe((workouts) => {
-                    this.getPreviousExerciseSets(workouts);
-                });
+        
+    }
+
+    ngOnChanges() {
+        this.getPreviousExerciseSets(this.previousWorkouts);
+    }
+
+    private getPreviousExerciseSets(previousWorkouts: IStrengthTrainingWorkout[]){
+        if(previousWorkouts){
+            previousWorkouts.forEach(function(previousWorkout){
+                this.previousWorkoutDates.push(previousWorkout.completedAt);
+                let previousExercise = this.getPreviousExercise(previousWorkout);
+                this.previousSets.push(this.getPreviousSetFromExercise(previousExercise));
+            }, this);
         }
     }
 
-    getPreviousExerciseSets(workouts: IStrengthTrainingWorkout[]){
-        workouts.forEach(function(workout){
-            this.previousWorkoutDates.push(workout.completedAt);
-            var exercise: IWorkoutExercise = _.find(workout.exercises, {guideExercise: this.exercise.guideExercise });
-            
-            if(this.set.side == "RIGHT" || this.set.side == "LEFT"){
-                this.previousSets.push(_.find(exercise.sets, {side: this.set.side}));
-            }
-            else{
-                this.previousSets.push(exercise.sets[0]);
-            }
-        }, this);
+    private getPreviousExercise(previousWorkout: IStrengthTrainingWorkout): IWorkoutExercise {
+        return _.find(previousWorkout.exercises, {guideExercise: this.exercise.guideExercise });
+    }
+
+    private getPreviousSetFromExercise(previousExercise) {
+        let isSidedSet = this.set.side == "RIGHT" || this.set.side == "LEFT"
+        if(isSidedSet) {
+            return _.find(previousExercise.sets, {side: this.set.side});
+        }
+        else {
+            return previousExercise.sets[0];
+        }
     }
 
     copyRepititions(pastRepititions) {

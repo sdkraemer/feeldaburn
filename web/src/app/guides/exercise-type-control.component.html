@@ -1,0 +1,4 @@
+<div class="form-group">
+    <label>Type:</label>
+    <button *ngFor="let exerciseType of exerciseTypes" type="button" class="btn btn-secondary" [class.active]="value == exerciseType.value" (click)="onClick(exerciseType.value);">{{exerciseType.display}}</button>
+</div>

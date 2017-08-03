@@ -4,5 +4,5 @@
 </div>
 <h4>{{ workout.name }}</h4>
 <div *ngIf="workout.exercises.length > 0">
-    <strength-training-workout-exercises [form]="form" [workout]="workout"></strength-training-workout-exercises>
+    <strength-training-workout-exercises [form]="form" [workout]="workout" [previousWorkouts]="previousWorkouts"></strength-training-workout-exercises>
 </div>

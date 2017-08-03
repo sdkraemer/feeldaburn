@@ -23,7 +23,7 @@ export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
     private workout: IWorkout;
 
     @Input("previousWorkouts")
-    private previousWorkouts: Observable<IStrengthTrainingWorkout[]>;
+    private previousWorkouts: IStrengthTrainingWorkout[];
 
     @Input("activeExerciseIndex")
     private activeExerciseIndex: number;
