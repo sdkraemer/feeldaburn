@@ -22,7 +22,7 @@ module.exports = function(app) {
         Workout.
             find(conditions)
             .limit(10)//limit to past 10 for now.
-            .sort({completedAt: 'desc'})
+            .sort({completedAt: 'asc'})
             .exec(function(err, workouts){
                 if(err){
                     console.log("Could not find workouts: %s", err);
