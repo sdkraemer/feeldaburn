@@ -21,7 +21,7 @@ module.exports = function(app) {
 
         Workout.
             find(conditions)
-            .limit(10)//limit to past 10 for now.
+            .limit(31)//limit to 31 now for calendar to work
             .sort({createdAt: 'desc'})
             .exec(function(err, workouts){
                 if(err){
