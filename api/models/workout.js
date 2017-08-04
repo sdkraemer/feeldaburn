@@ -103,6 +103,9 @@ var WorkoutSchema = new Schema(
     },
     completedAt: {
         type: Date
+    },
+    createdAt: {
+        type: Date
     }
 }, 
 { 

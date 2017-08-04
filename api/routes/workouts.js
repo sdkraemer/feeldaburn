@@ -22,7 +22,7 @@ module.exports = function(app) {
         Workout.
             find(conditions)
             .limit(10)//limit to past 10 for now.
-            .sort({completedAt: 'asc'})
+            .sort({createdAt: 'desc'})
             .exec(function(err, workouts){
                 if(err){
                     console.log("Could not find workouts: %s", err);
@@ -59,15 +59,14 @@ module.exports = function(app) {
                 elapsed_time: json.elapsed_time,
                 pace: json.pace,
                 heartrate: json.heartrate,
-                calories: json.calories
+                calories: json.calories,
+                createdAt: new Date()
             });
 
             if(json.isCompleted){
                 workout.completedAt = new Date();
             }
 
-            console.dir(workout);
-            console.log("testing");
             workout.save(function(err, workout){
                 if(err) { console.log('Error inserting new workout: '+err); }
                 res.json(req.body);
@@ -83,7 +82,8 @@ module.exports = function(app) {
                     createdBy: ObjectId(req.userId),
                     isCompleted: json.isCompleted,
                     guide: ObjectId(json.guide),
-                    exercises: json.exercises
+                    exercises: json.exercises,
+                    createdAt: new Date()
                 });
 
                 if(json.isCompleted){
@@ -149,7 +149,6 @@ module.exports = function(app) {
 
     app.get('/api/workouts/previous/:guideid', function(req, res){
         var guideId = req.params.guideid;
-        console.log("Getting previous workouts from guide:" +guideId);
         StrengthTrainingWorkout.
             find({'createdBy': ObjectId(req.userId), isCompleted: true})
             .where('guide').equals(ObjectId(guideId))
