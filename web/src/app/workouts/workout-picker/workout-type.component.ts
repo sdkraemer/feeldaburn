@@ -28,7 +28,7 @@ export class WorkoutTypeComponent implements ControlValueAccessor {
     private value: string;
     private focused: string;
 
-    private workoutTypes = [
+    public workoutTypes = [
         { value: 'STRENGTH_TRAINING', display: 'Strength Training' },
         { value: 'RUNNING', display: 'Running' },
         { value: 'CYCLING', display: 'Cycling' }

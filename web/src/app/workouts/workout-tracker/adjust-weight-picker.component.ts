@@ -28,7 +28,7 @@ export class AdjustWeightPickerComponent implements ControlValueAccessor {
     private value: string;
     private focused: string;
 
-    private adjustWeightOptions = ['DECREASE', 'NONE', 'INCREASE'];
+    public adjustWeightOptions = ['DECREASE', 'NONE', 'INCREASE'];
 
     public registerOnChange(fn: Function) {
         this.onModelChange = fn;

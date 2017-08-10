@@ -16,8 +16,8 @@ import { GuideService } from '../../guides/guide.service';
 })
 export class StrengthTrainingPickerComponent implements OnInit {
     @Input("form")
-    private form: FormGroup;
-    private guides: IGuide[];
+    public form: FormGroup;
+    public guides: IGuide[];
 
     constructor(
         private guideService: GuideService

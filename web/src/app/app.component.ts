@@ -11,7 +11,7 @@ export class AppComponent {
   selectedWorkout : any;
 
   constructor(
-    private auth: Auth
+    public auth: Auth
   ){
   }
 

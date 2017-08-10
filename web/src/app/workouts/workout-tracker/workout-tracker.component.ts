@@ -15,7 +15,7 @@ import { WorkoutFactory } from "app/core/factories/workoutfactory";
     templateUrl: 'workout-tracker.component.html'
 })
 export class WorkoutTrackerComponent implements OnInit {
-    private workout: IWorkout;
+    public workout: IWorkout;
     private form: FormGroup;
 
     constructor(

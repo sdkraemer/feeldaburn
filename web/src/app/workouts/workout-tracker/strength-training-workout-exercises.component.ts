@@ -26,7 +26,7 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     @Input("previousWorkouts")
     private previousWorkouts: IStrengthTrainingWorkout[];
 
-    private activeExerciseIndex: number = 0;
+    public activeExerciseIndex: number = 0;
 
     constructor(
         private formBuilder: FormBuilder,

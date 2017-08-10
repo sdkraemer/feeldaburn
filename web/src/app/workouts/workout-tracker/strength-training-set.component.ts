@@ -38,7 +38,7 @@ export class StrengthTrainingSetComponent implements OnInit {
     public workout: IStrengthTrainingWorkout;
 
     private previousWorkoutDates: Date[] = [];
-    private previousSets: ISet[] = [];
+    public previousSets: ISet[] = [];
 
     constructor() { }
 

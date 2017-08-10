@@ -11,22 +11,22 @@ import { IWorkout, IWorkoutExercise, IStrengthTrainingWorkout } from '../../core
 })
 export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
     @Input("group")
-    private group: FormGroup;
+    public group: FormGroup;
 
     @Input("exercise")
-    private exercise: IWorkoutExercise;
+    public exercise: IWorkoutExercise;
 
     @Input("exercisesIndex")
-    private exercisesIndex: number;
+    public exercisesIndex: number;
 
     @Input("workout")
-    private workout: IWorkout;
+    public workout: IWorkout;
 
     @Input("previousWorkouts")
-    private previousWorkouts: IStrengthTrainingWorkout[];
+    public previousWorkouts: IStrengthTrainingWorkout[];
 
     @Input("activeExerciseIndex")
-    private activeExerciseIndex: number;
+    public activeExerciseIndex: number;
 
     constructor() { }
 

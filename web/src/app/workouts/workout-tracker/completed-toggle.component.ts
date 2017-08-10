@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CompletedToggleComponent implements ControlValueAccessor {
     private onModelChange: Function;
     private onTouch: Function;
-    private value: boolean = false;
+    public value: boolean = false;
     private focused: string;
 
     public registerOnChange(fn: Function) {
