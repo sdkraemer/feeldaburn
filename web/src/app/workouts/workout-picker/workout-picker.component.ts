@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     templateUrl: 'workout-picker.component.html'
 })
 export class WorkoutPickerComponent implements OnInit {
-    private form: FormGroup;
+    public form: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder,
