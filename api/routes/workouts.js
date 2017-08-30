@@ -63,6 +63,13 @@ module.exports = function(app) {
                 createdAt: new Date()
             });
 
+            if(!json.createdAt) {
+                workout.createdAt = new Date();
+            }
+            else{
+                //handle date string here
+            }
+
             if(json.isCompleted){
                 workout.completedAt = new Date();
             }
@@ -86,6 +93,13 @@ module.exports = function(app) {
                     createdAt: new Date()
                 });
 
+                if(!json.createdAt) {
+                    workout.createdAt = new Date();
+                }
+                else{
+                    //handle date string here
+                }
+
                 if(json.isCompleted){
                     workout.completedAt = new Date();
                 }
@@ -98,6 +112,7 @@ module.exports = function(app) {
 
         }
     });
+
 
     app.put('/api/workouts/:id', function(req, res){
         Workout.findOne({'_id': req.params.id, 'createdBy': ObjectId(req.userId)}, {}, function(err, workout){
@@ -127,6 +142,31 @@ module.exports = function(app) {
             
             workout.save(function(error, workout){
                 if(error) { 
+                    console.log("Error updating workout. "+error);
+                    res.json({ 'status': false });
+                    return;
+                }
+            });
+        });
+        res.json({ 'status': true });
+    });
+
+    app.patch('/api/workout/:id', function(req, res) {
+        Workout.findOne({'_id': req.params.id, 'createdBy': ObjectId(req.userId)}, {}, function(err, workout){
+            if (err){
+                console.error('Error finding workout'+ err);
+                res.json({ 'status': false });
+                return;
+            } 
+            var json = req.body;
+            if(json.createdAt) {
+                workout.createdAt = json.createdAt;
+            }
+            if(json.completedAt) {
+                workout.completedAt = json.completedAt;
+            }
+            workout.save(function(error, workout) {
+                if(error) {
                     console.log("Error updating workout. "+error);
                     res.json({ 'status': false });
                     return;

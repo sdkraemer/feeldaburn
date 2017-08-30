@@ -28,6 +28,7 @@ console.log(connectionString);
 mongoose.connect(connectionString);
 
 app.use('/api/workouts', [authCheck, userId]);
+app.use('/api/workout', [authCheck, userId]);
 app.use('/api/guides', [authCheck, userId]);
 app.use('/api/users', [authCheck]);
 
