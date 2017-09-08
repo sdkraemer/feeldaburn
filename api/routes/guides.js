@@ -21,17 +21,18 @@ module.exports = function(app) {
     app.post('/api/guides', function(req, res){
         var data = req.body;
         var guide = new Guide({
-                            name: data.name, 
-                            description: data.description,
-                            createdBy: ObjectId(req.userId),
-                            exercises: []
-                        });
+            name: data.name, 
+            description: data.description,
+            createdBy: ObjectId(req.userId),
+            exercises: []
+        });
         if(data.exercises){
             data.exercises.forEach(function(exercise) {
                 guide.exercises.push({
                     name: exercise.name,
                     sided: exercise.sided,
-                    type: exercise.type
+                    type: exercise.type,
+                    order: exercise.order
                 });
             }, this);
         }
@@ -43,7 +44,12 @@ module.exports = function(app) {
 
     app.get('/api/guides/:id', function(req, res){
         Guide.findOne({ '_id': req.params.id }, {}, function (err, guide) {
-            res.json(guide);
+            var guideObject = guide.toObject();
+            //sort exercises in ascending order
+            guideObject.exercises.sort(function(a, b) {
+                return a.order - b.order;
+            });
+            res.json(guideObject);
         });
 
     });
@@ -67,6 +73,7 @@ module.exports = function(app) {
                     guide.exercises[dbExerciseIndex].name = exercise.name;
                     guide.exercises[dbExerciseIndex].sided = exercise.sided;
                     guide.exercises[dbExerciseIndex].type = exercise.type;
+                    guide.exercises[dbExerciseIndex].order = exercise.order;
 
                 }
                 else{

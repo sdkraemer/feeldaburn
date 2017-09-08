@@ -14,6 +14,10 @@ var ExerciseSchema = new Schema({
         type: String,
         enum: ['REPS', 'WEIGHTS', 'COMPLETED', 'SECONDS'],
         default: 'COMPLETED'
+    },
+    order: {
+        type: Number,
+        required: true
     }
 });
 
