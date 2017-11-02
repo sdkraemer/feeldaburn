@@ -4,7 +4,62 @@ To start:
 -To rebuild angular:
     From /web issue 'ng build'
 
+Bringing the containers down and up will refresh node/api code.
+
+
+Build on production w/ out aot
+ng build --env=prod
+
+To export droplet mongo data:
+    On droplet:
+    docker exec -it <container id> /bin/bash
+    mongodump -d db -o /mongobackup
+    exit
+    sudo docker cp <container id>:/mongobackup /home/sdkraemer/
+
+    On windows machine:
+    Used filezilla to copy to C:/mongobackup
+    Started docker on windows machine
+    docker cp C:\mongobackup\db xrcise-mongodb:/mongobackup
+    docker exec -it xrcise-mongodb /bin/bash 
+    mongorestore --drop -d db /mongobackup
+    exit
+
+    -Created cronjob to put backups in /mongodbbackup/<datestamp>
+
+ To call backfill_order.js to populate order column in guides exercises:
+    docker cp C:\ng2\xrcise\api\scripts\backfill_order.js xrcise-mongodb:/  #copies to root directory in mongo container
+    docker exec -it xrcise-mongodb /bin/bash
+    mongo
+    load("backfill_order.js");
+
+
 
 6/12: 
     -Was working on getting running component working, so I can track stats from my gps watch.
     -Upgraded to angular 4.0, now it looks like auth0 problem: No JWT present or has expired
+
+7/13:
+    -Needed to create workout in past. So I created workout through webapp. Then bashed into mongo container and ran: db.workouts.update({guide: ObjectId("5967fea58a3853000e5c17f3")}, {$set: {createdAt: ISODate("2017-07-08T23:14:10.355Z"), completedAt: ISODate("2017-07-08T23:14:10.355Z")}})
+7/18:
+    TODO: Previous workouts are being retrieved in two spots. Once in strength-training-workout-exercises and once in strength-training-set.
+    Actually its only retrieved once, but the form is built in strength-training-set. Maybe we can work on building the form in the parent.
+7/20:
+    Refactored previous workout information to be passed as object instead of observable. Now Im thinking previousWorkout data should be thrown into
+    workoutFactoryService.createWorkoutByGuide. Its causing messy code in strength-training-set, and would eliminate inputs being passed down
+    component hierarchy.
+
+8/3:
+    Adding createdAt for workouts.
+9/8:
+    Now retrieving guides w/ exercises in order. Need to run backfill_order.js on production. Next I need to add button on guide page that will update order.
+ 9/20:
+    Need to create an orderBy pipe for guide exercises for use in guide.component.html   
+10/6:
+    Decided to nix the orderBy pipe. Apparently theres performance issues. If I need to update the order of an exercise I will update it in the DB for now.    
+10/17:
+    Fixed measurements api endpoint
+    Updated node.dockerfile to use pm2-docker and use the process.json file
+10/25:
+    Started building out measurements. Created models, module, routes and measurements component.
+    Next create measurements service.

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IGuide, Guide, workoutType } from './guide';
+import { IGuide, Guide, workoutType } from '../core';
 import { GuideService } from './guide.service';
 
 //rxjs
@@ -70,7 +70,8 @@ export class GuideComponent implements OnInit {
                                 _id: [exercise._id],
                                 name: [exercise.name, Validators.required],
                                 sided: [exercise.sided],
-                                type: [exercise.type, Validators.required]
+                                type: [exercise.type, Validators.required],
+                                order: exercise.order
                             })
                         );
                     });

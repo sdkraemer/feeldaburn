@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:boron
 
 MAINTAINER Scott Kraemer
 
@@ -14,7 +14,9 @@ RUN mkdir -p /var/log/pm2
 RUN apt-get update
 
 EXPOSE 3000
+EXPOSE 7000
 
 #ENTRYPOINT ["nodemon", "server.js", "-L"]
-ENTRYPOINT ["pm2", "start", "server.js", "--log", "/var/log/pm2/pm2.log", "--watch", "--no-daemon"]
+#ENTRYPOINT ["pm2", "start", "server.js", "--log", "/var/log/pm2/pm2.log", "--watch", "--no-daemon"]
 
+CMD ["pm2-docker", "process.json"]  

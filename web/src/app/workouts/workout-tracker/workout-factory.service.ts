@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout, IWorkoutExercise, WorkoutExercise, ISet, Set, IRepetitionSet, RepetitionSet, IWeightsSet, WeightsSet } from '../../core';
-import { IGuide, IGuideExercise } from '../../guides/guide';
+import { IGuide, IGuideExercise } from '../../core';
 
 //rxjs
 import { Observable } from 'rxjs/Observable';
@@ -96,3 +96,4 @@ export class WorkoutFactoryService {
         return set;
     }
 }
+

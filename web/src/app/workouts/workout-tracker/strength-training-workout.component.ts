@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IGuide, IGuideExercise } from '../../guides/guide';
+import { IGuide, IGuideExercise } from '../../core';
 import { Observable } from "rxjs/Observable";
 import { IStrengthTrainingWorkout } from "app/core";
 import { WorkoutService } from "app/workouts/workout.service";

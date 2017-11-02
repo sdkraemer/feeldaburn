@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { GuidesModule } from './guides/guides.module';
 import { HomeModule } from './home/home.module';
+import { MeasurementsModule } from './measurements/measurements.module';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -33,7 +34,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     routing,
     WorkoutsModule,
     GuidesModule,
-    HomeModule
+    HomeModule,
+    MeasurementsModule,
   ],
   declarations: [
     AppComponent

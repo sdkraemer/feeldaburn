@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Guide, IGuide } from './guide';
+import { Guide, IGuide } from '../core';
 import { Http, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';

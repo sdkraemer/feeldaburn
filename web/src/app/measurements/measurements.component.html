@@ -1,0 +1,12 @@
+<h1>Measurements</h1>
+<button type="button" class="btn btn-primary" [routerLink]="['/measurements/new']">Add a Measurement</button>
+<hr>
+<div *ngFor="let measurement of measurements" class="card">
+  <div class="card-block">
+    <h4 class="card-title">{{measurement.type}}</h4>
+    <h6>{{measurement.createdAt | date:'short'}}</h6>
+  </div>
+  <div class="card-block">
+    <a href="#" class="btn btn-primary" [routerLink]="['/measurements', measurement._id]">View</a>
+  </div>
+</div>

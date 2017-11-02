@@ -28,6 +28,7 @@
                         <exercise-type-control formControlName="type"></exercise-type-control>
                         <guide-sided-selector *ngIf="showSidedSelector(exercise)" formControlName="sided"></guide-sided-selector>
                         <input type="hidden" formControlName="_id"/>
+                        <input type="hidden" formControlName="order"/>
                     </div>
                     <button type="button" class="btn btn-primary" (click)="removeExercise(i);">Remove</button>
                 </div>

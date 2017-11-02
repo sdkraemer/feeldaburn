@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { IGuide } from '../../guides/guide';
+import { IGuide } from '../../core';
 import { GuideService } from '../../guides/guide.service';
 
 @Component({

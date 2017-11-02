@@ -32,7 +32,7 @@ services:
       - nodeapp-network
   xrcise-mongodb:
     container_name: xrcise-mongodb
-    image: mongo:latest
+    image: mongo:3.4
     #command: mongod --auth
     command: mongod
     #ports:

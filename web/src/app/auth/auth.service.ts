@@ -14,6 +14,8 @@ export class Auth {
   userProfile: any;
   apiUrl: string = `${environment.apiUrl}/users`;
 
+  // if (!navigator.onLine) {
+
   constructor(
     private router: Router,
     private authHttp: AuthHttp

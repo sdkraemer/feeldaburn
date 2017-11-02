@@ -2,8 +2,8 @@ var express = require('express'),
     config = require('config'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    User = require('./models/user'),
-    Workout = require('./models/workout'),
+    //User = require('./models/user'),
+    //Workout = require('./models/workout'),
     ObjectId = mongoose.Types.ObjectId,
     userId = require('./userId');
     jwt = require('express-jwt'),
@@ -19,25 +19,23 @@ var authCheck = jwt({
   audience: 'TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX'
 });
 
-
 var mongooseConfig = config.get("mongo");
-console.dir(mongooseConfig);
-//var connectionString = "mongodb://"+mongooseConfig.username+":"+mongooseConfig.password+"@"+mongooseConfig.host+":27017/db?authSource=admin";
 var connectionString = "mongodb://"+mongooseConfig.host+":27017/db";
-console.log(connectionString);
 mongoose.connect(connectionString);
 
 app.use('/api/workouts', [authCheck, userId]);
 app.use('/api/workout', [authCheck, userId]);
 app.use('/api/guides', [authCheck, userId]);
+app.use('/api/measurements', [authCheck, userId]);
 app.use('/api/users', [authCheck]);
 
 var workouts = require('./routes/workouts.js')(app);
 var guides = require('./routes/guides.js')(app);
+var measurements = require('./routes/measurements.js')(app);
 var users = require('./routes/users.js')(app);
 
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500).json({error: "Hmmm something happened"});
+  res.status(err.status || 500).json({error: "Hmmm something happened. "+err});
 });
 
 

@@ -1,4 +1,4 @@
-import { IWorkout, RunningWorkout, StrengthTrainingWorkout } from '../models/workout';
+import { IWorkout, RunningWorkout, StrengthTrainingWorkout } from '../';
 
 export class WorkoutFactory {
     public static create(data): IWorkout {
