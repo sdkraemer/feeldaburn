@@ -19,11 +19,11 @@ export class RunningWorkoutComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
-        this.form.addControl("distance", new FormControl());
-        this.form.addControl("elapsed_time", new FormControl());
-        this.form.addControl("pace", new FormControl());
-        this.form.addControl("heartrate", new FormControl());
-        this.form.addControl("calories", new FormControl());
+        this.form.addControl("distance", new FormControl(this.workout.distance));
+        this.form.addControl("elapsed_time", new FormControl(this.workout.elapsed_time));
+        this.form.addControl("pace", new FormControl(this.workout.pace));
+        this.form.addControl("heartrate", new FormControl(this.workout.heartrate));
+        this.form.addControl("calories", new FormControl(this.workout.calories));
     }
 
 }

@@ -71,7 +71,7 @@ export class GuideComponent implements OnInit {
                                 name: [exercise.name, Validators.required],
                                 sided: [exercise.sided],
                                 type: [exercise.type, Validators.required],
-                                order: exercise.order
+                                order: [exercise.order]
                             })
                         );
                     });
