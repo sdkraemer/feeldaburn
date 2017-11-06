@@ -6,6 +6,7 @@ export interface IWorkout {
     createdAt?: Date;
     isCompleted?: boolean;
     completedAt?: Date;
+    previousWorkouts?: IWorkout[];
 }
 
 export class Workout implements IWorkout{
@@ -16,6 +17,7 @@ export class Workout implements IWorkout{
   createdAt?: Date;
   isCompleted?: boolean;
   completedAt?: Date;
+  previousWorkouts?: IWorkout[];
 
   constructor(options: IWorkout){
     this._id = options._id;
@@ -24,5 +26,6 @@ export class Workout implements IWorkout{
     this.createdAt = options.createdAt;
     this.isCompleted = options.isCompleted;
     this.completedAt = options.completedAt;
+    this.previousWorkouts = options.previousWorkouts;
   }
 }

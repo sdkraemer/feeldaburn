@@ -42,6 +42,7 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
             .getPreviousStrengthTrainingWorkouts(guideId)
                 .subscribe((previousWorkouts) => {
                     this.previousWorkouts = previousWorkouts;
+                    this.workout.previousWorkouts = previousWorkouts;
                 });
         }
     }

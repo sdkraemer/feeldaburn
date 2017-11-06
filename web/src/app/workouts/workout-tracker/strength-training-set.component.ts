@@ -43,11 +43,11 @@ export class StrengthTrainingSetComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        
     }
 
     ngOnChanges() {
-        this.getPreviousExerciseSets(this.previousWorkouts);
+        //this.getPreviousExerciseSets(this.previousWorkouts);
+        this.getPreviousExerciseSets(this.workout.previousWorkouts);
     }
 
     private getPreviousExerciseSets(previousWorkouts: IStrengthTrainingWorkout[]){
