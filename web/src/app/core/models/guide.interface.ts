@@ -1,4 +1,4 @@
-import { IGuideExercise } from './guideexercise'
+import { IGuideExercise } from './guideexercise.interface';
 export interface IGuide {
     _id: string;
     name: string;

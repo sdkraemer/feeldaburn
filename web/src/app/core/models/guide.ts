@@ -1,4 +1,4 @@
-import { IGuideExercise } from './guideexercise';
+import { IGuideExercise } from './guideexercise.interface';
 import { IGuide } from './guide.interface';
 
 export class Guide {

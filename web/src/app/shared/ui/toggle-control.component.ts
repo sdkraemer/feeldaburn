@@ -2,15 +2,19 @@ import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'completed-toggle',
-    templateUrl: 'completed-toggle.component.html',
-    providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CompletedToggleComponent),
-    multi: true
-  }]
+    selector: 'toggle-control',
+    template: `
+    <button type="button" class="btn btn-secondary" [class.active]="value == true" (click)="onClick(true);">Yes</button> 
+    <button type="button" class="btn btn-secondary" [class.active]="value != true" (click)="onClick(false);">No</button>`,
+    providers: [
+    {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => ToggleControlComponent),
+        multi: true
+    }]
 })
-export class CompletedToggleComponent implements ControlValueAccessor {
+
+export class ToggleControlComponent implements ControlValueAccessor {
     private onModelChange: Function;
     private onTouch: Function;
     public value: boolean = false;

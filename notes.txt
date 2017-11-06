@@ -63,3 +63,12 @@ To export droplet mongo data:
 10/25:
     Started building out measurements. Created models, module, routes and measurements component.
     Next create measurements service.
+
+TODO: 
+    -Get .debug compose working
+        - https://wannabeegeek.com/2016/12/17/debugging-asp-net-core-apps-running-in-docker-containers-using-vs-code/
+    -Try running app in ubuntu bash, does it fix db volume issue?
+    -Make toggle button reusable
+        -completed-toggle
+        -guide-sided-selector
+    -****Guides have been broken by model change

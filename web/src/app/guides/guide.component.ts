@@ -109,18 +109,19 @@ export class GuideComponent implements OnInit {
         this.goToGuides();
     }
 
-    initExercise() {
+    initExercise(exercisesIndex) {
         return this.formBuilder.group({
             _id: [null],
             name: ['', Validators.required],
             sided: [null],
-            type: ['REPS', Validators.required]
+            type: ['REPS', Validators.required],
+            order: exercisesIndex
         });
     }
 
     addExercise() {
-        const control = <FormArray>this.form.controls['exercises'];
-        control.push(this.initExercise());
+        const exercisesControl = <FormArray>this.form.controls['exercises'];
+        exercisesControl.push(this.initExercise(exercisesControl.length));
     }
 
     showSidedSelector(exercise) {

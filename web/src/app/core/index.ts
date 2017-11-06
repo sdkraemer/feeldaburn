@@ -12,3 +12,5 @@ export * from './models/weightmeasurement';
 export * from './models/guide';
 export * from './models/guide.interface';
 export * from './models/guideexercise';
+export * from './models/guideexercise.interface';
+export * from './models/workouttype';

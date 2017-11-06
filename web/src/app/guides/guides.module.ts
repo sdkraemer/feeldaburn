@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { GuideService } from './guide.service';
 
 import { GuideListComponent } from './guide-list.component';
-import { GuideSidedSelectorComponent } from './guide-sided-selector.component';
 import { ExerciseTypeControlComponent } from "app/guides/exercise-type-control.component";
 
 
@@ -20,7 +19,6 @@ import { ExerciseTypeControlComponent } from "app/guides/exercise-type-control.c
     exports: [],
     declarations: [
         GuideListComponent,
-        GuideSidedSelectorComponent,
         ExerciseTypeControlComponent,
         routedComponents
     ],

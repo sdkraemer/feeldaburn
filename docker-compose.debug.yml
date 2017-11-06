@@ -1,0 +1,47 @@
+# version: '2'
+# services:
+#   nginx:
+#     container_name: xrcise-nginx
+#     image: xrcise-nginx
+#     build: 
+#       context: .
+#       dockerfile: nginx.dockerfile
+#     volumes:
+#       - ./web/dist/:/var/www/public/
+#     links:
+#         - node-1:node-1
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     networks:
+#       - nodeapp-network
+#   node-1:
+#     container_name: xrcise-api
+#     image: xrcise-api
+#     build:
+#       context: ./api
+#       dockerfile: node.dockerfile
+#     volumes:
+#       - ./api/:/var/www/
+#     links:
+#       - xrcise-mongodb:xrcise-mongodb
+#     ports:
+#       - "3000:3000"
+#       - "7000:7000"
+#     networks:
+#       - nodeapp-network
+#   xrcise-mongodb:
+#     container_name: xrcise-mongodb
+#     image: mongo:3.4
+#     #command: mongod --auth
+#     command: mongod
+#     ports:
+#       - "27017:27017"
+#     networks:
+#       - nodeapp-network
+#     volumes:
+#       - '/data/db:/data/db'  
+#       - '/mongodbbackup:/mongodbbackup'
+# networks:
+#   nodeapp-network:
+#     driver: bridge
