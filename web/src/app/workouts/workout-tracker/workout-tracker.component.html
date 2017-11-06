@@ -2,11 +2,6 @@
     <form novalidate (ngSubmit)="save()" [formGroup]="form">
         <running-workout *ngIf="workout.type == 'RUNNING'" [form]="form" [workout]="workout"></running-workout>
         <strength-training-workout *ngIf="workout.type == 'STRENGTH_TRAINING'" [form]="form" [workout]="workout"></strength-training-workout>
-        <br>
-        <div class="form-group">
-            <label>Completed?</label>
-            <toggle-control formControlName="isCompleted"></toggle-control>
-        </div>
         <div class="form-group">
             <label for="notes">Notes:</label>
             <textarea class="form-control" rows="3" formControlName="notes"></textarea>
