@@ -8,6 +8,7 @@ var express = require('express'),
     userId = require('./userId');
     jwt = require('express-jwt'),
     app = express();
+ mongoose.Promise = require('bluebird')   ;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
