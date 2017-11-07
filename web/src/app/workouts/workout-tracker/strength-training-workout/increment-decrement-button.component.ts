@@ -30,7 +30,8 @@ export class IncrementDecrementButtonComponent implements OnInit {
         else if(this.operation == "decrement"){
             this.display = "-";
             this.operator = () => {
-                if(Number(this.control.value) != NaN){
+                let isNumberAndGreaterThanZero = Number(this.control.value) != NaN && this.control.value > 0;
+                if(isNumberAndGreaterThanZero){
                     this.control.setValue(+this.control.value - 1);
                 }
             };
