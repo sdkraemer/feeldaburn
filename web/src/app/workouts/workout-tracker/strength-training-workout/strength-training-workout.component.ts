@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IGuide, IGuideExercise } from '../../core';
+import { IGuide, IGuideExercise } from '../../../core';
 import { Observable } from "rxjs/Observable";
 import { IStrengthTrainingWorkout } from "app/core";
 import { WorkoutService } from "app/workouts/workout.service";
+
+import * as _ from 'lodash';
 
 @Component({
     selector: 'strength-training-workout',
@@ -18,7 +20,6 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     public workout: IStrengthTrainingWorkout;
 
     private guide: IGuide;
-    private previousWorkouts: IStrengthTrainingWorkout[];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -26,6 +27,9 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
+    }
+    
+    ngOnChanges() {
         this.addControlsToForm();
         this.getPreviousWorkouts(this.workout.guide);
     }
@@ -41,8 +45,10 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
             this.workoutService
             .getPreviousStrengthTrainingWorkouts(guideId)
                 .subscribe((previousWorkouts) => {
-                    this.previousWorkouts = previousWorkouts;
-                    this.workout.previousWorkouts = previousWorkouts;
+                    //Need to change workout object reference to trigger ngOnChanges in child components.
+                    let updatedWorkout = _.cloneDeep(this.workout);
+                    updatedWorkout.previousWorkouts = previousWorkouts;
+                    this.workout = updatedWorkout;
                 });
         }
     }

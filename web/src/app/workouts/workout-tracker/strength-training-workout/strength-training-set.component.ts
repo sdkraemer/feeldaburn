@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 //rxjs
 import { Observable } from 'rxjs/Observable';
 
-import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../../core';
+import { IStrengthTrainingWorkout, IWorkoutExercise, IRepetitionSet, IWeightsSet, ISet } from '../../../core';
 
 import * as _ from 'lodash';
 
@@ -31,9 +31,6 @@ export class StrengthTrainingSetComponent implements OnInit {
     @Input("exercise")
     public exercise: IWorkoutExercise;
 
-    @Input("previousWorkouts")
-    public previousWorkouts: IStrengthTrainingWorkout[];
-
     @Input("workout")
     public workout: IStrengthTrainingWorkout;
 
@@ -46,25 +43,24 @@ export class StrengthTrainingSetComponent implements OnInit {
     }
 
     ngOnChanges() {
-        //this.getPreviousExerciseSets(this.previousWorkouts);
-        this.getPreviousExerciseSets(this.workout.previousWorkouts);
+        this.buildPreviousExerciseSetInfo(this.workout.previousWorkouts);
     }
 
-    private getPreviousExerciseSets(previousWorkouts: IStrengthTrainingWorkout[]){
+    private buildPreviousExerciseSetInfo(previousWorkouts: IStrengthTrainingWorkout[]){
         if(previousWorkouts){
             previousWorkouts.forEach(function(previousWorkout){
                 this.previousWorkoutDates.push(previousWorkout.completedAt);
-                let previousExercise = this.getPreviousExercise(previousWorkout);
-                this.previousSets.push(this.getPreviousSetFromExercise(previousExercise));
+                let previousExercise = this.findPreviousExercise(previousWorkout);
+                this.previousSets.push(this.findPreviousSetFromExercise(previousExercise));
             }, this);
         }
     }
 
-    private getPreviousExercise(previousWorkout: IStrengthTrainingWorkout): IWorkoutExercise {
+    private findPreviousExercise(previousWorkout: IStrengthTrainingWorkout): IWorkoutExercise {
         return _.find(previousWorkout.exercises, {guideExercise: this.exercise.guideExercise });
     }
 
-    private getPreviousSetFromExercise(previousExercise) {
+    private findPreviousSetFromExercise(previousExercise) {
         let isSidedSet = this.set.side == "RIGHT" || this.set.side == "LEFT"
         if(isSidedSet) {
             return _.find(previousExercise.sets, {side: this.set.side});

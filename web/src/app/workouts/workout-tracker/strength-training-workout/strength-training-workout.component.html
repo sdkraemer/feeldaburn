@@ -7,7 +7,7 @@
     <strength-training-workout-exercises [form]="form" [workout]="workout"></strength-training-workout-exercises>
 </div>
 <br>
-<div class="form-group">
+<div class="form-group" [formGroup]="form">
     <label>Completed?</label>
     <toggle-control formControlName="isCompleted"></toggle-control>
 </div>

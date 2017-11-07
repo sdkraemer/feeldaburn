@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IRunningWorkout } from '../../core';
+import { IRunningWorkout } from '../../../core';
 
 @Component({
     selector: 'running-workout',

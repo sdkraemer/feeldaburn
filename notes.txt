@@ -68,7 +68,5 @@ TODO:
     -Get .debug compose working
         - https://wannabeegeek.com/2016/12/17/debugging-asp-net-core-apps-running-in-docker-containers-using-vs-code/
     -Try running app in ubuntu bash, does it fix db volume issue?
-    -Make toggle button reusable
-        -completed-toggle
-        -guide-sided-selector
-    -****Guides have been broken by model change
+    -Try adding previous workouts to workout model, then I dont have to pass it all the way down.
+        -Add API endpoint that will get workout w/ previous workout data attached

@@ -9,7 +9,7 @@
         <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
             <ul style="list-style-type:none;">
                 <li *ngFor="let set of exercise.sets; let setsIndex = index;">
-                    <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set" [previousWorkouts]="previousWorkouts"></strength-training-set>
+                    <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
                 </li>
             </ul>
         </div>

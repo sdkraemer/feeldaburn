@@ -3,8 +3,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 
 import { Observable } from 'rxjs/Observable';
 
-import { WorkoutService } from '../workout.service';
-import { StrengthTrainingFormFactoryService } from "app/workouts/workout-tracker/strength-training-form-factory.service";
+import { WorkoutService } from '../../workout.service';
+import { StrengthTrainingFormFactoryService } from "./strength-training-form-factory.service";
 import { IStrengthTrainingWorkout } from "app/core";
 
 @Component({
@@ -23,9 +23,6 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     @Input("workout")
     public workout: IStrengthTrainingWorkout;
 
-    @Input("previousWorkouts")
-    private previousWorkouts: IStrengthTrainingWorkout[];
-
     public activeExerciseIndex: number = 0;
 
     constructor(
@@ -35,7 +32,12 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.setupForm();
+    }
+    
+    ngOnChanges() {
+        if(this.workout) {
+            this.setupForm();
+        }
     }
 
     private setupForm() {
