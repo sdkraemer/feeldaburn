@@ -43,34 +43,6 @@ module.exports = function(app) {
                 console.log("Error finding workout. Workout ID: %s, User ID: %s",req.params.id, req.userId);
             }
         });
-                
-
-
-
-        // Workout
-        //     .findOne({ '_id': req.params.id, 'createdBy': ObjectId(req.userId) })
-        //     .exec(function (err, workout) {
-        //         if(err){
-        //             console.log("Error finding workout: "+req.params.id);
-        //         }
-
-        //         if(workout.type == "STRENGTH_TRAINING") {
-        //             var guideId = workout.guide;
-        //             StrengthTrainingWorkout.
-        //                 find({'createdBy': ObjectId(req.userId), isCompleted: true})
-        //                 .where('guide').equals(ObjectId(guideId))
-        //                 .limit(2)
-        //                 .sort({completedAt: 'desc'})
-        //                 .exec(function(err, previousWorkouts){
-        //                     if(err){
-        //                         console.log("Could not find previous workouts: %s", err);
-        //                         res.sendStatus(404);
-        //                     }
-        //                     workout.previousWorkouts = previousWorkouts;
-        //                     res.json(workout);
-        //                 });
-        //         }
-        //     });
     });
 
     app.post('/api/workouts', function(req, res){
