@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-primary" [routerLink]="['/workout-picker']">Pick a Workout!</button>
 <hr>
-<div *ngFor="let workout of workouts" class="card">
+<div *ngFor="let workout of workouts" class="card" [@workoutEnter]="workout">
   <div class="card-block">
     <h4 class="card-title">{{workout.name}}</h4>
     <h6 class="card-subtitle text-muted" *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</h6>
