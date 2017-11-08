@@ -31,7 +31,7 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     
     ngOnChanges() {
         this.addControlsToForm();
-        this.getPreviousWorkouts(this.workout.guide);
+        this.retrievePreviousWorkouts(this.workout.guide);
     }
 
     private addControlsToForm(){
@@ -39,7 +39,7 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
         this.form.addControl("exercises", new FormArray([]));
     }
 
-    private getPreviousWorkouts(guideId: string){
+    private retrievePreviousWorkouts(guideId: string){
         let isNewWorkout = !this.workout._id;
         if(isNewWorkout) {
             this.workoutService
