@@ -27,11 +27,11 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
+        this.addControlsToForm();
+        this.retrievePreviousWorkouts(this.workout.guide);
     }
     
     ngOnChanges() {
-        this.addControlsToForm();
-        this.retrievePreviousWorkouts(this.workout.guide);
     }
 
     private addControlsToForm(){

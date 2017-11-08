@@ -32,13 +32,11 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-    }
-    
-    ngOnChanges() {
         if(this.workout) {
             this.setupForm();
         }
     }
+    
 
     private setupForm() {
         this.form.addControl("exercises", new FormArray([]));
