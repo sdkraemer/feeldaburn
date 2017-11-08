@@ -7,7 +7,6 @@ import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWo
 
 import { WorkoutService } from '../workout.service';
 import { GuideService } from '../../guides/guide.service';
-import { WorkoutFactoryService } from './workout-factory.service';
 import { WorkoutFactory } from "app/core/factories/workoutfactory";
 
 @Component({
@@ -17,6 +16,7 @@ import { WorkoutFactory } from "app/core/factories/workoutfactory";
 export class WorkoutTrackerComponent implements OnInit {
     public workout: IWorkout;
     private form: FormGroup;
+    private workoutFactory;
 
     constructor(
         private router: Router,
@@ -24,12 +24,12 @@ export class WorkoutTrackerComponent implements OnInit {
         private formBuilder: FormBuilder,
         private workoutService: WorkoutService,
         private guideService: GuideService,
-        private workoutFactoryService: WorkoutFactoryService
     ) { }
 
     ngOnInit() {
         let id = this.route.snapshot.params['id'];
         let workoutType = this.route.snapshot.params['workoutType'];
+        this.workoutFactory = new WorkoutFactory();
         
         this.createForm(workoutType);
         
@@ -59,11 +59,11 @@ export class WorkoutTrackerComponent implements OnInit {
     private createWorkout(workoutType, guideId){
         if(guideId) {
             this.guideService.getGuide(guideId).subscribe((guide) => {
-                this.workout = this.workoutFactoryService.createWorkoutByGuide(guide);
+                this.workout = this.workoutFactory.createFromGuide(guide);
             });
         }
         else{
-            this.workout = this.workoutFactoryService.createWorkoutByWorkoutType(workoutType);
+            this.workout = this.workoutFactory.createFromWorkoutType(workoutType);
         }
     }
 
