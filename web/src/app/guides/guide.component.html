@@ -15,9 +15,9 @@
             <button type="button" class="btn btn-outline-secondary" (click)="addExercise()">Add Exercise</button>
             <br>
             <br>
-            <div class="card" *ngFor="let exercise of form.controls.exercises.controls; let i=index;">
+            <div class="card" *ngFor="let exercise of form.controls.exercises.controls; let i=index;" [style.order]="exercise.order" [@exerciseReordered]="exercise.controls.order.value">
                 <div class="card-header">
-                    Exercise #{{i + 1}}
+                    <h5 class="float-left">Exercise #{{i + 1}}</h5> <button *ngIf="i > 0" (click)="moveExerciseUp(exercise, i)" class="btn btn-secondary float-right">Move Up</button>
                 </div>
                 <div class="card-block">
                     <div [formGroupName]="i">

@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {trigger, transition, style, animate} from "@angular/animations";
 
 import { IGuide, Guide, workoutType } from '../core';
 import { GuideService } from './guide.service';
 
 //rxjs
 import 'rxjs/add/operator/do';
+
+import * as _ from 'lodash';
+
+function orderChangedTransition(from, to): boolean {
+    return from != 'void' && to != 'void' && from != to;
+}
 
 @Component({
     selector: 'guide',
@@ -15,7 +22,21 @@ import 'rxjs/add/operator/do';
         .card {
             margin-bottom: 1em;
         }
-    `]
+    `],
+    animations: [
+        trigger('exerciseReordered', [
+            transition("* => *", [
+                style({ opacity: 0 }),
+                animate(500, style({ opacity: 1 }))
+            ]),
+            //transition(":enter", style({ opacity: 1 })),
+            //transition(":leave", style({ opacity: 1 })),
+            // transition(orderChangedTransition as any, [
+            //     style({ opacity: 0 }),
+            //     animate(500, style({ opacity: 1 }))
+            // ])
+        ])
+    ]
 })
 export class GuideComponent implements OnInit {
     private _id: any;
@@ -122,6 +143,25 @@ export class GuideComponent implements OnInit {
     addExercise() {
         const exercisesControl = <FormArray>this.form.controls['exercises'];
         exercisesControl.push(this.initExercise(exercisesControl.length));
+    }
+
+    moveExerciseUp(exercise, index) {
+        let exercisesArray = <FormArray>this.form.controls['exercises'];
+
+        let moveControlUp = <FormGroup>this.form.controls['exercises']['controls'][index];
+        let moveControlDown = <FormGroup>this.form.controls['exercises']['controls'][index-1];
+        
+        exercisesArray.removeAt(index-1);
+        exercisesArray.insert(index, moveControlDown);
+
+        <FormGroup>this.form.controls['exercises']['controls'][index].patchValue({
+            order: index
+        });
+        <FormGroup>this.form.controls['exercises']['controls'][index-1].patchValue({
+            order: index-1
+        });
+
+        return false;
     }
 
     showSidedSelector(exercise) {
