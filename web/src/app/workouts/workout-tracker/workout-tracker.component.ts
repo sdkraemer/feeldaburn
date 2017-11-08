@@ -31,7 +31,7 @@ export class WorkoutTrackerComponent implements OnInit {
         let workoutType = this.route.snapshot.params['workoutType'];
         this.workoutFactory = new WorkoutFactory();
         
-        this.createForm(workoutType);
+        this.createBaseForm(workoutType);
         
         if(id){
             this.fillFormWithExistingWorkout(id);
@@ -67,7 +67,7 @@ export class WorkoutTrackerComponent implements OnInit {
         }
     }
 
-    private createForm(workoutType){
+    private createBaseForm(workoutType){
         this.form = this.formBuilder.group({
             _id: [''],
             type: [workoutType],
