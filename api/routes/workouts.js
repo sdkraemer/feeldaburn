@@ -6,11 +6,10 @@ var WorkoutModels = require('../models/workout'),
     mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
-
+    
 module.exports = function(app) {
 
     app.get('/api/workouts', function(req, res){
-        console.log("req.userId: %s", req.userId);
         var conditions = {
             'createdBy': ObjectId(req.userId)
         };
@@ -19,32 +18,46 @@ module.exports = function(app) {
             conditions['completedAt'] = {$gte: new Date(req.params.start), $lte: new Date(req.params.end)}
         }
 
-        Workout.
-            find(conditions)
-            .limit(31)//limit to 31 now for calendar to work
+        var workoutPromise = Workout.find(conditions)
+            .limit(60)//change this for later. Maybe different endpoints for calendar workouts vs workouts tab
             .sort({createdAt: 'desc'})
+            .exec();
+        workoutPromise.then(function(workouts) {
+            res.json(workouts);
+        })
+        .catch(function(error) {
+            console.log("Could not find workouts. Error: %s", error);
+        });
+    });
+
+    app.get("/api/workouts/:id", function (req, res) {
+        var queryParameters = { _id: req.params.id, createdBy: ObjectId(req.userId) };
+        var workoutPromise = Workout.findOne(queryParameters).exec();
+        workoutPromise
+            .then(function (workout) {
+                res.json(workout);
+            })
+            .catch(function (err) {
+                console.log("Error finding workout. Workout ID: %s, User ID: %s", req.params.id, req.userId);
+            });
+    });
+
+    app.get('/api/workouts/previous/:guideid', function(req, res){
+        var guideId = req.params.guideid;
+        StrengthTrainingWorkout.
+            find({'createdBy': ObjectId(req.userId), isCompleted: true})
+            .where('guide').equals(ObjectId(guideId))
+            .limit(2)
+            .sort({completedAt: 'desc'})
             .exec(function(err, workouts){
                 if(err){
-                    console.log("Could not find workouts: %s", err);
+                    console.log("Could not find previous workouts: %s", err);
                     res.sendStatus(404);
                 }
                 res.json(workouts);
             });
     });
-
-    app.get('/api/workouts/:id', function(req, res){
-        var queryParameters = { '_id': req.params.id, 'createdBy': ObjectId(req.userId) };
-        var workoutPromise = Workout.findOne(queryParameters).exec();
-        workoutPromise.then(function(workout) { 
-            res.json(workout);
-        })
-        .catch(function(err) {
-            if(err){
-                console.log("Error finding workout. Workout ID: %s, User ID: %s",req.params.id, req.userId);
-            }
-        });
-    });
-
+    
     app.post('/api/workouts', function(req, res){
         var json = req.body;
 
@@ -179,7 +192,6 @@ module.exports = function(app) {
     });
 
     app.delete('/api/workouts/:id', function(req, res){
-        console.log('DELETE /api/workout/%s', req.params.id);
         Workout.remove({_id: req.params.id, 'createdBy': ObjectId(req.userId)}, function(err){
             if(err){
                 console.log("Error occurred removing workout: %s", err);
@@ -189,21 +201,6 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/api/workouts/previous/:guideid', function(req, res){
-        var guideId = req.params.guideid;
-        StrengthTrainingWorkout.
-            find({'createdBy': ObjectId(req.userId), isCompleted: true})
-            .where('guide').equals(ObjectId(guideId))
-            .limit(2)
-            .sort({completedAt: 'desc'})
-            .exec(function(err, workouts){
-                if(err){
-                    console.log("Could not find previous workouts: %s", err);
-                    res.sendStatus(404);
-                }
-                res.json(workouts);
-            });
-    });
 
         
 
