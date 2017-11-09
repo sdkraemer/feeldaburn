@@ -29,6 +29,11 @@ var GuideSchema = new Schema(
     description: {
         type: String, required: false, trim: true 
     },
+    createdBy: {
+        type: ObjectId,
+        ref: "User",
+        required: true
+    },
     exercises: [ExerciseSchema]
 }, 
 { 
