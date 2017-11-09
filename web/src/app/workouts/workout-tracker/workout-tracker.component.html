@@ -1,7 +1,6 @@
 <div *ngIf="workout" >
     <form novalidate (ngSubmit)="save()" [formGroup]="form">
-        <running-workout *ngIf="workout.type == 'RUNNING'" [form]="form" [workout]="workout"></running-workout>
-        <strength-training-workout *ngIf="workout.type == 'STRENGTH_TRAINING'" [form]="form" [workout]="workout"></strength-training-workout>
+        <dynamic-workout-container [form]="form" [workout]="workout"></dynamic-workout-container>
         <div class="form-group">
             <label for="notes">Notes:</label>
             <textarea class="form-control" rows="3" formControlName="notes"></textarea>

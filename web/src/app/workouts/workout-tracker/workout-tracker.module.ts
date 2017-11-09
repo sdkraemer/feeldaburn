@@ -15,7 +15,7 @@ import { StrengthTrainingSetComponent } from './strength-training-workout/streng
 import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-workout/strength-training-workout-exercise.component';
 import { IncrementDecrementButtonComponent } from './strength-training-workout/increment-decrement-button.component';
 import { AdjustWeightPickerComponent } from './strength-training-workout/adjust-weight-picker.component';
-
+import { DynamicWorkoutContainerComponent } from './dynamic-workout-container.component';
 
 
 
@@ -34,7 +34,8 @@ import { AdjustWeightPickerComponent } from './strength-training-workout/adjust-
     StrengthTrainingSetComponent,
     StrengthTrainingWorkoutExerciseComponent,
     IncrementDecrementButtonComponent,
-    AdjustWeightPickerComponent
+    AdjustWeightPickerComponent,
+    DynamicWorkoutContainerComponent
   ],
   providers: [
     GuideService,
@@ -42,6 +43,10 @@ import { AdjustWeightPickerComponent } from './strength-training-workout/adjust-
   ],
   exports: [
     
+  ],
+  entryComponents: [
+    StrengthTrainingWorkoutComponent,
+    RunningWorkoutComponent
   ]
 })
 export class WorkoutTrackerModule {}
