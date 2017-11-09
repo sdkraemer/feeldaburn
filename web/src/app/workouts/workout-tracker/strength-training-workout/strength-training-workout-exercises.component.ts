@@ -54,4 +54,20 @@ export class StrengthTrainingWorkoutExercisesComponent implements OnInit {
     public changeWorkout(modifier){
         this.activeExerciseIndex += modifier;
     }
+
+    public goToNextExercise() {
+        this.activeExerciseIndex++;
+    }
+
+    public goToPreviousExercise() {
+        this.activeExerciseIndex--;
+    }
+
+    public isLastExercise() {
+        return this.activeExerciseIndex == (this.workout.exercises.length-1);
+    }
+
+    public isFirstExercise() {
+        return this.activeExerciseIndex == 0;
+    }
 }
