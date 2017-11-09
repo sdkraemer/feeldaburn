@@ -4,18 +4,17 @@ var ObjectId = mongoose.Types.ObjectId;
 var _ = require('lodash');
 
 module.exports = function(app) {
-    app.get('/api/guides', function(req, res){
-
-        Guide.
-            find({})
-            .sort({name: 'asc'})
-            .exec(function(err, guides){
-                if(err){
-                    console.log("Could not find guides: %s", err);
-                    res.sendStatus(404);
-                }
-                res.json(guides);
-            });
+    app.get("/api/guides", function(req, res) {
+      var predicates = { 'createdBy': ObjectId(req.userId) };
+      Guide.find(predicates)
+        .sort({ name: "asc" })
+        .exec(function(err, guides) {
+          if (err) {
+            console.log("Could not find guides: %s", err);
+            res.sendStatus(404);
+          }
+          res.json(guides);
+        });
     });
 
     app.post('/api/guides', function(req, res){
@@ -43,7 +42,11 @@ module.exports = function(app) {
     });
 
     app.get('/api/guides/:id', function(req, res){
-        Guide.findOne({ '_id': req.params.id }, {}, function (err, guide) {
+        var predicates = { 
+            '_id': req.params.id,
+            'createdBy': ObjectId(req.userId) 
+        };
+        Guide.findOne(predicates, {}, function (err, guide) {
             var guideObject = guide.toObject();
             //sort exercises in ascending order
             guideObject.exercises.sort(function(a, b) {
@@ -55,6 +58,7 @@ module.exports = function(app) {
     });
 
     app.put('/api/guides/:id', function(req, res){
+        var predicates = { createdBy: ObjectId(req.userId) };
         Guide.findOne({'_id': req.params.id}, {}, function(err, guide){
             if (err) return console.error(err);
             console.log("PUT existing guide data:", guide);
@@ -93,8 +97,11 @@ module.exports = function(app) {
     });
 
     app.delete('/api/guides/:id', function(req, res){
-        console.log('DELETE /api/guides/%s', req.params.id);
-        Guide.remove({_id: req.params.id}, function(err){
+        var predicates = { 
+            '_id': req.params.id,
+            'createdBy': ObjectId(req.userId) 
+        };
+        Guide.remove(predicates, function(err){
             if(err){
                 console.log("Error occurred removing guide: %s", err);
                 res.sendStatus(404);
