@@ -56,7 +56,7 @@ export class WorkoutTrackerComponent implements OnInit {
 
     save() {
         var formData = this.form.value;
-        let workout = this.workoutFactory.create(formData);
+        let workout = this.workoutFactory.createFromFormData(formData);
         this.persistWorkout(workout);
     }
 
