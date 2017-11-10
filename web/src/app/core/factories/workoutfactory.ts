@@ -14,12 +14,12 @@ import {
 } from "../";
 
 export class WorkoutFactory {
-  public static create(data): IWorkout {
+  public createFromFormData(formData): IWorkout {
     let workout: IWorkout = null;
-    if (data.type == "RUNNING") {
-      workout = new RunningWorkout(data);
-    } else if ((data.type = "STRENGTH_TRAINING")) {
-      workout = new StrengthTrainingWorkout(data);
+    if (formData.type == "RUNNING") {
+      workout = new RunningWorkout(formData);
+    } else if ((formData.type = "STRENGTH_TRAINING")) {
+      workout = new StrengthTrainingWorkout(formData);
     }
     return workout;
   }
