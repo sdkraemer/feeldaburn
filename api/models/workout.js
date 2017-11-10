@@ -47,13 +47,15 @@ var ExerciseSchema = new Schema({
     }
 });
 
-var StrengthTrainingWorkoutSchema = new Schema({
+var StrengthTrainingWorkoutSchema = new Schema();
+StrengthTrainingWorkoutSchema.add({
     guide: {
         type: ObjectId,
         ref: "Guide",
         required: true
     },
-    exercises: [ExerciseSchema]
+    exercises: [ExerciseSchema],
+    previousWorkouts: [StrengthTrainingWorkoutSchema]
 });
 
 var RunningWorkoutSchema = new Schema({
