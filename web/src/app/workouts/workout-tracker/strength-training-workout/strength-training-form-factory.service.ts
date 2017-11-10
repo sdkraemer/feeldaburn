@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { IWorkoutExercise, ISet, IWeightsSet } from "app/core";
+import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
+import { IWorkoutExercise, ISet, IWeightsSet, IRepetitionSet } from "app/core";
 
 @Injectable()
 export class StrengthTrainingFormFactoryService {
@@ -11,37 +11,56 @@ export class StrengthTrainingFormFactoryService {
 
     public createExerciseFormGroup(exercise : IWorkoutExercise) {
         let exerciseGroup = this.formBuilder.group({
-                name: exercise.name,
-                guideExercise: exercise.guideExercise,
-                type: exercise.type
-            });
+            name: exercise.name,
+            guideExercise: exercise.guideExercise,
+            type: exercise.type
+        });
 
-            if(exercise.type == 'COMPLETED'){
-                exerciseGroup.addControl("isCompleted", this.formBuilder.control(exercise.isCompleted));
-            }
-            else if(exercise.type == 'SECONDS') {
-                exerciseGroup.addControl("seconds", this.formBuilder.control(exercise.seconds));
-            }
+        if(exercise.type == 'COMPLETED'){
+            exerciseGroup.addControl("isCompleted", this.formBuilder.control(exercise.isCompleted));
+        }
+        else if(exercise.type == 'SECONDS') {
+            exerciseGroup.addControl("seconds", this.formBuilder.control(exercise.seconds));
+        }
 
-            this.createSetsControlOnExerciseGroup(exerciseGroup, exercise);
+        let setsFormArray = this.createSetsFormArray(exercise);
+        if(setsFormArray) {
+            exerciseGroup.addControl("sets", setsFormArray);
+        }
         return exerciseGroup;
     }
 
-    private createSetsControlOnExerciseGroup(exerciseGroup, exercise: IWorkoutExercise){
-        if(exercise.sets && exercise.sets.length > 0) {
-            let setsControl = this.formBuilder.array([]);
-            exercise.sets.forEach((set, index) => {
-                setsControl.push(this.createSetFormGroup(exercise.type, set));
+    private createSetsFormArray(exercise: IWorkoutExercise): FormArray{
+        let setsFormArray: FormArray;
+        let doesExerciseHaveSets = exercise.sets && exercise.sets.length > 0;
+        if(doesExerciseHaveSets) {
+            setsFormArray = this.formBuilder.array([]);
+            exercise.sets.forEach(set => {
+                setsFormArray.push(this.createSetFormGroup(exercise.type, set));
             }, this);
-            exerciseGroup.addControl("sets", setsControl);
         }
+        return setsFormArray;
     }
 
     private createSetFormGroup(exerciseType, set: ISet): FormGroup {
-        if(exerciseType == 'WEIGHTS'){
-            return this.createWeightsSetFormGroup(<IWeightsSet>set);
+        let setFormGroup;
+        let isWeightedSet = exerciseType == 'WEIGHTS';
+        let isRepetitionSet = exerciseType == 'REPS';
+        
+        if(isWeightedSet){
+            setFormGroup = this.createWeightsSetFormGroup(<IWeightsSet>set);
+        }
+        else if(isRepetitionSet) {
+            setFormGroup = this.createRepetitionFormGroup(set);
+        }
+        else{
+            console.error("Unknown sets type");
         }
         
+        return setFormGroup;
+    }
+
+    private createRepetitionFormGroup(set: IRepetitionSet) {
         return this.formBuilder.group({
             side: [set.side],
             repetitions: [set.repetitions]
