@@ -6,7 +6,6 @@ export interface IWorkout {
     createdAt?: Date;
     isCompleted?: boolean;
     completedAt?: Date;
-    previousWorkouts?: IWorkout[];
 }
 
 export class Workout implements IWorkout{
