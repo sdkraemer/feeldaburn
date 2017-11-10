@@ -30,8 +30,9 @@ module.exports = function(app) {
         });
     });
 
+
     app.get("/api/workouts/:id", function (req, res) {
-        var queryParameters = { _id: req.params.id, createdBy: ObjectId(req.userId) };
+        var queryParameters = { '_id': req.params.id, 'createdBy': ObjectId(req.userId) };
         var workoutPromise = Workout.findOne(queryParameters).exec();
         workoutPromise
             .then(function (workout) {
@@ -39,6 +40,7 @@ module.exports = function(app) {
             })
             .catch(function (err) {
                 console.log("Error finding workout. Workout ID: %s, User ID: %s", req.params.id, req.userId);
+                res.json({});
             });
     });
 
