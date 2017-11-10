@@ -28,7 +28,6 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
 
     ngOnInit() { 
         this.addControlsToForm();
-        this.retrievePreviousWorkouts(this.workout.guide);
     }
     
     ngOnChanges() {
@@ -37,19 +36,5 @@ export class StrengthTrainingWorkoutComponent implements OnInit {
     private addControlsToForm(){
         this.form.addControl("guide", new FormControl(this.workout.guide));
         this.form.addControl("exercises", new FormArray([]));
-    }
-
-    private retrievePreviousWorkouts(guideId: string){
-        let isNewWorkout = !this.workout._id;
-        if(isNewWorkout) {
-            this.workoutService
-            .getPreviousStrengthTrainingWorkouts(guideId)
-                .subscribe((previousWorkouts) => {
-                    //Need to change workout object reference to trigger ngOnChanges in child components.
-                    let updatedWorkout = _.cloneDeep(this.workout);
-                    updatedWorkout.previousWorkouts = previousWorkouts;
-                    this.workout = updatedWorkout;
-                });
-        }
     }
 }

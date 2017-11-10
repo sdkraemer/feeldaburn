@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/zip'; 
 
-import { IWorkout, Workout, IRunningWorkout, RunningWorkout, IStrengthTrainingWorkout, StrengthTrainingWorkout } from '../../core';
+import { IWorkout } from '../../core';
 
-
+import { WorkoutFactoryService } from './workoutfactory.service';
 import { WorkoutService } from '../workout.service';
-import { GuideService } from '../../guides/guide.service';
 import { WorkoutFactory } from "app/core/factories/workoutfactory";
 
 @Component({
@@ -22,75 +23,40 @@ export class WorkoutTrackerComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
+        private workoutFactoryService: WorkoutFactoryService,
         private workoutService: WorkoutService,
-        private guideService: GuideService,
     ) { }
 
     ngOnInit() {
-        let id = this.route.snapshot.params['id'];
+        let workoutId = this.route.snapshot.params['id'];
+        let guideId = this.route.snapshot.params['guide'];
         let workoutType = this.route.snapshot.params['workoutType'];
         this.workoutFactory = new WorkoutFactory();
-        
-        this.createBaseForm(workoutType);
-        
-        if(id){
-            this.fillFormWithExistingWorkout(id);
-        }
-        else{
-            let guideId = this.route.snapshot.params['guide'];
-            this.createWorkout(workoutType, guideId);
-        }
-    }
 
-    private fillFormWithExistingWorkout(workoutId) {
-        this.getWorkout(workoutId, () => {
-                this.form.patchValue({
-                    _id: this.workout._id,
-                    name: this.workout.name,
-                    type: this.workout.type,
-                    notes: this.workout.notes,
-                    createdAt: this.workout.createdAt,
-                    isCompleted: this.workout.isCompleted,
-                    completedAt: this.workout.completedAt
-                });
-            });
-    }
-
-    private createWorkout(workoutType, guideId){
-        if(guideId) {
-            this.guideService.getGuide(guideId).subscribe((guide) => {
-                this.workout = this.workoutFactory.createFromGuide(guide);
-            });
-        }
-        else{
-            this.workout = this.workoutFactory.createFromWorkoutType(workoutType);
-        }
-    }
-
-    private createBaseForm(workoutType){
-        this.form = this.formBuilder.group({
-            _id: [''],
-            type: [workoutType],
-            name: [''],
-            notes: [''],
-            createdAt: [''],
-            isCompleted: [false],
-            completedAt: ['']
-        });
-    }
-
-    getWorkout(id, completed){
-        this.workoutService.getWorkout(id)
+        this.workoutFactoryService
+            .createOrRetrieve(workoutId, workoutType, guideId)
             .subscribe(workout => {
                 this.workout = workout;
-            },
-            error => console.log('Could not load guide: '+id),
-            completed);
+                this.createForm(workout);
+            });
+    }
+
+
+    private createForm(workout: IWorkout) {
+        this.form = this.formBuilder.group({
+            _id: [workout._id],
+            type: [workout.type],
+            name: [workout.name],
+            notes: [workout.notes],
+            createdAt: [workout.createdAt],
+            isCompleted: [workout.isCompleted],
+            completedAt: [workout.completedAt]
+        });
     }
 
     save() {
         var formData = this.form.value;
-        let workout = WorkoutFactory.create(formData);
+        let workout = this.workoutFactory.create(formData);
         this.persistWorkout(workout);
     }
 

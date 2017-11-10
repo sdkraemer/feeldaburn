@@ -5,7 +5,6 @@ export interface IStrengthTrainingWorkout extends IWorkout {
   guide?: string;
   exercises?: IWorkoutExercise[];
   previousWorkouts?: IStrengthTrainingWorkout[];
-  
 }
 
 export class StrengthTrainingWorkout extends Workout

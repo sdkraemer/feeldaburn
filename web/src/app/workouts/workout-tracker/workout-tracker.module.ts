@@ -7,6 +7,7 @@ import { WorkoutTrackerRoutingModule, routedComponents } from './workout-tracker
 import { SharedModule } from '../../shared/shared.module';
 import { GuideService } from '../../guides/guide.service';
 import { StrengthTrainingFormFactoryService } from './strength-training-workout/strength-training-form-factory.service';
+import { WorkoutFactoryService } from './workoutfactory.service';
 
 import { RunningWorkoutComponent } from './running-workout/running-workout.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout/strength-training-workout.component';
@@ -39,7 +40,8 @@ import { DynamicWorkoutContainerComponent } from './dynamic-workout-container.co
   ],
   providers: [
     GuideService,
-    StrengthTrainingFormFactoryService
+    StrengthTrainingFormFactoryService,
+    WorkoutFactoryService
   ],
   exports: [
     
