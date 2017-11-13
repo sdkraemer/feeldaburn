@@ -1,14 +1,30 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing'
 import { AppComponent } from './app.component';
+import { Auth } from 'app/auth/auth.service';
 
-describe('App: WorkoutApp', () => {
+
+// Mock our Auth service
+export class MockAuthService {
+  public authenticated(): void {
+    return;
+  }
+}
+
+describe('App: Xrcise', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
       ],
+      imports: [
+        RouterTestingModule
+      ],
+      providers: [
+        {provide: Auth, useValue: new MockAuthService()}
+      ]
     });
   });
 
@@ -18,16 +34,4 @@ describe('App: WorkoutApp', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
 });
