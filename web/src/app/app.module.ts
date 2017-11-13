@@ -7,21 +7,21 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
 
-import { AppComponent } from './app.component';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Auth } from './auth/auth.service';
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig(), http, options);
+}
 
 import { WorkoutsModule } from './workouts/workouts.module';
 import { GuidesModule } from './guides/guides.module';
 import { HomeModule } from './home/home.module';
 import { MeasurementsModule } from './measurements/measurements.module';
+import { AppRoutingModule, appRoutingProviders } from './app-routing.module';
 
-import { routing, appRoutingProviders } from './app.routes';
+import { NavBarComponent } from 'app/nav-bar.component';
+import { AppComponent } from './app.component';
 
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import { Auth } from './auth/auth.service';
-
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig(), http, options);
-}
 
 @NgModule({
   imports: [
@@ -31,14 +31,15 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HttpModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    routing,
     WorkoutsModule,
     GuidesModule,
     HomeModule,
     MeasurementsModule,
+    AppRoutingModule,//This needs to be after all other feature modules.
   ],
   declarations: [
-    AppComponent
+    NavBarComponent,
+    AppComponent,
   ],
   providers: [
     {
