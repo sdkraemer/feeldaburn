@@ -7,8 +7,6 @@ import { Auth } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Xrcise';
-  selectedWorkout : any;
 
   constructor(
     public auth: Auth
