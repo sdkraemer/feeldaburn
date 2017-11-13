@@ -28,13 +28,7 @@ function orderChangedTransition(from, to): boolean {
             transition("* => *", [
                 style({ opacity: 0 }),
                 animate(500, style({ opacity: 1 }))
-            ]),
-            //transition(":enter", style({ opacity: 1 })),
-            //transition(":leave", style({ opacity: 1 })),
-            // transition(orderChangedTransition as any, [
-            //     style({ opacity: 0 }),
-            //     animate(500, style({ opacity: 1 }))
-            // ])
+            ])
         ])
     ]
 })
