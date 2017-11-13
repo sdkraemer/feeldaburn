@@ -3,8 +3,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 
 import { Observable } from 'rxjs/Observable';
 
-import { WorkoutService } from '../../workout.service';
-import { StrengthTrainingFormFactoryService } from "./strength-training-form-factory.service";
+import { WorkoutService } from '../../../workout.service';
+import { StrengthTrainingFormFactoryService } from "./../strength-training-form-factory.service";
 import { IStrengthTrainingWorkout } from "app/core";
 
 @Component({

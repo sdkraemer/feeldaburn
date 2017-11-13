@@ -11,11 +11,11 @@ import { WorkoutFactoryService } from './workoutfactory.service';
 
 import { RunningWorkoutComponent } from './running-workout/running-workout.component';
 import { StrengthTrainingWorkoutComponent } from './strength-training-workout/strength-training-workout.component';
-import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-workout/strength-training-workout-exercises.component';
-import { StrengthTrainingSetComponent } from './strength-training-workout/strength-training-set.component';
-import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-workout/strength-training-workout-exercise.component';
-import { IncrementDecrementButtonComponent } from './strength-training-workout/increment-decrement-button.component';
-import { AdjustWeightPickerComponent } from './strength-training-workout/adjust-weight-picker.component';
+import { StrengthTrainingWorkoutExercisesComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-workout-exercises.component';
+import { StrengthTrainingSetComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-set/strength-training-set.component';
+import { StrengthTrainingWorkoutExerciseComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-workout-exercise.component';
+import { IncrementDecrementButtonComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-set/increment-decrement-button.component';
+import { AdjustWeightPickerComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-set/adjust-weight-picker.component';
 import { DynamicWorkoutContainerComponent } from './dynamic-workout-container.component';
 
 
