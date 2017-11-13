@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { tokenNotExpired, AuthHttp } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-
+import 'rxjs/add/operator/map';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
