@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
-
-import { IWorkout, IWorkoutExercise, IStrengthTrainingWorkout } from '../../../core';
+import { IWorkoutExercise, IWorkout } from 'app/core';
 
 @Component({
     selector: 'strength-training-workout-exercise',

@@ -19,7 +19,6 @@ import { HomeModule } from './home/home.module';
 import { MeasurementsModule } from './measurements/measurements.module';
 import { AppRoutingModule, appRoutingProviders } from './app-routing.module';
 
-import { NavBarComponent } from 'app/nav-bar.component';
 import { AppComponent } from './app.component';
 
 
@@ -38,8 +37,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,//This needs to be after all other feature modules.
   ],
   declarations: [
-    NavBarComponent,
-    AppComponent,
+    AppComponent
   ],
   providers: [
     {
