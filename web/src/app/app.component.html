@@ -9,16 +9,16 @@
       <li class="nav-item" routerLink="" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
         <a class="nav-link">Home</a>
       </li>
-      <li class="nav-item" *ngIf="auth.authenticated()" routerLink="/workouts" routerLinkActive="active">
+      <li class="nav-item" *ngIf="auth.authenticated" routerLink="/workouts" routerLinkActive="active">
         <a class="nav-link">Workouts</a>
       </li>
-      <li class="nav-item" *ngIf="auth.authenticated()" routerLink="/guides" routerLinkActive="active">
+      <li class="nav-item" *ngIf="auth.authenticated" routerLink="/guides" routerLinkActive="active">
         <a class="nav-link">Guides</a>
       </li>
-      <li class="nav-item" *ngIf="!auth.authenticated()">
+      <li class="nav-item" *ngIf="!auth.authenticated">
         <a class="nav-link" (click)="auth.login()">Log In</a>
       </li>
-      <li class="nav-item" *ngIf="auth.authenticated()">
+      <li class="nav-item" *ngIf="auth.authenticated">
         <a class="nav-link" (click)="auth.logout()">Log Out</a>
       </li>
     </ul>

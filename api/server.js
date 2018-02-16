@@ -2,33 +2,42 @@ var express = require('express'),
     config = require('config'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    //User = require('./models/user'),
-    //Workout = require('./models/workout'),
     ObjectId = mongoose.Types.ObjectId,
     userId = require('./userId');
     jwt = require('express-jwt'),
+    jwks = require('jwks-rsa');
     app = express();
- mongoose.Promise = require('bluebird')   ;
+ mongoose.Promise = require('bluebird');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var authCheck = jwt({
-  secret: new Buffer('48kVnyEKzqRQRiZNQ2i48cjMlkkhfK77isP6firPm4ta9M19Jn0zX2Hjl0wDU4Hc', 'base64'),
-  audience: 'TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX'
+
+var auth0Config = config.get("auth0");
+console.log("auth0Config1: "+auth0Config.CLIENT_DOMAIN);
+const jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://${auth0Config.CLIENT_DOMAIN}/.well-known/jwks.json`
+    }),
+    audience: auth0Config.AUTH0_AUDIENCE,
+    issuer: `https://${auth0Config.CLIENT_DOMAIN}/`,
+    algorithm: 'RS256'
 });
 
 var mongooseConfig = config.get("mongo");
 var connectionString = "mongodb://"+mongooseConfig.host+":27017/db";
 mongoose.connect(connectionString);
 
-app.use('/api/workouts', [authCheck, userId]);
-app.use('/api/workout', [authCheck, userId]);
-app.use('/api/guides', [authCheck, userId]);
-app.use('/api/measurements', [authCheck, userId]);
-app.use('/api/users', [authCheck]);
+app.use('/api/workouts', [jwtCheck, userId]);
+app.use('/api/workout', [jwtCheck, userId]);
+app.use('/api/guides', [jwtCheck, userId]);
+app.use('/api/measurements', [jwtCheck, userId]);
+app.use('/api/users', [jwtCheck]);
 
 var workouts = require('./routes/workouts.js')(app);
 var guides = require('./routes/guides.js')(app);

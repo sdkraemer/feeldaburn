@@ -1,9 +1,12 @@
 {
-    //"dbConnectionString": "mongodb://feeldaburn:qdra6A6CvtVdVsyta2FiHnHp3uMxK620d2gMzEzlYbaAYjqRti9aJtH8H9rQEyxkbIjuLeDt83H7HF2ZE8Zjog==@feeldaburn.documents.azure.com:10250/feeldaburn/?ssl=true",
     "mongo": {
         "host": "feeldburnmongodb",
         "database": "db",
         "username": "myAdmin",
         "password": "uq0ZM3VPrYxI1Xk6"
+    },
+    "auth0": {
+        "CLIENT_DOMAIN": "feeldaburn.auth0.com", 
+        "AUTH0_AUDIENCE": "http://localhost/api/"
     }
 }

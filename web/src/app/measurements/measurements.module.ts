@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { MeasurementsRoutingModule, routedComponents } from './measurements.routing';
 
-import { Auth } from '../auth/auth.service';
+import { AuthNewService } from '../auth/auth-new.service';
 
 
 
@@ -16,7 +16,7 @@ import { Auth } from '../auth/auth.service';
     routedComponents
   ],
   providers: [
-    Auth,
+    AuthNewService,
   ]
 })
 export class MeasurementsModule { }

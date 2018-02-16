@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { WorkoutService } from '../workouts/workout.service';
@@ -47,10 +47,10 @@ export class AuthenticatedHomeComponent implements OnInit {
         }[this.view];
 
 
-        const search: URLSearchParams = new URLSearchParams();
-        search.set('start', format(getStart(this.viewDate), 'YYYY-MM-DD'));
-        search.set('end', format(getEnd(this.viewDate), 'YYYY-MM-DD'));
-        this.events = this.calendarService.getWorkoutEvents(search);
+        let searchHttpParams = new HttpParams();
+        searchHttpParams.append("start", format(getStart(this.viewDate), 'YYYY-MM-DD'));
+        searchHttpParams.append("end", format(getEnd(this.viewDate), 'YYYY-MM-DD'));
+        this.events = this.calendarService.getWorkoutEvents(searchHttpParams);
     }
 
     public dateChanged(){

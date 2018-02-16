@@ -1,8 +1,10 @@
-import { NgModule }              from '@angular/core';
-import { RouterModule, Routes }  from '@angular/router';
-import { AuthGuard }                from './auth/auth.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+import { Auth0CallbackComponent } from 'app/auth/auth0-callback.component';
 
 const appRoutes: Routes = [
+    { path: 'auth0callback', component: Auth0CallbackComponent },
     { path: '**', redirectTo: '' }
   ];
   

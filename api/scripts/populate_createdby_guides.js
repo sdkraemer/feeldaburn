@@ -3,6 +3,6 @@ var db = conn.getDB("db");
 db.guides.updateMany(
     {}, 
     {$set: 
-        {"createdBy": ObjectId("5a01d8a756eb68000ece6fa2")}
+        {"createdBy": ObjectId("593efbeac94b76000e047422")}
     }
 );

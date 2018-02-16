@@ -1,16 +1,12 @@
 import { ModuleWithProviders }      from '@angular/core';
 import { Routes, RouterModule }     from '@angular/router';
 
-
-import { WorkoutsComponent }        from './workouts/workouts.component';
-
-import { GuidesComponent }          from './guides/guides.component';
-import { GuideComponent }          from './guides/guide.component';
+import { Auth0CallbackComponent } from 'app/auth/auth0-callback.component';
 
 import { AuthGuard }                from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  //{ path: '', component: HomeComponent },
+  { path: 'auth0callback', component: Auth0CallbackComponent },
   { path: '**', redirectTo: '' }
 ];
 

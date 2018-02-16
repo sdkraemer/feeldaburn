@@ -70,7 +70,7 @@ export class GuideComponent implements OnInit {
         }
         else {
             this.guideService.getGuide(this._id)
-                .subscribe((guide) => {
+                .subscribe((guide: IGuide) => {
                     this.form.setValue({
                         _id: guide._id,
                         name: guide.name,
