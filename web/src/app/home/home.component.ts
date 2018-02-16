@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthNewService } from '../auth/auth-new.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
     moduleId: module.id,
@@ -8,7 +8,7 @@ import { AuthNewService } from '../auth/auth-new.service';
 })
 export class HomeComponent implements OnInit {
 
-    constructor(public auth: AuthNewService) { }
+    constructor(public auth: AuthService) { }
 
     ngOnInit() { }
 }

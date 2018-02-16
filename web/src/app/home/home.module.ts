@@ -4,7 +4,7 @@ import { CalendarModule } from 'angular-calendar';
 
 import { HomeRoutingModule, routedComponents } from './home.routing';
 
-import { AuthNewService } from '../auth/auth-new.service';
+import { AuthService } from '../auth/auth.service';
 import { WorkoutService } from '../workouts/workout.service';
 import { CalendarService } from './calendar.service';
 
@@ -23,7 +23,7 @@ import { NonAuthenticatedHomeComponent }   from './non-authenticated-home.compon
         NonAuthenticatedHomeComponent,
         routedComponents],
     providers: [
-        AuthNewService,
+        AuthService,
         WorkoutService,
         CalendarService
     ],

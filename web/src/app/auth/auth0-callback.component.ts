@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { AuthNewService } from './auth-new.service';
+import { AuthService } from './auth.service';
 
 @Component({
     selector: 'auth0-callback',
@@ -12,7 +12,7 @@ export class Auth0CallbackComponent implements OnInit {
     loggedInSub: Subscription;
 
     constructor(
-        private auth: AuthNewService,
+        private auth: AuthService,
         private router: Router) {
         auth.handleAuth();
     }

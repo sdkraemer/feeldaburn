@@ -1,77 +1,107 @@
-// import { Injectable } from '@angular/core';
-// import { tokenNotExpired, AuthHttp } from 'angular2-jwt';
-// import { Router } from '@angular/router';
-// import { environment } from '../../environments/environment';
-// import 'rxjs/add/operator/map';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import * as auth0 from 'auth0-js';
+import { AUTH_CONFIG } from './auth0-variables';
+import { UserProfile } from '../core/models/profile';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
-// // Avoid name not found warnings
-// declare var Auth0Lock: any;
+@Injectable()
+export class AuthService {
+    auth0 = new auth0.WebAuth({
+        clientID: AUTH_CONFIG.CLIENT_ID,
+        domain: AUTH_CONFIG.CLIENT_DOMAIN,
+        responseType: 'token id_token',
+        redirectUri: AUTH_CONFIG.REDIRECT,
+        audience: AUTH_CONFIG.AUDIENCE,
+        scope: AUTH_CONFIG.SCOPE
+    });
+    userProfile: UserProfile;
 
-// @Injectable()
-// export class Auth {
-//   // Configure Auth0
-//   lock = new Auth0Lock('TSWTGq6o5dDKUYt1qxvSGWOjikQZ38VX', 'feeldaburn.auth0.com', {});
-//   userProfile: any;
-//   apiUrl: string = `${environment.apiUrl}/users`;
+    // Create a stream of logged in status to communicate throughout app
+    loggedIn: boolean;
+    loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-//   // if (!navigator.onLine) {
+    usersApiUrl: string = `${environment.apiUrl}/users`;
 
-//   constructor(
-//     private router: Router,
-//     private authHttp: AuthHttp
-//   ) {
-//     this.userProfile = JSON.parse(localStorage.getItem('profile'));
+    constructor(
+        private http: HttpClient
+    ) {
+        // If authenticated, set local profile property and update login status subject
+        if (this.authenticated) {
+            this.userProfile = JSON.parse(localStorage.getItem('profile'));
+            this.setLoggedIn(true);
+        }
+    }
 
-//     this.lock.on('authenticated', (authResult) => {
-//       localStorage.setItem('id_token', authResult.idToken);
-//       this.lock.getProfile(authResult.idToken, (error, profile) => {
-//         if (error) {
-//           console.log("Error logging in: " + error);
-//           return;
-//         }
-//         localStorage.setItem('profile', JSON.stringify(profile));
-//         this.userProfile = profile;
+    setLoggedIn(value: boolean) {
+        // Update login status subject
+        this.loggedIn$.next(value);
+        this.loggedIn = value;
+    }
 
-//         this.createUser(profile);
+    login() {
+        // Auth0 authorize request
+        this.auth0.authorize();
+    }
 
-//         var redirectUrl: string = localStorage.getItem('redirect_url');
-//         if (redirectUrl != undefined) {
-//           this.router.navigate([redirectUrl]);
-//           localStorage.removeItem('redirect_url');
-//         } else {
-//           this.router.navigate(['/']);
-//         }
-//       });
-//     });
-//   }
+    handleAuth() {
+        // When Auth0 hash parsed, get profile
+        this.auth0.parseHash((err, authResult) => {
+            if (authResult && authResult.accessToken) {
+                window.location.hash = '';
+                this._getProfile(authResult);
+            } else if (err) {
+                console.error(`Error: ${err.error}`);
+            }
+        });
+    }
 
-//   //probably belongs in some sort of user service, but just try this
-//   private createUser(profileJson) {
-//     console.log("creating user");
-//     this.authHttp.post(this.apiUrl, profileJson)
-//       .map(res => res.json())
-//       .subscribe(user => {
-//         console.log("did it create a user?");
-//         console.log(user);
-//       });
-//   }
+    private _getProfile(authResult) {
+        // Use access token to retrieve user's profile and set session
+        this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+            this._setSession(authResult, profile);
+            this.createUser(profile);
+        });
+    }
 
-//   public login() {
-//     // Call the show method to display the widget.
-//     this.lock.show();
-//   }
+    private _setSession(authResult, profile) {
+        const expTime = authResult.expiresIn * 1000 + Date.now();
+        // Save session data and update login status subject
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('profile', JSON.stringify(profile));
+        localStorage.setItem('expires_at', JSON.stringify(expTime));
+        this.userProfile = profile;
+        this.setLoggedIn(true);
+    }
 
-//   public authenticated() {
-//     // Check if there's an unexpired JWT
-//     // This searches for an item in localStorage with key == 'id_token'
-//     return tokenNotExpired();
-//   }
+    logout() {
+        // Remove tokens and profile and update login status subject
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('profile');
+        localStorage.removeItem('expires_at');
+        this.userProfile = undefined;
+        this.setLoggedIn(false);
+    }
 
-//   public logout() {
-//     // Remove token from localStorage
-//     localStorage.removeItem('id_token');
-//     localStorage.removeItem('profile');
-//     this.userProfile = undefined;
-//     this.router.navigate(['']);
-//   }
-// }
+    get authenticated(): boolean {
+        // Check if current date is greater than expiration
+        const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        return Date.now() < expiresAt;
+    }
+
+    private createUser(profile) {
+        console.log("creating user");
+        this.http.post(this.usersApiUrl, profile, {
+            headers: new HttpHeaders().set(
+                'Authorization', `Bearer ${localStorage.getItem('access_token')}`
+            )
+        })
+            //.map(res => res.json())
+        .subscribe(user => {
+            console.log("did it create a user?");
+            console.log(user);
+        });
+    }
+
+}
