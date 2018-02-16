@@ -3,20 +3,59 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToggleControlComponent } from './ui/toggle-control.component';
 
-//From John papa: https://github.com/johnpapa/a2-first-look/blob/master/_examples/storyline-tracker/app/shared/shared.module.ts
-// imports: imports the module's exports. which are usually
-// declarables(components / directives / pipes) and providers.
-// in our case the FilterTextModule has a provider.
-//
-// exports: exports modules AND declarables (components/directives/pipes) that other modules may want to use
-// SharedModule does not use CommonModule, but does use FormsModule.
-// Even so, we import/export both of these because most other modules will import SharedModule and will need them.
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   exports: [
     CommonModule, 
     FormsModule,
-    ToggleControlComponent
+    ToggleControlComponent,
+
+    MatButtonModule,
+    MatToolbarModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   declarations: [
     ToggleControlComponent
