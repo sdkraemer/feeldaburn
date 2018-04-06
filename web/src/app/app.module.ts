@@ -4,8 +4,10 @@ import { Http, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { CalendarModule } from 'angular-calendar';
 
+import { SharedModule } from './shared/shared.module';
 import { WorkoutsModule } from './workouts/workouts.module';
 import { GuidesModule } from './guides/guides.module';
 import { HomeModule } from './home/home.module';
@@ -20,10 +22,12 @@ import { Auth0CallbackComponent } from './auth/auth0-callback.component';
 @NgModule({
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
     CalendarModule.forRoot(),
     WorkoutsModule,
     GuidesModule,

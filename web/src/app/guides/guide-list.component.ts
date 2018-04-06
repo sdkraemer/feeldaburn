@@ -7,9 +7,13 @@ import { GuideService } from './guide.service';
     selector: 'guide-list',
     templateUrl: 'guide-list.component.html',
     styles: [`
-        .card {
+        .guide-card {
             margin-bottom: 1em;
-            width: 18rem;
+        }
+
+        .divider-margin { 
+            margin-top: 1em;
+            margin-bottom: 1em;
         }
     `],
     animations: [

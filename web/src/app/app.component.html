@@ -1,5 +1,34 @@
-<!-- <nav-bar></nav-bar> -->
-<nav class="navbar navbar-light navbar-toggleable-md fixed-top bg-faded">
+<mat-toolbar color="primary">
+  <a class="logo" routerLink=""><i class="logo-big-font">X</i>rcise</a>
+  <span class="example-fill-remaining-space"></span>
+
+  <a mat-raised-button 
+    color="primary"
+    *ngIf="auth.authenticated"
+    [routerLink]="['/workouts']" 
+    routerLinkActive="router-link-active" >Workouts</a>
+  <a mat-raised-button 
+    color="primary"
+    *ngIf="auth.authenticated"
+    [routerLink]="['/guides']" 
+    routerLinkActive="router-link-active" >Guides</a>
+  <button mat-raised-button color="primary"
+    *ngIf="!auth.authenticated"
+    (click)="auth.login()">
+    Sign in
+  </button>
+  <button mat-raised-button color="primary"
+    *ngIf="auth.authenticated"
+    (click)="auth.logout()">
+    Sign Out
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+
+
+
+<!-- <nav class="navbar navbar-light navbar-toggleable-md fixed-top bg-faded">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,6 +55,6 @@
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
-</div>
+</div> -->
 
 

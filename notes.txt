@@ -33,6 +33,12 @@ To export droplet mongo data:
     mongo
     load("backfill_order.js");
 
+To backfill createdBy field in guide
+    docker cp C:\ng2\xrcise\api\scripts\populate_createdby_guides.js xrcise-mongodb:/    
+    docker exec -it xrcise-mongodb /bin/bash
+    mongo
+    load("populate_createdby_guides.js");
+
 
 
 6/12: 
@@ -68,5 +74,4 @@ TODO:
     -Get .debug compose working
         - https://wannabeegeek.com/2016/12/17/debugging-asp-net-core-apps-running-in-docker-containers-using-vs-code/
     -Try running app in ubuntu bash, does it fix db volume issue?
-    -Try adding previous workouts to workout model, then I dont have to pass it all the way down.
-        -Add API endpoint that will get workout w/ previous workout data attached
+        -Not sure theres a docker for windows subsystem

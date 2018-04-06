@@ -1,29 +1,24 @@
-<div class="row text-center">
-  <button type="button" class="btn btn-primary mx-auto" [routerLink]="['/workout-picker']">Pick a Workout!</button>
-  <button type="button" class="btn btn-primary mx-auto" [routerLink]="['/measurements/new']">Add a Measurement</button>
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <button type="button" mat-raised-button [routerLink]="['/workout-picker']">Pick a Workout!</button>
+    <button type="button" mat-raised-button [routerLink]="['/measurements/new']">Add a Measurement</button>
 </div>
-<br>
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <button class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
-        Previous
-      </button>
-      <button class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
-        Today
-      </button>
-      <button class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
-        Next
-      </button>
-    </div>
-  </div>
-  <div class="col-md-4">
+
+<div style="text-align: center">
+  <br>
+  <div>
     <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
   </div>
-  <div class="col-md-4">
+  <div>
+    <button mat-raised-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
+      Previous
+    </button>
+    <button mat-raised-button mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
+      Today
+    </button>
+    <button mat-raised-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="dateChanged()">
+      Next
+    </button>
   </div>
+  <mwl-calendar-month-view [viewDate]="viewDate" [events]="(events | async) || []">
+  </mwl-calendar-month-view>
 </div>
-<mwl-calendar-month-view
-  [viewDate]="viewDate"
-  [events]="(events | async) || []">
-</mwl-calendar-month-view>

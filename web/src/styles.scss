@@ -1,11 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-body { padding-top: 75px; }
+/*body { padding-top: 75px; }*/
 
-.container {
+/* .container {
     padding: 7px;
+} */
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+  background-color: #ffffff;
 }
+
 
 md-card{
     width: 50%;

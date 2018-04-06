@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { GuidesRoutingModule, routedComponents } from './guides.routing';
 
@@ -12,6 +13,7 @@ import { ExerciseTypeControlComponent } from "app/guides/exercise-type-control.c
 
 @NgModule({
     imports: [
+        FlexLayoutModule,
         SharedModule,
         GuidesRoutingModule,
         ReactiveFormsModule

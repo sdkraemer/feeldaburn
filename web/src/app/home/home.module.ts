@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from 'angular-calendar';
 
@@ -14,6 +16,7 @@ import { NonAuthenticatedHomeComponent }   from './non-authenticated-home.compon
 @NgModule({
     imports: [
         SharedModule,
+        FlexLayoutModule,
         HomeRoutingModule,
         CalendarModule.forRoot()
     ],

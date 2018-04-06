@@ -1,6 +1,18 @@
-<button type="button" class="btn btn-primary" [routerLink]="['/guides', 'New']">Add</button>
-<hr>
-<div *ngFor="let guide of guides" class="card" style="width: 18rem;" [@guideEnter]="guide">
+<button type="button" mat-raised-button [routerLink]="['/guides', 'New']">Add Guide</button>
+<mat-divider></mat-divider>
+<div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="20px" style="height: 100%;">
+  <mat-card *ngFor="let guide of guides" class="guide-card">
+    <mat-card-title>{{guide.name}}</mat-card-title>
+    <mat-card-subtitle>{{guide.createdAt | date:'short'}}</mat-card-subtitle>
+    <mat-card-content>
+      <p class="card-text">{{guide.description}}</p>
+      <a href="#" mat-raised-button color="primary" [routerLink]="['/guides', guide._id]">View</a>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div *ngFor="let guide of guides" class="card" style="width: 18rem;" [@guideEnter]="guide">
+  
   <div class="card-block">
     <h4 class="card-title">{{guide.name}}</h4>
     <h6 class="card-subtitle text-muted">{{guide.createdAt | date:'short'}}</h6>
@@ -9,4 +21,4 @@
     <p class="card-text">{{guide.description}}</p>
     <a href="#" class="btn btn-primary" [routerLink]="['/guides', guide._id]">View</a>
   </div>
-</div>
+</div> -->
