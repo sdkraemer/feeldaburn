@@ -22,6 +22,10 @@ function orderChangedTransition(from, to): boolean {
         .card {
             margin-bottom: 1em;
         }
+
+        .card-layout {
+            min-width: 50%;
+        }
     `],
     animations: [
         trigger('exerciseReordered', [
@@ -35,6 +39,13 @@ function orderChangedTransition(from, to): boolean {
 export class GuideComponent implements OnInit {
     private _id: any;
     public form: FormGroup;
+
+    public exerciseTypes = [
+        { "display": "Repetitions", "value": "REPS" },
+        { "display": "Repetitions With Weights", "value": "WEIGHTS" },
+        { "display": "Completed", "value": "COMPLETED" },
+        { "display": "Seconds", "value": "SECONDS" },
+    ]
 
     constructor(
         private formBuilder: FormBuilder,
