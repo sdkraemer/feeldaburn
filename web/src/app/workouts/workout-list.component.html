@@ -1,12 +1,24 @@
-<button type="button" class="btn btn-primary" [routerLink]="['/workout-picker']">Pick a Workout!</button>
-<hr>
-<div *ngFor="let workout of workouts" class="card" [@workoutEnter]="workout">
-  <div class="card-block">
-    <h4 class="card-title">{{workout.name}}</h4>
-    <h6 class="card-subtitle text-muted" *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</h6>
-    <h6 class="card-subtitle text-muted" *ngIf="!workout.completedAt">In Progress</h6>
-  </div>
-  <div class="card-block">
-    <a href="#" class="btn btn-primary" [routerLink]="['/workout-tracker', workout._id]">View</a>
+<button type="button" mat-raised-button [routerLink]="['/workout-picker']">Pick a Workout!</button>
+<mat-divider></mat-divider>
+<div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="20px" style="height: 100%;">
+
+  <mat-card *ngFor="let workout of workouts" class="guide-card">
+    <mat-card-title>{{workout.name}}</mat-card-title>
+    <mat-card-subtitle *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!workout.completedAt">Workout in progress</mat-card-subtitle>
+    <mat-card-content>
+      <a href="#" mat-raised-button color="primary" [routerLink]="['/workout-tracker', workout._id]">View</a>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngFor="let workout of workouts" class="card" [@workoutEnter]="workout">
+    <div class="card-block">
+      <h4 class="card-title">{{workout.name}}</h4>
+      <h6 class="card-subtitle text-muted" *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</h6>
+      <h6 class="card-subtitle text-muted" *ngIf="!workout.completedAt">In Progress</h6>
+    </div>
+    <div class="card-block">
+      <a href="#" class="btn btn-primary" [routerLink]="['/workout-tracker', workout._id]">View</a>
+    </div>
   </div>
 </div>
