@@ -4,10 +4,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'workout-picker',
-    templateUrl: 'workout-picker.component.html'
+    templateUrl: 'workout-picker.component.html',
+    styles: [`
+        .card-layout {
+            min-width: 50%;
+        }
+    `],
 })
 export class WorkoutPickerComponent implements OnInit {
     public form: FormGroup;
+
+    public workoutTypes = [
+        { value: 'STRENGTH_TRAINING', display: 'Strength Training' },
+        { value: 'RUNNING', display: 'Running' },
+        { value: 'CYCLING', display: 'Cycling' }
+    ];
 
     constructor(
         private formBuilder: FormBuilder,

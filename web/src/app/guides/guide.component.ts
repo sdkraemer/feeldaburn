@@ -19,10 +19,6 @@ function orderChangedTransition(from, to): boolean {
     selector: 'guide',
     templateUrl: 'guide.component.html',
     styles: [`
-        .card {
-            margin-bottom: 1em;
-        }
-
         .card-layout {
             min-width: 50%;
         }

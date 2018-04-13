@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from '../../shared/shared.module';
+
 import { WorkoutPickerRoutingModule, routedComponents } from './workout-picker.routing';
 
 import { GuideService } from '../../guides/guide.service';
@@ -11,6 +13,7 @@ import { StrengthTrainingPickerComponent } from './strength-training-picker.comp
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     ReactiveFormsModule,
     WorkoutPickerRoutingModule

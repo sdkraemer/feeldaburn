@@ -1,4 +1,3 @@
-
 <div style="text-align: center">
     <h2>{{form.controls.name.value}} Guide</h2>
     <button type="button" mat-raised-button [routerLink]="['/guides']">Back</button>
@@ -8,7 +7,7 @@
         <form novalidate (ngSubmit)="save()" [formGroup]="form">
             <input type="hidden" formControlName="_id" />
             <input type="hidden" formControlName="createdAt" />
-            <div fxLayout="column"fxLayoutAlign="space-evenly center" fxLayoutGap="10px" style="margin:20px">
+            <div fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px" style="margin:20px">
                 <mat-card class="card-layout">
                     <mat-card-content>
                         <mat-form-field class="example-full-width">
