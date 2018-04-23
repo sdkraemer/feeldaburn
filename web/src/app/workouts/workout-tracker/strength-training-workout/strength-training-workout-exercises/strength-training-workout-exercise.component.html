@@ -1,25 +1,34 @@
-<div class="card"[formGroup]="group" [hidden]="activeExerciseIndex != exercisesIndex">
-    <div class="card-header">
-        <b>{{ exercise.name }}</b>
+<div [formGroup]="group" [hidden]="activeExerciseIndex != exercisesIndex">
+    <input type="hidden" formControlName="name" />
+    <input type="hidden" formControlName="guideExercise" />
+    <input type="hidden" formControlName="type" />
+
+    <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
+        <div *ngFor="let set of exercise.sets; let setsIndex = index;">
+            <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
+        </div>
+        <!-- <div *ngFor="let set of exercise.sets; let setIndex = index;">
+            <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
+        </div> -->
+        <!-- <ul style="list-style-type:none; padding-left:0px;">
+            <li *ngFor="let set of exercise.sets; let setsIndex = index;">
+                <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
+            </li>
+        </ul> -->
     </div>
-    <div class="card-block">
-        <input type="hidden" formControlName="name"/>
-        <input type="hidden" formControlName="guideExercise"/>
-        <input type="hidden" formControlName="type"/>
-        <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
-            <ul style="list-style-type:none; padding-left:0px;">
-                <li *ngFor="let set of exercise.sets; let setsIndex = index;">
-                    <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
-                </li>
-            </ul>
-        </div>
-        <div class="form-group" *ngIf="exercise.type == 'COMPLETED'">
-            <label>Completed?</label>
-            <toggle-control formControlName="isCompleted"></toggle-control>
-        </div>
-        <div class="form-group" *ngIf="exercise.type == 'SECONDS'">
-            <label>Seconds: </label>
-            <input  type="number" class="form-control" formControlName="seconds"/>
-        </div>
-    </div>
+    <mat-form-field *ngIf="exercise.type == 'COMPLETED'" class="example-full-width">
+        <label>Completed?:</label>
+        <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
+    </mat-form-field>
+    <!-- <div class="form-group" *ngIf="exercise.type == 'COMPLETED'">
+        <label>Completed?</label>
+        <toggle-control formControlName="isCompleted"></toggle-control>
+    </div> -->
+    <!-- <div class="form-group" *ngIf="exercise.type == 'SECONDS'">
+        <label>Seconds: </label>s
+        <input type="number" class="form-control" formControlName="seconds" />
+    </div> -->
+    <mat-form-field *ngIf="exercise.type == 'SECONDS'" class="example-full-width">
+        <input matInput placeholder="Name" id="name" formControlName="seconds">
+    </mat-form-field>
 </div>

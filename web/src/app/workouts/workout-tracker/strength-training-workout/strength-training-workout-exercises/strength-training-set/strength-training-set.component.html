@@ -1,8 +1,43 @@
 <div [formGroup]="group">
-    <h6 *ngIf="set.side != 'NONE'" style="text-align:center">{{set.side | titlecase}} Side</h6>
-    <input type="hidden" formControlName="side"/>
+    <input type="hidden" formControlName="side" />
+    <mat-card>
+        <mat-card-title *ngIf="set.side != 'NONE'">
+            {{set.side | titlecase}} Side
+        </mat-card-title>
+        <mat-card-content>
+            <div fxLayout="row">
+                <div fxFlex>Repetitions</div>
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxFlex>Weight</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="50%">
+                    <strength-training-set-input-control [formGroup]="group" [control]="group.controls.repetitions" name="repetitions"></strength-training-set-input-control>
+                </div>
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxFlex="50%">
+                    <strength-training-set-input-control [formGroup]="group" [control]="group.controls.weight" name="weight"></strength-training-set-input-control>
+                </div>
+            </div>
+            <div *ngIf="showPreviousWorkouts()">
+                <div *ngFor="let previousSet of previousSets; let i = index;">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <div fxFlex>{{ previousWorkoutDates[i] | date }}</div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <div fxFlex>
+                            <button type="button" mat-raised-button (click)="copyRepititions(previousSet.repetitions)">{{ previousSet.repetitions }}</button>
+                        </div>
+                        <div fxFlex *ngIf="exercise.type == 'WEIGHTS'">
+                            <button type="button" mat-raised-button *ngIf="previousSet.weight" (click)="copyWeight(previousSet.weight)">{{ previousSet.weight }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
-    <div class="container">
+    <!-- <h6 *ngIf="set.side != 'NONE'" style="text-align:center">{{set.side | titlecase}} Side</h6> -->
+
+    <!-- <div class="container">
         <div class="row no-gutters">
             <div class="col-2"></div>
             <div class="col-5" style="text-align: center">
@@ -20,7 +55,7 @@
                 </span>
             </div>
             <div class="col">
-                <input type="number" class="form-control form-control-sm" formControlName="repetitions"/>
+                <input type="number" class="form-control form-control-sm" formControlName="repetitions" />
             </div>
             <div class="col">
                 <span class="input-group-btn float-left">
@@ -33,68 +68,23 @@
                 </span>
             </div>
             <div *ngIf="exercise.type == 'WEIGHTS'" class="col">
-                    <input type="number" class="form-control form-control-sm" formControlName="weight"/>
+                <input type="number" class="form-control form-control-sm" formControlName="weight" />
             </div>
             <div *ngIf="exercise.type == 'WEIGHTS'" class="col">
                 <span class="input-group-btn float-left">
                     <increment-decrement-button [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
                 </span>
             </div>
-        </div>
-        <!-- Make this open/close when needed? -->
-        <div class="row" *ngIf="exercise.type == 'WEIGHTS'">
-                <label class="col-4 col-sm-2 col-form-label">Adjust Weight:</label>
-                <div class="col-8 col-sm-10 text-center">
-                    <adjust-weight-picker formControlName="adjustWeight"></adjust-weight-picker>
-                </div>
-            </div>
-        <!-- <div *ngFor="let previousSet of previousSets; let i = index;" class="row no-gutters" style="margin-top:1em;">
-            <div class="col-2">{{ previousWorkoutDates[i] | date:'shortDate' }}</div>
-            <div class="col-5" style="text-align: center">
-                <button type="button" class="btn btn-secondary" (click)="copyRepititions(previousSet.repetitions)" *ngIf="previousSet.repetitions">{{ previousSet.repetitions }}</button>
-                <span *ngIf="!previousSet.repetitions">-</span>
-            </div>
-            <div class="col-5" style="text-align: center">
-                <button type="button" class="btn btn-secondary" (click)="copyWeight(previousSet.weight)" *ngIf="previousSet.weight">{{ previousSet.weight }}</button>
-                <span *ngIf="!previousSet.weight">-</span>
+        </div> -->
+    <!-- Make this open/close when needed? -->
+    <!-- <div class="row" *ngIf="exercise.type == 'WEIGHTS'">
+            <label class="col-4 col-sm-2 col-form-label">Adjust Weight:</label>
+            <div class="col-8 col-sm-10 text-center">
+                <adjust-weight-picker formControlName="adjustWeight"></adjust-weight-picker>
             </div>
         </div> -->
-    </div>
 
-
-    <!-- <div class="form-group row">
-            <label class="col-4 col-sm-2 col-form-label">Repetitions:</label>
-            <div class="col-8 col-sm-10 input-group">
-                <span class="input-group-btn">
-                    <increment-decrement-button [operation]="'decrement'" [control]="group.controls.repetitions"></increment-decrement-button>
-                </span>
-                <input type="number" class="form-control" formControlName="repetitions"/>
-                <span class="input-group-btn">
-                    <increment-decrement-button [operation]="'increment'" [control]="group.controls.repetitions"></increment-decrement-button>
-                </span>
-            </div>
-    </div>
-
-    <div class="form-group row" *ngIf="exercise.type == 'WEIGHTS'">
-            <label class="col-4 col-sm-2 col-form-label">Weight:</label>
-            <div class="col-8 col-sm-10 input-group">
-                <span class="input-group-btn">
-                    <increment-decrement-button [operation]="'decrement'" [control]="group.controls.weight"></increment-decrement-button>
-                </span>
-                <input type="number" class="form-control" formControlName="weight"/>
-                <span class="input-group-btn">
-                    <increment-decrement-button [operation]="'increment'" [control]="group.controls.weight"></increment-decrement-button>
-                </span>
-            </div>
-    </div>
-    <div class="form-group row" *ngIf="exercise.type == 'WEIGHTS'">
-        <label class="col-4 col-sm-2 col-form-label">Adjust Weight:</label>
-        <div class="col-8 col-sm-10 text-center">
-            <adjust-weight-picker formControlName="adjustWeight"></adjust-weight-picker>
-        </div>
-    </div> -->
-
-    <table class="table table-sm" *ngIf="!workout._id && previousSets.length > 0">
+    <!-- <table class="table table-sm" *ngIf="!workout._id && previousSets.length > 0">
         <thead>
             <tr>
                 <th></th>
@@ -122,6 +112,6 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
 
 </div>

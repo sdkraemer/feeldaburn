@@ -1,13 +1,14 @@
-
 <div [formGroup]="form">
-    <input type="hidden" formControlName="guide"/>
+    <input type="hidden" formControlName="guide" />
 </div>
-<h4>{{ workout.name }}</h4>
 <div *ngIf="workout.exercises.length > 0">
     <strength-training-workout-exercises [form]="form" [workout]="workout"></strength-training-workout-exercises>
 </div>
-<br>
-<div class="form-group" [formGroup]="form">
+<!-- <div class="form-group" [formGroup]="form">
     <label>Completed?</label>
     <toggle-control formControlName="isCompleted"></toggle-control>
+</div> -->
+<div [formGroup]="form">
+    <label>Completed?:</label>
+    <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
 </div>

@@ -1,15 +1,16 @@
 .example-fill-remaining-space {
-/* This fills the remaining space, by using flexbox. 
+  /* This fills the remaining space, by using flexbox. 
     Every toolbar row uses a flexbox row layout. */
-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .logo {
-    font-family: 'Aeromatics';
-    font-size: 18pt;
-    //color: #0275d8;
-    color: white;
-    .logo-big-font {
-        font-size: 28pt;
-    }
+  font-family: "Aeromatics";
+  font-size: 18pt;
+  //color: #0275d8;
+  color: white;
+  text-decoration: none;
+  .logo-big-font {
+    font-size: 28pt;
+  }
 }
