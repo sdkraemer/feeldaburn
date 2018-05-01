@@ -38,6 +38,7 @@ import * as _ from "lodash";
     .previous-set-adjust-weight > .fa-arrow-up {
         color: #1d831d;
     }
+
     `
   ]
 })
@@ -102,5 +103,9 @@ export class StrengthTrainingSetComponent implements OnInit {
 
   showPreviousWorkouts() {
     return !this.workout.isCompleted && this.previousSets.length > 0;
+  }
+
+  adjustWeightClicked(value, control) {
+    control.patchValue(value);
   }
 }

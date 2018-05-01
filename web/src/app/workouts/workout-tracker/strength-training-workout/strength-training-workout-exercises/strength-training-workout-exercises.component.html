@@ -2,11 +2,11 @@
     <div formArrayName="exercises">
         <mat-toolbar color="primary">
             <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-icon-button [disabled]="isFirstExercise()" (click)="goToPreviousExercise()">
+                <button type="button" mat-icon-button [disabled]="isFirstExercise()" (click)="goToPreviousExercise()">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
                 <span>{{workout.exercises[activeExerciseIndex].name}}</span>
-                <button mat-icon-button [disabled]="isLastExercise()" (click)="goToNextExercise()">
+                <button type="button" mat-icon-button [disabled]="isLastExercise()" (click)="goToNextExercise()">
                     <mat-icon>arrow_forward</mat-icon>
                 </button>
             </mat-toolbar-row>

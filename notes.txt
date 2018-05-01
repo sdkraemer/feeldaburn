@@ -74,4 +74,7 @@ TODO:
     -Get .debug compose working
         - https://wannabeegeek.com/2016/12/17/debugging-asp-net-core-apps-running-in-docker-containers-using-vs-code/
     -Try running app in ubuntu bash, does it fix db volume issue?
-        -Not sure theres a docker for windows subsystem
+        -Not sure theres a docker for windows subsystem 
+
+
+-docker mounting issues fix: $Env:COMPOSE_CONVERT_WINDOWS_PATHS=1
