@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from "@angular/forms";
   templateUrl: "strength-training-set-input-control.component.html"
 })
 export class StrengthTrainingSetInputControlComponent implements OnInit {
-  @Input("formGroup") private formGroup: FormGroup;
+  @Input("formGroup") public formGroup: FormGroup;
   @Input("control") private control: FormControl;
   @Input("name") public name;
 
