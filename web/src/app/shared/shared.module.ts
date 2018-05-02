@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { ToggleControlComponent } from './ui/toggle-control.component';
+import { ToggleControlComponent } from "./ui/toggle-control.component";
 
-import { 
+import {
   MatButtonModule,
   MatToolbarModule,
   MatMenuModule,
@@ -22,11 +22,12 @@ import {
   MatButtonToggleModule,
   MatRadioModule,
   MatTooltipModule,
-} from '@angular/material';
+  MatProgressBarModule
+} from "@angular/material";
 
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -46,9 +47,10 @@ import {
     MatButtonToggleModule,
     MatRadioModule,
     MatTooltipModule,
+    MatProgressBarModule
   ],
   exports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     FlexLayoutModule,
     ToggleControlComponent,
@@ -70,9 +72,8 @@ import {
     MatButtonToggleModule,
     MatRadioModule,
     MatTooltipModule,
+    MatProgressBarModule
   ],
-  declarations: [
-    ToggleControlComponent
-  ]
+  declarations: [ToggleControlComponent]
 })
-export class SharedModule { }
+export class SharedModule {}
