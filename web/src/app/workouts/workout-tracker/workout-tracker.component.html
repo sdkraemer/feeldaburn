@@ -1,7 +1,7 @@
 <div *ngIf="workout" style="text-align: center">
     <h4>{{workout.name}}</h4>
     <form novalidate (ngSubmit)="save()" [formGroup]="form">
-        <mat-card>
+        <mat-card [ngStyle.gt-sm]="{'max-width': '50%', 'margin': 'auto'}">
             <!-- This card probably needs to be moved to strength training workout, not pertinant to running/cycling-->
             <mat-card-content>
                 <dynamic-workout-container [form]="form" [workout]="workout"></dynamic-workout-container>

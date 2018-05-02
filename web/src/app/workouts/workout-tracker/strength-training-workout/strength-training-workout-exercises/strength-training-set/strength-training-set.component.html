@@ -6,22 +6,22 @@
         </mat-card-title>
         <mat-card-content>
             <div fxLayout="row" fxLayoutAlign="center center">
-                <div fxFlex="40%">
+                <div fxFlex="45%">
                     <b>Repetitions</b>
                 </div>
-                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="40%">
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="45%">
                     <b>Weight</b>
                 </div>
-                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="20%"></div>
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="10%"></div>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center">
-                <div fxFlex="40%">
+                <div fxFlex="45%">
                     <strength-training-set-input-control [formGroup]="group" [control]="group.controls.repetitions" name="repetitions"></strength-training-set-input-control>
                 </div>
-                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="40%">
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="45%">
                     <strength-training-set-input-control [formGroup]="group" [control]="group.controls.weight" name="weight"></strength-training-set-input-control>
                 </div>
-                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="20%">
+                <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="10%">
                     <input type="hidden" formControlName="adjustWeight" />
                     <button type="button" mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
@@ -42,16 +42,16 @@
                 <div *ngFor="let previousSet of previousSets; let i = index;">
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <div fxFlex="80%">{{ previousWorkoutDates[i] | date }}</div>
-                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="20%"></div>
+                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="10%"></div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <div fxFlex="40%">
+                        <div fxFlex="45%">
                             <button type="button" mat-raised-button (click)="copyRepititions(previousSet.repetitions)">{{ previousSet.repetitions }}</button>
                         </div>
-                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="40%">
+                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="45%">
                             <button type="button" mat-raised-button *ngIf="previousSet.weight" (click)="copyWeight(previousSet.weight)">{{ previousSet.weight }}</button>
                         </div>
-                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="20%">
+                        <div *ngIf="exercise.type == 'WEIGHTS'" fxShow="exercise.type == 'WEIGHTS'" fxFlex="10%">
                             <mat-icon *ngIf="previousSet.adjustWeight == 'INCREASE'">arrow_upwards</mat-icon>
                             <mat-icon *ngIf="previousSet.adjustWeight == 'DECREASE'">arrow_downward</mat-icon>
                         </div>

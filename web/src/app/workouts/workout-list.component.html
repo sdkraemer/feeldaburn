@@ -1,7 +1,10 @@
 <button type="button" mat-raised-button [routerLink]="['/workout-picker']">Pick a Workout!</button>
+<br>
+<br>
 <mat-divider></mat-divider>
+<br>
 <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="20px" style="height: 100%;">
-  <mat-card *ngFor="let workout of workouts" class="guide-card">
+  <mat-card *ngFor="let workout of workouts" [ngStyle.lt-sm]="{'min-width': '80%'}" [ngStyle]="{'min-width': '30%'}">
     <mat-card-title>{{workout.name}}</mat-card-title>
     <mat-card-subtitle *ngIf="workout.completedAt">{{workout.completedAt | date:'short'}}</mat-card-subtitle>
     <mat-card-subtitle *ngIf="!workout.completedAt">Workout in progress</mat-card-subtitle>

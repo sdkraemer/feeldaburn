@@ -1,9 +1,9 @@
 <mat-form-field [formGroup]="formGroup">
-  <button type="button" mat-button matPrefix (click)="decrement()">
+  <button type="button" mat-button matPrefix (click)="decrement()" [ngStyle.lt-sm]="{'padding': '0px'}">
     <mat-icon>remove</mat-icon>
   </button>
-  <input [formControlName]="name" matInput type="text" style="width:3em" />
-  <button type="button" mat-button matSuffix (click)="increment()">
+  <input [formControlName]="name" matInput type="text" style="width: 3em; text-align: center;" />
+  <button type="button" mat-button matSuffix (click)="increment()" [ngStyle.lt-sm]="{'padding': '0px'}">
     <mat-icon>add</mat-icon>
   </button>
 </mat-form-field>

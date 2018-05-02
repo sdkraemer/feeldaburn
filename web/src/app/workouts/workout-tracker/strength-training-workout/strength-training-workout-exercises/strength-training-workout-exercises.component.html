@@ -11,20 +11,8 @@
                 </button>
             </mat-toolbar-row>
         </mat-toolbar>
-        <!-- <div style="text-align: center">
-            <button type="button" class="btn btn-secondary" [disabled]="isFirstExercise()" (click)="goToPreviousExercise()" style="float:left;">Previous</button>
-            <h5 style="display:inline;">({{ (activeExerciseIndex+1) }}/{{ workout.exercises.length }})</h5>
-            <button type="button" class="btn btn-secondary" [disabled]="isLastExercise()" (click)="goToNextExercise()" style="float:right;">Next</button>
-            <div style="clear:both"></div>
-        </div>
-        <br> -->
         <strength-training-workout-exercise *ngFor="let exercise of workout.exercises; let exercisesIndex = index;" [group]="form.controls.exercises.controls[exercisesIndex]"
             [exercise]="exercise" [exercisesIndex]="exercisesIndex" [workout]="workout" [activeExerciseIndex]="activeExerciseIndex"></strength-training-workout-exercise>
         <br>
-        <!-- <div>
-            <button type="button" class="btn btn-secondary" [disabled]="isFirstExercise()" (click)="goToPreviousExercise()" style="float:left;">Previous</button>
-            <button type="button" class="btn btn-secondary" [disabled]="isLastExercise()" (click)="goToNextExercise()" style="float:right;">Next</button>
-            <div style="clear:both"></div>
-        </div> -->
     </div>
 </div>
