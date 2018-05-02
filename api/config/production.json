@@ -7,6 +7,6 @@
   },
   "auth0": {
     "CLIENT_DOMAIN": "feeldaburn.auth0.com",
-    "AUTH0_AUDIENCE": "http://xrcise.net/api/"
+    "AUTH0_AUDIENCE": "http://xrcise.net/api"
   }
 }
