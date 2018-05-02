@@ -16,6 +16,7 @@ app.use(
 );
 
 var auth0Config = config.get("auth0");
+console.log("NODE_ENV:" + process.env.NODE_ENV);
 console.log("auth0Config.CLIENT_DOMAIN: " + auth0Config.CLIENT_DOMAIN);
 console.log("auth0Config.AUTH0_AUDIENCE: " + auth0Config.AUTH0_AUDIENCE);
 const jwtCheck = jwt({
