@@ -21,6 +21,8 @@ services:
     build:
       context: ./api
       dockerfile: node.dockerfile
+      args:
+        - node_env=${NODE_ENV}
     volumes:
       - ./api/:/var/www/
     links:
