@@ -18,7 +18,8 @@ export class StrengthTrainingSetInputControlComponent implements OnInit {
     this.currentFormControlName = "repetitions";
   }
 
-  decrement() {
+  decrement($event) {
+    $event.stopPropagation();
     let isNumberAndGreaterThanZero =
       Number(this.control.value) != NaN && this.control.value > 0;
     if (isNumberAndGreaterThanZero) {
@@ -26,7 +27,8 @@ export class StrengthTrainingSetInputControlComponent implements OnInit {
     }
   }
 
-  increment() {
+  increment($event) {
+    $event.stopPropagation();
     if (Number(this.control.value) != NaN) {
       this.control.setValue(+this.control.value + 1);
     }
