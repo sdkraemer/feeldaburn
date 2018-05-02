@@ -17,6 +17,8 @@ EXPOSE 3000
 #DO NOT COMMIT THIS, PORT 7000 SHOULD NOT BE EXPOSED
 EXPOSE 7000 
 
+ENV NODE_ENV production
+
 #ENTRYPOINT ["nodemon", "server.js", "-L"]
 ENTRYPOINT ["pm2", "start", "server.js", "--log", "/var/log/pm2/pm2.log", "--watch", "--no-daemon"]
 
