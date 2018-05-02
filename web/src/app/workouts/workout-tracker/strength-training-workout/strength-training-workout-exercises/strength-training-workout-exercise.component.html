@@ -7,28 +7,20 @@
         <div *ngFor="let set of exercise.sets; let setsIndex = index;">
             <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
         </div>
-        <!-- <div *ngFor="let set of exercise.sets; let setIndex = index;">
-            <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
-        </div> -->
-        <!-- <ul style="list-style-type:none; padding-left:0px;">
-            <li *ngFor="let set of exercise.sets; let setsIndex = index;">
-                <strength-training-set [group]="group.controls.sets.controls[setsIndex]" [workout]="workout" [exercise]="exercise" [set]="set"></strength-training-set>
-            </li>
-        </ul> -->
     </div>
-    <mat-form-field *ngIf="exercise.type == 'COMPLETED'" class="example-full-width">
-        <label>Completed?:</label>
-        <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
-    </mat-form-field>
-    <!-- <div class="form-group" *ngIf="exercise.type == 'COMPLETED'">
-        <label>Completed?</label>
-        <toggle-control formControlName="isCompleted"></toggle-control>
-    </div> -->
-    <!-- <div class="form-group" *ngIf="exercise.type == 'SECONDS'">
-        <label>Seconds: </label>s
-        <input type="number" class="form-control" formControlName="seconds" />
-    </div> -->
-    <mat-form-field *ngIf="exercise.type == 'SECONDS'" class="example-full-width">
-        <input matInput placeholder="Name" id="name" formControlName="seconds">
-    </mat-form-field>
+
+    <mat-card *ngIf="exercise.type == 'COMPLETED'">
+        <mat-card-content>
+            <label>Completed?:</label>
+            <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="exercise.type == 'SECONDS'">
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="seconds" id="seconds" formControlName="seconds">
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
 </div>
