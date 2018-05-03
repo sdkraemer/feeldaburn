@@ -48,6 +48,7 @@ export class StrengthTrainingSetComponent implements OnInit {
   @Input("group") public group: FormGroup;
 
   @Input("exercise") public exercise: IWorkoutExercise;
+  //used for exercise.guideExercise
 
   @Input("workout") public workout: IStrengthTrainingWorkout;
 
