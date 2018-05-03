@@ -11,8 +11,6 @@ import {
   MatSelectModule,
   MatTabsModule,
   MatInputModule,
-  MatProgressSpinnerModule,
-  MatChipsModule,
   MatSidenavModule,
   MatCheckboxModule,
   MatCardModule,
@@ -21,7 +19,6 @@ import {
   MatSlideToggleModule,
   MatButtonToggleModule,
   MatRadioModule,
-  MatTooltipModule,
   MatProgressBarModule
 } from "@angular/material";
 
@@ -35,8 +32,6 @@ import {
     MatSelectModule,
     MatTabsModule,
     MatInputModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
     MatCardModule,
     MatSidenavModule,
     MatCheckboxModule,
@@ -46,7 +41,6 @@ import {
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatTooltipModule,
     MatProgressBarModule
   ],
   exports: [
@@ -54,14 +48,11 @@ import {
     FormsModule,
     FlexLayoutModule,
     ToggleControlComponent,
-
     MatButtonModule,
     MatToolbarModule,
     MatSelectModule,
     MatTabsModule,
     MatInputModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
     MatCardModule,
     MatSidenavModule,
     MatCheckboxModule,
@@ -71,7 +62,6 @@ import {
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatTooltipModule,
     MatProgressBarModule
   ],
   declarations: [ToggleControlComponent]
