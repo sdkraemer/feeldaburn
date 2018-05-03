@@ -18,7 +18,6 @@ import { StrengthTrainingWorkoutExercisesComponent } from "./strength-training-w
 import { StrengthTrainingSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-set/strength-training-set.component";
 import { StrengthTrainingWorkoutExerciseComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-workout-exercise.component";
 import { IncrementDecrementButtonComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-set/increment-decrement-button.component";
-import { AdjustWeightPickerComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-set/adjust-weight-picker.component";
 import { DynamicWorkoutContainerComponent } from "./dynamic-workout-container.component";
 import { StrengthTrainingSetInputControlComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-set/strength-training-set-input-control.component";
 
@@ -37,7 +36,6 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
     StrengthTrainingSetComponent,
     StrengthTrainingWorkoutExerciseComponent,
     IncrementDecrementButtonComponent,
-    AdjustWeightPickerComponent,
     DynamicWorkoutContainerComponent,
     StrengthTrainingSetInputControlComponent
   ],
