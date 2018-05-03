@@ -1,4 +1,4 @@
-<div [formGroup]="group" [hidden]="activeExerciseIndex != exercisesIndex">
+<div [formGroup]="group" [hidden]="!showExercise">
     <input type="hidden" formControlName="name" />
     <input type="hidden" formControlName="guideExercise" />
     <input type="hidden" formControlName="type" />

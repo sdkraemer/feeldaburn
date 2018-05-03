@@ -1,16 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
-import {
-  IWorkout,
-  IStrengthTrainingWorkout,
-  StrengthTrainingWorkout
-} from "../../core";
+import { IWorkout, IStrengthTrainingWorkout } from "../../core";
 import { IGuide, Guide } from "../../core";
 import { WorkoutService } from "app/workouts/workout.service";
 import { GuideService } from "app/guides/guide.service";
 import { WorkoutFactory } from "app/core/factories/workoutfactory";
-import { map } from "rxjs/operators";
 
 @Injectable()
 export class WorkoutFactoryService {
