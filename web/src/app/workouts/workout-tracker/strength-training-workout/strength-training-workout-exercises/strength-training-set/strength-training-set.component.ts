@@ -9,7 +9,9 @@ import {
   IWorkoutExercise,
   IRepetitionSet,
   IWeightsSet,
-  ISet
+  ISet,
+  IPreviousWorkoutExercise,
+  IPreviousSet
 } from "app/core";
 
 import * as _ from "lodash";
@@ -47,42 +49,29 @@ export class StrengthTrainingSetComponent implements OnInit {
 
   @Input("group") public group: FormGroup;
 
-  @Input("exercise") public exercise: IWorkoutExercise;
-  //used for exercise.guideExercise
-
   @Input("workout") public workout: IStrengthTrainingWorkout;
 
-  private previousWorkoutDates: Date[] = [];
-  public previousSets: ISet[] = [];
+  @Input("previousExercises")
+  public previousExercises: IPreviousWorkoutExercise[];
+
+  public previousSets: IPreviousSet[] = [];
 
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges() {
-    this.buildPreviousExerciseSetInfo(this.workout.previousWorkouts);
+    this.previousSets = this.buildPreviousSets();
   }
 
-  private buildPreviousExerciseSetInfo(
-    previousWorkouts: IStrengthTrainingWorkout[]
-  ) {
-    if (previousWorkouts) {
-      previousWorkouts.forEach(function(previousWorkout) {
-        this.previousWorkoutDates.push(previousWorkout.completedAt);
-        let previousExercise = this.findPreviousExercise(previousWorkout);
-        this.previousSets.push(
-          this.findPreviousSetFromExercise(previousExercise)
-        );
-      }, this);
-    }
-  }
-
-  private findPreviousExercise(
-    previousWorkout: IStrengthTrainingWorkout
-  ): IWorkoutExercise {
-    return _.find(previousWorkout.exercises, {
-      guideExercise: this.exercise.guideExercise
-    });
+  private buildPreviousSets() {
+    let sets: IPreviousSet[] = [];
+    this.previousExercises.forEach(previousExercise => {
+      let set = this.findPreviousSetFromExercise(previousExercise);
+      set.completedAt = previousExercise.completedAt;
+      sets.push(set);
+    }, this);
+    return sets;
   }
 
   private findPreviousSetFromExercise(previousExercise) {

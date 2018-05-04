@@ -1,19 +1,19 @@
 <div [formGroup]="form">
-    <div formArrayName="exercises">
-        <mat-toolbar color="primary">
-            <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-                <button type="button" mat-icon-button [disabled]="isFirstExercise()" (click)="goToPreviousExercise()">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-                <span style="white-space: pre-wrap;">{{workout.exercises[activeExerciseIndex].name}}</span>
-                <button type="button" mat-icon-button [disabled]="isLastExercise()" (click)="goToNextExercise()">
-                    <mat-icon>arrow_forward</mat-icon>
-                </button>
-            </mat-toolbar-row>
-        </mat-toolbar>
-        <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
-        <strength-training-workout-exercise *ngFor="let exercise of workout.exercises; let exercisesIndex = index;" [group]="form.controls.exercises.controls[exercisesIndex]"
-            [exercise]="exercise" [showExercise]="exercisesIndex == activeExerciseIndex" [workout]="workout"></strength-training-workout-exercise>
-        <br>
-    </div>
+  <div formArrayName="exercises">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <button type="button" mat-icon-button [disabled]="isFirstExercise()" (click)="goToPreviousExercise()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span style="white-space: pre-wrap;">{{workout.exercises[activeExerciseIndex].name}}</span>
+        <button type="button" mat-icon-button [disabled]="isLastExercise()" (click)="goToNextExercise()">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
+    <strength-training-workout-exercise *ngFor="let exercise of workout.exercises; let exercisesIndex = index;" [group]="form.controls.exercises.controls[exercisesIndex]"
+      [exercise]="exercise" [showExercise]="exercisesIndex == activeExerciseIndex" [workout]="workout"></strength-training-workout-exercise>
+    <br>
+  </div>
 </div>
