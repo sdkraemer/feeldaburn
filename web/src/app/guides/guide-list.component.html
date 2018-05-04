@@ -4,7 +4,7 @@
 <mat-divider></mat-divider>
 <br>
 <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="20px" style="height: 100%;">
-  <mat-card *ngFor="let guide of guides" [ngStyle.lt-sm]="{'min-width': '80%'}" [ngStyle]="{'min-width': '30%'}">
+  <mat-card *ngFor="let guide of guides" [ngStyle.lt-md]="{'width': '80%'}" [ngStyle.gt-sm]="{'width': '30%'}">
     <mat-card-title>{{guide.name}}</mat-card-title>
     <mat-card-subtitle>{{guide.createdAt | date:'short'}}</mat-card-subtitle>
     <mat-card-content>
