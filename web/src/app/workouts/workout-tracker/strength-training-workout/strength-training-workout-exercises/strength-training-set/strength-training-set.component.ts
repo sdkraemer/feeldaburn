@@ -11,7 +11,9 @@ import {
   IWeightsSet,
   ISet,
   IPreviousWorkoutExercise,
-  IPreviousSet
+  IPreviousSet,
+  WeightsSet,
+  IWorkout
 } from "app/core";
 
 import * as _ from "lodash";
@@ -51,6 +53,8 @@ export class StrengthTrainingSetComponent implements OnInit {
 
   @Input("workout") public workout: IStrengthTrainingWorkout;
 
+  @Input("exercise") public exercise: IWorkoutExercise;
+
   @Input("previousExercises")
   public previousExercises: IPreviousWorkoutExercise[];
 
@@ -81,6 +85,10 @@ export class StrengthTrainingSetComponent implements OnInit {
     } else {
       return previousExercise.sets[0];
     }
+  }
+
+  public isWeightsSet() {
+    return this.exercise.type == "WEIGHTS";
   }
 
   copyRepititions(pastRepititions) {

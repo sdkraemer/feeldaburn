@@ -1,53 +1,55 @@
 <div style="text-align: center">
   <h2>{{form.controls.name.value}} Guide</h2>
   <button type="button" mat-raised-button [routerLink]="['/guides']">Back</button>
-  <button type="submit" mat-raised-button (click)="save()">Save</button>
-  <button type="button" mat-raised-button (click)="delete()" [hidden]="!form.value._id">Delete</button>
+  <button type="submit" mat-raised-button color="primary" (click)="save()">Save</button>
+  <button type="button" mat-raised-button color="primary" (click)="delete()" [hidden]="!form.value._id">Delete</button>
+  <br>
+  <mat-divider></mat-divider>
+  <br>
   <div *ngIf="form" [ngStyle.lt-md]="{'width':'80%'}" [ngStyle.gt-sm]="{'width':'50%'}" style="margin: auto;">
-    <form novalidate (ngSubmit)=" save() " [formGroup]="form ">
-      <input type="hidden " formControlName="_id " />
-      <input type="hidden " formControlName="createdAt " />
-      <div fxLayout="column " fxLayoutAlign="space-evenly center " fxLayoutGap="10px ">
-        <mat-card class="card-layout ">
+    <form novalidate (ngSubmit)="save()" [formGroup]="form">
+      <input type="hidden" formControlName="_id" />
+      <input type="hidden" formControlName="createdAt" />
+      <div fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+        <mat-card class="card-layout">
           <mat-card-content>
-            <mat-form-field class="example-full-width ">
-              <input matInput placeholder="Name " id="name " formControlName="name ">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name" id="name" formControlName="name">
             </mat-form-field>
-            <mat-form-field class="example-full-width ">
-              <textarea matInput placeholder="Description " formControlName="description "></textarea>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Description" formControlName="description"></textarea>
             </mat-form-field>
           </mat-card-content>
         </mat-card>
-        <mat-card class="card-layout ">
+        <mat-card class="card-layout">
           <mat-card-title>Exercises</mat-card-title>
           <mat-card-content>
-            <div formArrayName="exercises ">
-              <div fxLayout="column " fxLayoutAlign="space-evenly center " fxLayoutGap="10px ">
+            <div formArrayName="exercises">
+              <div fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
                 <!-- Putting buttons in div shrink wrapped them -->
                 <div>
-                  <button type="button " mat-raised-button (click)="addExercise() ">Add Exercise</button>
+                  <button type="button" mat-raised-button (click)="addExercise()">Add Exercise</button>
                 </div>
-                <mat-card *ngFor="let exercise of form.controls.exercises.controls; let i=index; " [style.order]="exercise.order
-    " [@exerciseReordered]="exercise.controls.order.value ">
+                <mat-card *ngFor="let exercise of form.controls.exercises.controls; let i=index;" [style.order]="exercise.order" [@exerciseReordered]="exercise.controls.order.value">
                   <mat-card-title>{{form.controls.exercises.controls[i].controls.name.value}}</mat-card-title>
                   <mat-card-subtitle>Exercise #{{i+1}}</mat-card-subtitle>
-                  <mat-card-content [formGroupName]="i ">
-                    <input type="hidden " formControlName="_id " />
-                    <input type="hidden " formControlName="order " />
-                    <mat-form-field class="example-full-width ">
-                      <input matInput placeholder="Name " id="name " formControlName="name ">
+                  <mat-card-content [formGroupName]="i">
+                    <input type="hidden" formControlName="_id" />
+                    <input type="hidden" formControlName="order" />
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Name" id="name" formControlName="name">
                     </mat-form-field>
                     <mat-form-field>
-                      <mat-select placeholder="Type " formControlName="type ">
-                        <mat-option *ngFor="let exerciseType of exerciseTypes " [value]="exerciseType.value ">{{exerciseType.display}}</mat-option>
+                      <mat-select placeholder="Type" formControlName="type">
+                        <mat-option *ngFor="let exerciseType of exerciseTypes" [value]="exerciseType.value">{{exerciseType.display}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                     <label>Sided:</label>
-                    <mat-slide-toggle formControlName="sided "></mat-slide-toggle>
+                    <mat-slide-toggle formControlName="sided"></mat-slide-toggle>
                   </mat-card-content>
                   <mat-card-actions>
-                    <button mat-button (click)="removeExercise(i); ">Remove</button>
-                    <button mat-button *ngIf="i> 0" (click)="moveExerciseUp(exercise, i)">Move Up</button>
+                    <button mat-button (click)="removeExercise(i);">Remove</button>
+                    <button mat-button *ngIf="i > 0" (click)="moveExerciseUp(exercise, i)">Move Up</button>
                   </mat-card-actions>
                 </mat-card>
                 <div>
