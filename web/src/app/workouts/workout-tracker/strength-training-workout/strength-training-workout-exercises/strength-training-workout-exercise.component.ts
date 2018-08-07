@@ -8,7 +8,8 @@ import {
   ISet,
   IStrengthTrainingWorkout,
   StrengthTrainingWorkout,
-  PreviousWorkoutExercise
+  PreviousWorkoutExercise,
+  IPreviousWorkoutExercise
 } from "app/core";
 
 import * as _ from "lodash";
@@ -26,7 +27,7 @@ export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
 
   @Input("workout") public workout: IStrengthTrainingWorkout;
 
-  public previousExercises: IWorkoutExercise[];
+  public previousExercises: IPreviousWorkoutExercise[];
 
   constructor() {}
 
