@@ -14,7 +14,7 @@ export class WorkoutExercise implements IWorkoutExercise {
   guideExercise: string;
   sets: ISet[];
   type: string;
-  isCompleted: boolean;
+  isCompleted?: boolean;
   seconds: number;
 
   constructor(options: IWorkoutExercise) {
