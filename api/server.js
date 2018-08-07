@@ -39,6 +39,7 @@ app.use("/api/workouts", [jwtCheck, userId]);
 app.use("/api/workout", [jwtCheck, userId]);
 app.use("/api/guides", [jwtCheck, userId]);
 app.use("/api/measurements", [jwtCheck, userId]);
+app.use("/api/statuses", [jwtCheck, userId]);
 app.use("/api/users", [jwtCheck]);
 app.use("/api/ping", function(req, res) {
   res.send("Hello world");
@@ -47,6 +48,7 @@ app.use("/api/ping", function(req, res) {
 var workouts = require("./routes/workouts.js")(app);
 var guides = require("./routes/guides.js")(app);
 var measurements = require("./routes/measurements.js")(app);
+var statuses = require("./routes/statuses.js")(app);
 var users = require("./routes/users.js")(app);
 
 app.use(function(err, req, res, next) {
