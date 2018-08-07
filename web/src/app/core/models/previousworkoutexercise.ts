@@ -4,7 +4,8 @@ export interface IPreviousWorkoutExercise extends IWorkoutExercise {
   completedAt: Date;
 }
 
-export class PreviousWorkoutExercise extends WorkoutExercise {
+export class PreviousWorkoutExercise extends WorkoutExercise
+  implements IPreviousWorkoutExercise {
   completedAt: Date;
   constructor(options: IPreviousWorkoutExercise) {
     super(options);
