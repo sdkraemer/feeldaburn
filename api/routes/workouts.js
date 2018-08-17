@@ -164,6 +164,9 @@ module.exports = function(app) {
             : new Date();
         }
         workout.isCompleted = json.isCompleted;
+        if (json.createdAt) {
+          workout.createdAt = json.createdAt;
+        }
 
         if (json.type == "RUNNING") {
           workout.distance = json.distance;
