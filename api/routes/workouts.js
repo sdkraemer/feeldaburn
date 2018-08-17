@@ -159,7 +159,9 @@ module.exports = function(app) {
         var isWorkoutNewlyCompleted = json.isCompleted && !workout.isCompleted;
         var isCompletedAtBeingUpdated = json.completedAt;
         if (isWorkoutNewlyCompleted || isCompletedAtBeingUpdated) {
-          workout.completedAt = new Date();
+          workout.completedAt = json.completedAt
+            ? json.completedAt
+            : new Date();
         }
         workout.isCompleted = json.isCompleted;
 
