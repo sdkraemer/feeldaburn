@@ -170,6 +170,9 @@ module.exports = function(app) {
 
         if (json.type == "RUNNING") {
           workout.distance = json.distance;
+          workout.elapsed_time = json.elapsed_time;
+          workout.heartrate = json.heartrate;
+          workout.calories = json.calories;
         } else if (json.type == "STRENGTH_TRAINING") {
           workout.guide = json.guide;
           workout.exercises = json.exercises; //just replace the whole thing.
