@@ -12,16 +12,29 @@ import {
   ISet,
   WeightsSet
 } from "../";
+import { TimeDuration } from "../models/timeduration";
 
 export class WorkoutFactory {
   public createFromFormData(formData): IWorkout {
     let workout: IWorkout = null;
     if (formData.type == "RUNNING") {
-      workout = new RunningWorkout(formData);
+      workout = this.createRunningWorkout(workout, formData);
     } else if ((formData.type = "STRENGTH_TRAINING")) {
       workout = new StrengthTrainingWorkout(formData);
     }
     return workout;
+  }
+
+  private createRunningWorkout(workout: IWorkout, formData: any) {
+    formData.elapsed_time = this.calculateSecondsFromTimeDuration(formData);
+    workout = new RunningWorkout(formData);
+    return workout;
+  }
+
+  private calculateSecondsFromTimeDuration(formData: any) {
+    let timeDuration: TimeDuration = formData.elapsed_time;
+    let elapsedTimeInSeconds = timeDuration.minutes * 60 + timeDuration.seconds;
+    return elapsedTimeInSeconds;
   }
 
   public createFromGuide(guide: IGuide): IStrengthTrainingWorkout {
@@ -77,13 +90,13 @@ export class WorkoutFactory {
 
   public createFromWorkoutType(workoutType: string): IWorkout {
     if (workoutType == "RUNNING") {
-      return this.createRunningWorkout();
+      return this.createEmptyRunningWorkout();
     } else {
       console.error("Unknown workout type");
     }
   }
 
-  private createRunningWorkout(): IRunningWorkout {
+  private createEmptyRunningWorkout(): IRunningWorkout {
     return new RunningWorkout({
       _id: null,
       distance: null,

@@ -16,3 +16,4 @@ export * from "./models/guideexercise.interface";
 export * from "./models/workouttype";
 export * from "./models/previousworkoutexercise";
 export * from "./models/previousset";
+export * from "./models/timeduration";

@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ToggleControlComponent } from "./ui/toggle-control.component";
+import { TimeDurationControlComponent } from "./ui/time-duration-control.component";
 
 import {
   MatButtonModule,
@@ -26,6 +27,7 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MatButtonModule,
     MatToolbarModule,
@@ -46,8 +48,10 @@ import {
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     ToggleControlComponent,
+    TimeDurationControlComponent,
     MatButtonModule,
     MatToolbarModule,
     MatSelectModule,
@@ -64,6 +68,6 @@ import {
     MatRadioModule,
     MatProgressBarModule
   ],
-  declarations: [ToggleControlComponent]
+  declarations: [ToggleControlComponent, TimeDurationControlComponent]
 })
 export class SharedModule {}

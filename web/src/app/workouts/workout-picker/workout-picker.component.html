@@ -1,15 +1,37 @@
 <div style="text-align: center">
   <h2>Select a Workout!</h2>
   <form novalidate [formGroup]="form">
-    <div fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
-      <mat-card class="card-layout" [ngStyle.gt-sm]="{'max-width':'50%', 'margin':'auto'}" [ngStyle.lt-md]="{'min-width':'80%', 'margin':'auto'}">
-        <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
-          <mat-form-field class="example-full-width">
-            <mat-select placeholder="Workout Type" formControlName="workoutType">
-              <mat-option *ngFor="let workoutType of workoutTypes" [value]="workoutType.value">{{workoutType.display}}</mat-option>
+    <div
+      fxLayout="column"
+      fxLayoutAlign="space-evenly center"
+      fxLayoutGap="10px"
+    >
+      <mat-card
+        class="card-layout"
+        [ngStyle.gt-sm]="{ 'max-width': '50%', margin: 'auto' }"
+        [ngStyle.lt-md]="{ 'min-width': '80%', margin: 'auto' }"
+      >
+        <mat-card-content
+          fxLayout="column"
+          fxLayoutAlign="space-evenly center"
+          fxLayoutGap="10px"
+        >
+          <mat-form-field class="full-width-input">
+            <mat-select
+              placeholder="Workout Type"
+              formControlName="workoutType"
+            >
+              <mat-option
+                *ngFor="let workoutType of workoutTypes"
+                [value]="workoutType.value"
+                >{{ workoutType.display }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
-          <strength-training-picker *ngIf="form.value.workoutType == 'STRENGTH_TRAINING'" [form]="form"></strength-training-picker>
+          <strength-training-picker
+            *ngIf="form.value.workoutType == 'STRENGTH_TRAINING'"
+            [form]="form"
+          ></strength-training-picker>
           <div *ngIf="form.value.workoutType == 'CYCLING'">
             <div class="alert alert-info" role="alert">
               <strong>Whoops!</strong> Cycling is not quite there yet.
@@ -17,7 +39,13 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="startWorkout()" [disabled]="form.value.workoutType == 'CYCLING'">Let's Go!</button>
+          <button
+            mat-button
+            (click)="startWorkout()"
+            [disabled]="form.value.workoutType == 'CYCLING'"
+          >
+            Let's Go!
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

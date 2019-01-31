@@ -36,22 +36,6 @@ export class WorkoutService {
         )
       })
       .pipe(catchError(this.handleError("getWorkouts", [])));
-
-    // return this.http
-    //     .get(this.apiUrl, {
-    //         headers: new HttpHeaders().set(
-    //             'Authorization', `Bearer ${localStorage.getItem('access_token')}`
-    //         )
-    //     })
-    //     .subscribe((res: Response) => {
-    //         this.workouts = res.json();
-    //         return this.workouts;
-    //     })
-    //     // .map((res: Response) => {
-    //     //     this.workouts = res.json();
-    //     //     return this.workouts;
-    //     // })
-    //     .catch(this.handleError);
   }
 
   getWorkout(_id: string) {
@@ -64,18 +48,6 @@ export class WorkoutService {
         )
       })
       .pipe(catchError(this.handleError("getWorkout", [])));
-    // .map((response: Response) => {
-    //     let json = response.json();
-    //     let workout: IWorkout;
-    //     if(json.type == 'RUNNING'){
-    //         workout = new RunningWorkout(json);
-    //     }
-    //     else if(json.type == 'STRENGTH_TRAINING'){
-    //         workout = new StrengthTrainingWorkout(json);
-    //     }
-    //     return workout;
-    // })
-    // .catch(this.handleError);
   }
 
   add(workout: IWorkout) {
@@ -87,9 +59,6 @@ export class WorkoutService {
         )
       })
       .pipe(
-        // map((response: Response) => {
-        //   return this.isSuccessStatusCode(response.status);
-        // }),
         map((response: Response) => {
           return true;
         }),
@@ -106,9 +75,6 @@ export class WorkoutService {
         )
       })
       .pipe(
-        // map((response: Response) => {
-        //     return this.isSuccessStatusCode(response.status);
-        // }),
         map((response: Response) => {
           return true;
         }),
@@ -126,12 +92,6 @@ export class WorkoutService {
         responseType: "text"
       })
       .pipe(
-        // map((response: Response) => {
-        //   return this.isSuccessStatusCode(response.status);
-        // }),
-        // map((response: Response) => {
-        //   return true;
-        // }),
         tap(response => {
           return true;
         }),
@@ -156,11 +116,6 @@ export class WorkoutService {
   private isSuccessStatusCode(statusCode) {
     return statusCode >= 200 && statusCode < 300;
   }
-
-  // handleError(error: any){
-  //     console.error('server error:', error);
-  //     return Observable.throw(error || ' default error handlererererer');
-  // }
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {

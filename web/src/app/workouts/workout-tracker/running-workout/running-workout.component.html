@@ -1,27 +1,51 @@
-<h4>Running Workout</h4>
 <div [formGroup]="form">
-    <div class="form-group">
-        <label for="distance">Distance (In Miles):</label>
-        <input type="text" class="form-control" formControlName="distance"/>
-    </div>
-    <div class="form-group">
-        <label for="elapsed_time">Time (In Seconds):</label>
-        <input type="text" class="form-control" formControlName="elapsed_time"/>
-    </div>
-    <div class="form-group">
-        <label for="pace">Pace (In Seconds/Mile):</label>
-        <input type="text" class="form-control" formControlName="pace"/>
-    </div>
-    <div class="form-group">
-        <label for="heartrate">Heart Rate:</label>
-        <input type="text" class="form-control" formControlName="heartrate"/>
-    </div>
-    <div class="form-group">
-        <label for="calories">Calories:</label>
-        <input type="text" class="form-control" formControlName="calories"/>
-    </div>
-    <div class="form-group">
-        <label>Completed?</label>
-        <toggle-control formControlName="isCompleted"></toggle-control>
-    </div>
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      type="text"
+      placeholder="Distance (In Miles)"
+      formControlName="distance"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="push-left">
+    <time-duration-control
+      placeholder="Time"
+      formControlName="elapsed_time"
+    ></time-duration-control>
+    <mat-icon matSuffix>timer</mat-icon>
+    <mat-hint>Minutes:Seconds</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      type="text"
+      placeholder="Pace (In Seconds/Mile)"
+      formControlName="pace"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      type="text"
+      placeholder="Average Heart Rate"
+      formControlName="heartrate"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      type="text"
+      placeholder="Calories"
+      formControlName="calories"
+    />
+  </mat-form-field>
+
+  <div>
+    <label>Completed?:</label>
+    <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
+  </div>
 </div>
