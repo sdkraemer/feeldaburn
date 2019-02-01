@@ -77,4 +77,8 @@ TODO:
         -Not sure theres a docker for windows subsystem 
 
 
--docker mounting issues fix: $Env:COMPOSE_CONVERT_WINDOWS_PATHS=1
+-docker mounting issues fix: 
+    $Env:COMPOSE_CONVERT_WINDOWS_PATHS=1
+    export COMPOSE_CONVERT_WINDOWS_PATHS=1
+    --for windows
+    SET COMPOSE_CONVERT_WINDOWS_PATHS=1
