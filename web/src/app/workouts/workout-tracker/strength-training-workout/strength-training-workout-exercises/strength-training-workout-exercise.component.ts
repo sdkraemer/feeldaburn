@@ -1,18 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewContainerRef,
+  ComponentRef,
+  ViewChild,
+  ComponentFactoryResolver
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 import { Observable } from "rxjs/Observable";
-import {
-  IWorkoutExercise,
-  IWorkout,
-  ISet,
-  IStrengthTrainingWorkout,
-  StrengthTrainingWorkout,
-  PreviousWorkoutExercise,
-  IPreviousWorkoutExercise
-} from "app/core";
+import { IWorkoutExercise, IStrengthTrainingWorkout } from "app/core";
 
-import * as _ from "lodash";
+import { CompletedExerciseTypeComponent } from "./strength-training-exercises/completed-exercise-type/completed-exercise-type.component";
+import { SecondsExerciseTypeComponent } from "./strength-training-exercises/seconds-exercise-type/seconds-exercise-type.component";
+import { SetsExerciseTypeComponent } from "./strength-training-exercises/sets-exercise-type/sets-exercise-type.component";
 
 @Component({
   selector: "strength-training-workout-exercise",
@@ -27,31 +29,45 @@ export class StrengthTrainingWorkoutExerciseComponent implements OnInit {
 
   @Input("workout") public workout: IStrengthTrainingWorkout;
 
-  public previousExercises: IPreviousWorkoutExercise[];
+  @ViewChild("exerciseComponentContainer", { read: ViewContainerRef })
+  public exerciseComponentContainer: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
 
-  constructor() {}
+  private exerciseTypeComponentMap = {
+    REPS: SetsExerciseTypeComponent,
+    REPS_WEIGHTS: SetsExerciseTypeComponent,
+    WEIGHTS: SetsExerciseTypeComponent,
+    COMPLETED: CompletedExerciseTypeComponent,
+    SECONDS: SecondsExerciseTypeComponent
+  };
 
-  ngOnInit() {
-    this.previousExercises = this.retrievePreviousExerciseSets();
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+
+  ngOnInit() {}
+
+  ngAfterContentInit() {
+    let component = this.exerciseTypeComponentMap[this.exercise.type];
+    if (!component) {
+      console.error("Undefined exercise component type. Need to map it.");
+    }
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      component
+    );
+    this.componentRef = this.exerciseComponentContainer.createComponent(
+      componentFactory
+    );
+    this.renderComponent();
   }
 
-  retrievePreviousExerciseSets() {
-    let previousExercises: PreviousWorkoutExercise[] = [];
-    //Pass only previous exercise data to set component. Maybe create a new model that has a date per exercise.
-    if (this.workout.previousWorkouts) {
-      let previousWorkouts: IStrengthTrainingWorkout[] = this.workout
-        .previousWorkouts;
-      previousWorkouts.forEach(function(previousWorkout) {
-        let previousExercise: PreviousWorkoutExercise = _.find(
-          previousWorkout.exercises,
-          {
-            guideExercise: this.exercise.guideExercise
-          }
-        );
-        previousExercise.completedAt = previousWorkout.completedAt;
-        previousExercises.push(previousExercise);
-      }, this);
+  ngOnChanges() {
+    this.renderComponent();
+  }
+
+  private renderComponent() {
+    if (this.componentRef) {
+      this.componentRef.instance.form = this.group;
+      this.componentRef.instance.workout = this.workout;
+      this.componentRef.instance.exercise = this.exercise;
     }
-    return previousExercises;
   }
 }

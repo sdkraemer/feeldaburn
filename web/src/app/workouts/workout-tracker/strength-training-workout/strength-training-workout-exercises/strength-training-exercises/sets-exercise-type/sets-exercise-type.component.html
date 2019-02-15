@@ -1,0 +1,13 @@
+<div [formGroup]="form">
+  <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
+    <div *ngFor="let set of exercise.sets; let setsIndex = index">
+      <strength-training-set
+        [group]="form.controls.sets.controls[setsIndex]"
+        [workout]="workout"
+        [exercise]="exercise"
+        [set]="set"
+        [previousExercises]="previousExercises"
+      ></strength-training-set>
+    </div>
+  </div>
+</div>

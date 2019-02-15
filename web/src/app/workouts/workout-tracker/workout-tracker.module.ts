@@ -19,6 +19,9 @@ import { StrengthTrainingSetComponent } from "./strength-training-workout/streng
 import { StrengthTrainingWorkoutExerciseComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-workout-exercise.component";
 import { DynamicWorkoutContainerComponent } from "./dynamic-workout-container.component";
 import { StrengthTrainingSetInputControlComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-set/strength-training-set-input-control.component";
+import { CompletedExerciseTypeComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/completed-exercise-type/completed-exercise-type.component";
+import { SecondsExerciseTypeComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/seconds-exercise-type/seconds-exercise-type.component";
+import { SetsExerciseTypeComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/sets-exercise-type.component";
 
 @NgModule({
   imports: [
@@ -35,7 +38,10 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
     StrengthTrainingSetComponent,
     StrengthTrainingWorkoutExerciseComponent,
     DynamicWorkoutContainerComponent,
-    StrengthTrainingSetInputControlComponent
+    StrengthTrainingSetInputControlComponent,
+    SetsExerciseTypeComponent,
+    CompletedExerciseTypeComponent,
+    SecondsExerciseTypeComponent
   ],
   providers: [
     GuideService,
@@ -43,6 +49,12 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
     WorkoutFactoryService
   ],
   exports: [],
-  entryComponents: [StrengthTrainingWorkoutComponent, RunningWorkoutComponent]
+  entryComponents: [
+    StrengthTrainingWorkoutComponent,
+    RunningWorkoutComponent,
+    SetsExerciseTypeComponent,
+    CompletedExerciseTypeComponent,
+    SecondsExerciseTypeComponent
+  ]
 })
 export class WorkoutTrackerModule {}

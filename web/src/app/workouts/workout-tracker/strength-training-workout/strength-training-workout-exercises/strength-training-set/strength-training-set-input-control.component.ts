@@ -10,12 +10,12 @@ export class StrengthTrainingSetInputControlComponent implements OnInit {
   @Input("control") private control: FormControl;
   @Input("name") public name;
 
-  public currentFormControlName: string;
+  //public currentFormControlName: string;
 
   constructor() {}
 
   ngOnInit() {
-    this.currentFormControlName = "repetitions";
+    //this.currentFormControlName = "repetitions";
   }
 
   decrement($event) {

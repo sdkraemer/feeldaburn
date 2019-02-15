@@ -3,36 +3,5 @@
   <input type="hidden" formControlName="guideExercise" />
   <input type="hidden" formControlName="type" />
 
-  <div *ngIf="exercise.sets.length > 0" formArrayName="sets">
-    <div *ngFor="let set of exercise.sets; let setsIndex = index">
-      <strength-training-set
-        [group]="group.controls.sets.controls[setsIndex]"
-        [workout]="workout"
-        [exercise]="exercise"
-        [set]="set"
-        [previousExercises]="previousExercises"
-      ></strength-training-set>
-    </div>
-  </div>
-
-  <mat-card *ngIf="exercise.type == 'COMPLETED'">
-    <mat-card-content>
-      <label>Completed?:</label>
-      <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card *ngIf="exercise.type == 'SECONDS'">
-    <mat-card-content>
-      <mat-form-field class="full-width-input">
-        <input
-          matInput
-          type="number"
-          placeholder="seconds"
-          id="seconds"
-          formControlName="seconds"
-        />
-      </mat-form-field>
-    </mat-card-content>
-  </mat-card>
+  <div #exerciseComponentContainer></div>
 </div>
