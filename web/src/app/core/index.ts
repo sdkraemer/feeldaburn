@@ -4,6 +4,8 @@ export * from "./models/runningworkout";
 export * from "./models/strengthtrainingworkout";
 export * from "./models/workoutexercise";
 export * from "./models/set";
+export * from "./models/repsweightsset";
+export * from "./models/weightsset.interface";
 export * from "./models/weightsset";
 export * from "./models/repetitionset.interface";
 export * from "./models/repetitionset";

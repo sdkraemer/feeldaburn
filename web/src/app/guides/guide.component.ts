@@ -25,10 +25,7 @@ function orderChangedTransition(from, to): boolean {
 @Component({
   selector: "guide",
   templateUrl: "guide.component.html",
-  styles: [
-    `
-    `
-  ],
+  styles: [``],
   animations: [
     trigger("exerciseReordered", [
       transition("* => *", [
@@ -44,10 +41,13 @@ export class GuideComponent implements OnInit {
 
   public exerciseTypes = [
     { display: "Repetitions", value: "REPS" },
-    { display: "Repetitions With Weights", value: "WEIGHTS" },
+    { display: "Repetitions With Weights", value: "REPS_WEIGHTS" },
+    { display: "Weights", value: "WEIGHTS" },
     { display: "Completed", value: "COMPLETED" },
     { display: "Seconds", value: "SECONDS" }
   ];
+
+  private sidedExerciseTypes = ["REPS", "WEIGHTS", "REPS_WEIGHTS"];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -151,12 +151,12 @@ export class GuideComponent implements OnInit {
   moveExerciseUp(exercise, index) {
     let exercisesArray = <FormArray>this.form.controls["exercises"];
 
-    let moveControlUp = <FormGroup>this.form.controls["exercises"]["controls"][
-      index
-    ];
-    let moveControlDown = <FormGroup>this.form.controls["exercises"][
-      "controls"
-    ][index - 1];
+    let moveControlUp = <FormGroup>(
+      this.form.controls["exercises"]["controls"][index]
+    );
+    let moveControlDown = <FormGroup>(
+      this.form.controls["exercises"]["controls"][index - 1]
+    );
 
     exercisesArray.removeAt(index - 1);
     exercisesArray.insert(index, moveControlDown);
@@ -175,7 +175,7 @@ export class GuideComponent implements OnInit {
 
   showSidedSelector(exercise) {
     let type = exercise.controls["type"].value;
-    return type == "REPS" || type == "WEIGHTS";
+    return this.sidedExerciseTypes.indexOf(type) > -1;
   }
 
   goToGuides() {

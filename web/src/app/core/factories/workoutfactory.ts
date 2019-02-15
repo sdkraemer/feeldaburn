@@ -10,7 +10,8 @@ import {
   IRunningWorkout,
   RepetitionSet,
   ISet,
-  WeightsSet
+  WeightsSet,
+  RepsWeightsSet
 } from "../";
 import { TimeDuration } from "../models/timeduration";
 
@@ -57,7 +58,11 @@ export class WorkoutFactory {
         type: exercise.type
       });
 
-      if (exercise.type == "REPS" || exercise.type == "WEIGHTS") {
+      if (
+        exercise.type == "REPS" ||
+        exercise.type == "WEIGHTS" ||
+        exercise.type == "REPS_WEIGHTS"
+      ) {
         if (exercise.sided) {
           workoutExercise.sets.push(this.createSet(exercise.type, "RIGHT"));
           workoutExercise.sets.push(this.createSet(exercise.type, "LEFT"));
@@ -78,8 +83,8 @@ export class WorkoutFactory {
       set = new RepetitionSet({
         side: side
       });
-    } else if ((type = "WEIGHTS")) {
-      set = new WeightsSet({
+    } else if (type == "REPS_WEIGHTS" || type == "WEIGHTS") {
+      set = new RepsWeightsSet({
         side: side,
         adjustWeight: "NONE"
       });

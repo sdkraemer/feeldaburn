@@ -102,10 +102,15 @@
                         >
                       </mat-select>
                     </mat-form-field>
-                    <label>Sided:</label>
-                    <mat-slide-toggle
-                      formControlName="sided"
-                    ></mat-slide-toggle>
+                    <div
+                      *ngIf="
+                        showSidedSelector(form.controls.exercises.controls[i])
+                      "
+                    >
+                      <mat-slide-toggle formControlName="sided"
+                        >Sided:</mat-slide-toggle
+                      >
+                    </div>
                   </mat-card-content>
                   <mat-card-actions>
                     <button mat-button (click)="removeExercise(i)">

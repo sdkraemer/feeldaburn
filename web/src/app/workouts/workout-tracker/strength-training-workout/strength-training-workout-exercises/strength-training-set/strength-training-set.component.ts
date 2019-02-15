@@ -9,6 +9,7 @@ import {
   IWorkoutExercise,
   IRepetitionSet,
   IWeightsSet,
+  IRepsWeightsSet,
   ISet,
   IPreviousWorkoutExercise,
   IPreviousSet,
@@ -23,26 +24,25 @@ import * as _ from "lodash";
   templateUrl: "strength-training-set.component.html",
   styles: [
     `
-    ::ng-deep .mat-form-field .mat-form-field-infix {
+      ::ng-deep .mat-form-field .mat-form-field-infix {
         width: auto;
-    }
+      }
 
-    ::ng-deep .mat-form-field .mat-form-field-prefix button {
+      ::ng-deep .mat-form-field .mat-form-field-prefix button {
         min-width: 0px !important;
-    }
+      }
 
-    ::ng-deep .mat-form-field .mat-form-field-suffix button {
+      ::ng-deep .mat-form-field .mat-form-field-suffix button {
         min-width: 0px !important;
-    }
+      }
 
-    .previous-set-adjust-weight > .fa-arrow-down {
+      .previous-set-adjust-weight > .fa-arrow-down {
         color: #a83232;
-    }
+      }
 
-    .previous-set-adjust-weight > .fa-arrow-up {
+      .previous-set-adjust-weight > .fa-arrow-up {
         color: #1d831d;
-    }
-
+      }
     `
   ]
 })
@@ -88,7 +88,13 @@ export class StrengthTrainingSetComponent implements OnInit {
   }
 
   public isWeightsSet() {
-    return this.exercise.type == "WEIGHTS";
+    return (
+      this.exercise.type == "WEIGHTS" || this.exercise.type == "REPS_WEIGHTS"
+    );
+  }
+
+  public isRepsSet() {
+    return this.exercise.type == "REPS" || this.exercise.type == "REPS_WEIGHTS";
   }
 
   copyRepititions(pastRepititions) {
