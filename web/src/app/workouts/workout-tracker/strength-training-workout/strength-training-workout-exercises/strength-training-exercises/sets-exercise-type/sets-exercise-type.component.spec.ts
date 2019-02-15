@@ -1,19 +1,18 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { SetsExerciseTypeComponentComponent } from "./sets-exercise-type.component";
+import { SetsExerciseTypeComponent } from "./sets-exercise-type.component";
 
 describe("SetsExerciseTypeComponentComponent", () => {
-  let component: SetsExerciseTypeComponentComponent;
-  let fixture: ComponentFixture<SetsExerciseTypeComponentComponent>;
+  let component: SetsExerciseTypeComponent;
+  let fixture: ComponentFixture<SetsExerciseTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SetsExerciseTypeComponentComponent]
+      declarations: [SetsExerciseTypeComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SetsExerciseTypeComponentComponent);
+    fixture = TestBed.createComponent(SetsExerciseTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
