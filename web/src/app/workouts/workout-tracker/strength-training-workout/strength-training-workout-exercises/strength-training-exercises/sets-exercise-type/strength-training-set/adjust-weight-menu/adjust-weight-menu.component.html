@@ -1,0 +1,13 @@
+<button type="button" mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="increase()" style="text-align: right">
+    <mat-icon *ngIf="value == 'INCREASE'">check</mat-icon>
+    <span style="text-align: right">Increase Weight</span>
+  </button>
+  <button mat-menu-item (click)="decrease()" style="text-align: right">
+    <mat-icon *ngIf="value == 'DECREASE'">check</mat-icon>
+    <span>Decrease Weight</span>
+  </button>
+</mat-menu>

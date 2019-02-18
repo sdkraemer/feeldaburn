@@ -25,6 +25,7 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
 import { RepsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/reps-set/reps-set.component";
 import { RepsWeightsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/reps-weights-set/reps-weights-set.component";
 import { WeightsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/weights-set/weights-set.component";
+import { AdjustWeightMenuComponent } from './strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/adjust-weight-menu/adjust-weight-menu.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { WeightsSetComponent } from "./strength-training-workout/strength-traini
     SecondsExerciseTypeComponent,
     RepsSetComponent,
     RepsWeightsSetComponent,
-    WeightsSetComponent
+    WeightsSetComponent,
+    AdjustWeightMenuComponent
   ],
   providers: [
     GuideService,

@@ -58,7 +58,7 @@ export class WeightsSetComponent implements OnInit {
     return !this.workout.isCompleted && this.previousSets.length > 0;
   }
 
-  adjustWeightClicked(value, control) {
-    control.patchValue(value);
+  adjustWeightChange(event) {
+    this.formGroup.controls.adjustWeight.patchValue(event);
   }
 }

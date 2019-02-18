@@ -21,36 +21,10 @@
         </div>
         <div fxFlex="30%" fxFlexAlign="start">
           <input type="hidden" formControlName="adjustWeight" />
-          <button type="button" mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button
-              mat-menu-item
-              (click)="
-                adjustWeightClicked('INCREASE', formGroup.controls.adjustWeight)
-              "
-              style="text-align: right"
-            >
-              <mat-icon
-                *ngIf="formGroup.controls.adjustWeight.value == 'INCREASE'"
-                >check</mat-icon
-              >
-              <span style="text-align: right">Increase Weight</span>
-            </button>
-            <button
-              mat-menu-item
-              (click)="
-                adjustWeightClicked('DECREASE', formGroup.controls.adjustWeight)
-              "
-              style="text-align: right"
-            >
-              <mat-icon
-                *ngIf="formGroup.controls.adjustWeight.value == 'DECREASE'"
-                >check</mat-icon
-              >
-              <span>Decrease Weight</span>
-            </button>
+          <adjust-weight-menu
+            [value]="formGroup.controls.adjustWeight.value"
+            (change)="adjustWeightChange($event)"
+          ></adjust-weight-menu>
           </mat-menu>
         </div>
       </div>
