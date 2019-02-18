@@ -74,10 +74,6 @@ var RunningWorkoutSchema = new Schema({
   heartrate: {
     type: Number,
     required: false
-  },
-  calories: {
-    type: Number,
-    required: false
   }
 });
 
@@ -111,6 +107,10 @@ var WorkoutSchema = new Schema(
     },
     createdAt: {
       type: Date
+    },
+    calories: {
+      type: Number,
+      required: false
     }
   },
   {

@@ -118,6 +118,7 @@ module.exports = function(app) {
           isCompleted: json.isCompleted,
           guide: ObjectId(json.guide),
           exercises: json.exercises,
+          calories: json.calories,
           createdAt: new Date()
         });
 
@@ -156,6 +157,7 @@ module.exports = function(app) {
         workout.name = json.name;
         workout.notes = json.notes;
         workout.createdBy = workout.createdBy;
+        workout.calories = json.calories;
         var isWorkoutNewlyCompleted = json.isCompleted && !workout.isCompleted;
         var isCompletedAtBeingUpdated = json.completedAt;
         if (isWorkoutNewlyCompleted || isCompletedAtBeingUpdated) {
@@ -172,7 +174,6 @@ module.exports = function(app) {
           workout.distance = json.distance;
           workout.elapsed_time = json.elapsed_time;
           workout.heartrate = json.heartrate;
-          workout.calories = json.calories;
         } else if (json.type == "STRENGTH_TRAINING") {
           workout.guide = json.guide;
           workout.exercises = json.exercises; //just replace the whole thing.

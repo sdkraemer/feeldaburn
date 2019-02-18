@@ -4,5 +4,4 @@ export interface IRunningWorkout extends IWorkout {
   elapsed_time: number;
   pace: number;
   heartrate: number;
-  calories: number;
 }

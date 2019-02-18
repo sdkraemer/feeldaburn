@@ -1,11 +1,22 @@
 <div [formGroup]="form">
-    <input type="hidden" formControlName="guide" />
-</div>
-<div *ngIf="workout.exercises.length > 0">
-    <strength-training-workout-exercises [form]="form" [workout]="workout"></strength-training-workout-exercises>
-</div>
-<mat-divider></mat-divider>
-<div [formGroup]="form">
+  <input type="hidden" formControlName="guide" />
+  <div *ngIf="workout.exercises.length > 0">
+    <strength-training-workout-exercises
+      [form]="form"
+      [workout]="workout"
+    ></strength-training-workout-exercises>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      type="number"
+      placeholder="Calories"
+      formControlName="calories"
+    />
+  </mat-form-field>
+  <div>
     <label>Completed?:</label>
     <mat-slide-toggle formControlName="isCompleted"></mat-slide-toggle>
+  </div>
 </div>
