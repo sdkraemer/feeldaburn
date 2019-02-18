@@ -6,7 +6,6 @@ export class RunningWorkout extends Workout implements IRunningWorkout {
   elapsed_time: number;
   pace: number;
   heartrate: number;
-  calories: number;
 
   constructor(options: IRunningWorkout) {
     super(options);
@@ -15,6 +14,5 @@ export class RunningWorkout extends Workout implements IRunningWorkout {
     this.elapsed_time = options.elapsed_time;
     this.pace = options.pace;
     this.heartrate = options.heartrate;
-    this.calories = options.calories;
   }
 }

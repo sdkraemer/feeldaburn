@@ -44,7 +44,8 @@ export class WorkoutFactory {
       _id: null,
       guide: guide._id,
       name: guide.name,
-      exercises: this.createExercisesFromGuide(guide)
+      exercises: this.createExercisesFromGuide(guide),
+      calories: null
     });
   }
 
