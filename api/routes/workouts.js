@@ -85,7 +85,6 @@ module.exports = function(app) {
         completedAt: json.completedAt,
         distance: json.distance,
         elapsed_time: json.elapsed_time,
-        pace: json.pace,
         heartrate: json.heartrate,
         calories: json.calories,
         createdAt: new Date()

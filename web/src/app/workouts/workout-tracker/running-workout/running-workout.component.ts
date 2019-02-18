@@ -38,7 +38,6 @@ export class RunningWorkoutComponent implements OnInit {
         this.createTimeDurationFromWorkoutElapsedTime(this.workout.elapsed_time)
       )
     );
-    this.form.addControl("pace", new FormControl(this.workout.pace));
     this.form.addControl("heartrate", new FormControl(this.workout.heartrate));
     this.form.addControl("calories", new FormControl(this.workout.calories));
   }

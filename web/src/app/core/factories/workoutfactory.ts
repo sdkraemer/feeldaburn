@@ -107,7 +107,6 @@ export class WorkoutFactory {
       _id: null,
       distance: null,
       elapsed_time: null,
-      pace: null,
       heartrate: null,
       calories: null
     });

@@ -67,10 +67,6 @@ var RunningWorkoutSchema = new Schema({
     type: Number,
     required: false
   },
-  pace: {
-    type: Number,
-    required: false
-  },
   heartrate: {
     type: Number,
     required: false
