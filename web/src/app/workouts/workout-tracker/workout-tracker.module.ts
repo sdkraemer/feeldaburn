@@ -22,6 +22,9 @@ import { SecondsExerciseTypeComponent } from "./strength-training-workout/streng
 import { SetsExerciseTypeComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/sets-exercise-type.component";
 import { StrengthTrainingSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/strength-training-set.component";
 import { StrengthTrainingSetInputControlComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/strength-training-set-input-control.component";
+import { RepsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/reps-set/reps-set.component";
+import { RepsWeightsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/reps-weights-set/reps-weights-set.component";
+import { WeightsSetComponent } from "./strength-training-workout/strength-training-workout-exercises/strength-training-exercises/sets-exercise-type/strength-training-set/weights-set/weights-set.component";
 
 @NgModule({
   imports: [
@@ -41,7 +44,10 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
     StrengthTrainingSetInputControlComponent,
     SetsExerciseTypeComponent,
     CompletedExerciseTypeComponent,
-    SecondsExerciseTypeComponent
+    SecondsExerciseTypeComponent,
+    RepsSetComponent,
+    RepsWeightsSetComponent,
+    WeightsSetComponent
   ],
   providers: [
     GuideService,
@@ -54,7 +60,10 @@ import { StrengthTrainingSetInputControlComponent } from "./strength-training-wo
     RunningWorkoutComponent,
     SetsExerciseTypeComponent,
     CompletedExerciseTypeComponent,
-    SecondsExerciseTypeComponent
+    SecondsExerciseTypeComponent,
+    WeightsSetComponent,
+    RepsWeightsSetComponent,
+    RepsSetComponent
   ]
 })
 export class WorkoutTrackerModule {}

@@ -1,4 +1,12 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ViewContainerRef,
+  ComponentRef,
+  ComponentFactoryResolver
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 //rxjs
@@ -7,17 +15,15 @@ import { Observable } from "rxjs/Observable";
 import {
   IStrengthTrainingWorkout,
   IWorkoutExercise,
-  IRepetitionSet,
-  IWeightsSet,
-  IRepsWeightsSet,
   ISet,
   IPreviousWorkoutExercise,
-  IPreviousSet,
-  WeightsSet,
-  IWorkout
+  IPreviousSet
 } from "app/core";
 
 import * as _ from "lodash";
+import { RepsSetComponent } from "./reps-set/reps-set.component";
+import { WeightsSetComponent } from "./weights-set/weights-set.component";
+import { RepsWeightsSetComponent } from "./reps-weights-set/reps-weights-set.component";
 
 @Component({
   selector: "strength-training-set",
@@ -57,15 +63,47 @@ export class StrengthTrainingSetComponent implements OnInit {
 
   @Input("previousExercises")
   public previousExercises: IPreviousWorkoutExercise[];
-
   public previousSets: IPreviousSet[] = [];
 
-  constructor() {}
+  @ViewChild("vc", { read: ViewContainerRef })
+  public vc: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
+
+  private exerciseTypeComponentMap = {
+    REPS: RepsSetComponent,
+    REPS_WEIGHTS: RepsWeightsSetComponent,
+    WEIGHTS: WeightsSetComponent
+  };
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+
+  ngAfterContentInit() {
+    let component = this.exerciseTypeComponentMap[this.exercise.type];
+    if (!component) {
+      console.error("Undefined sets component type. Need to map it.");
+    }
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      component
+    );
+    this.componentRef = this.vc.createComponent(componentFactory);
+    this.renderComponent();
+  }
 
   ngOnInit() {}
 
   ngOnChanges() {
     this.previousSets = this.buildPreviousSets();
+    this.renderComponent();
+  }
+
+  private renderComponent() {
+    if (this.componentRef) {
+      this.componentRef.instance.formGroup = this.group;
+      this.componentRef.instance.workout = this.workout;
+      this.componentRef.instance.exercise = this.exercise;
+      this.componentRef.instance.set = this.set;
+      this.componentRef.instance.previousSets = this.previousSets;
+    }
   }
 
   private buildPreviousSets() {
@@ -85,31 +123,5 @@ export class StrengthTrainingSetComponent implements OnInit {
     } else {
       return previousExercise.sets[0];
     }
-  }
-
-  public isWeightsSet() {
-    return (
-      this.exercise.type == "WEIGHTS" || this.exercise.type == "REPS_WEIGHTS"
-    );
-  }
-
-  public isRepsSet() {
-    return this.exercise.type == "REPS" || this.exercise.type == "REPS_WEIGHTS";
-  }
-
-  copyRepititions(pastRepititions) {
-    this.group.controls["repetitions"].setValue(pastRepititions);
-  }
-
-  copyWeight(pastWeight) {
-    this.group.controls["weight"].setValue(pastWeight);
-  }
-
-  showPreviousWorkouts() {
-    return !this.workout.isCompleted && this.previousSets.length > 0;
-  }
-
-  adjustWeightClicked(value, control) {
-    control.patchValue(value);
   }
 }
