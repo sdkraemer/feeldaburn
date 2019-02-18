@@ -40,7 +40,27 @@ module.exports = function(app) {
     var workoutPromise = Workout.findOne(queryParameters).exec();
     workoutPromise
       .then(function(workout) {
-        res.json(workout);
+        if (!workout.isCompleted && workout.guide) {
+          StrengthTrainingWorkout.find({
+            createdBy: ObjectId(req.userId),
+            isCompleted: true
+          })
+            .where("guide")
+            .equals(ObjectId(workout.guide))
+            .limit(2)
+            .sort({ completedAt: "desc" })
+            .exec(function(err, previousWorkouts) {
+              if (err) {
+                console.log("Could not find previous workouts: %s", err);
+                res.sendStatus(404);
+              }
+              console.log("previous workouts length" + previousWorkouts.length);
+              workout.previousWorkouts = previousWorkouts;
+              res.json(workout);
+            });
+        } else {
+          res.json(workout);
+        }
       })
       .catch(function(err) {
         console.log(
